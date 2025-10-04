@@ -1,0 +1,159 @@
+import type { HttpContext } from '@adonisjs/core/http'
+import Order from '#models/order'
+import OrderItem from '#models/order_item'
+import Product from '#models/product'
+import logger from '@adonisjs/core/services/logger'
+import db from '@adonisjs/lucid/services/db'
+
+export default class OrdersController {
+  /**
+   * Create a new order (guest checkout)
+   */
+  async store({ request, response }: HttpContext) {
+    const trx = await db.transaction()
+
+    try {
+      const {
+        customerName,
+        customerEmail,
+        customerPhone,
+        shippingAddress,
+        notes,
+        items,
+      } = request.only([
+        'customerName',
+        'customerEmail',
+        'customerPhone',
+        'shippingAddress',
+        'notes',
+        'items',
+      ])
+
+      logger.info(`[Orders] Nouvelle commande de ${customerEmail}`)
+
+      // Validation
+      if (!customerName || !customerEmail || !customerPhone) {
+        return response.badRequest({
+          message: 'Les informations client sont obligatoires',
+        })
+      }
+
+      if (!items || items.length === 0) {
+        return response.badRequest({
+          message: 'La commande doit contenir au moins un produit',
+        })
+      }
+
+      // Vérifier le stock et calculer le total
+      let totalAmount = 0
+      const orderItemsData = []
+
+      for (const item of items) {
+        const product = await Product.findOrFail(item.productId)
+
+        // Vérifier le stock
+        if (product.stock < item.quantity) {
+          await trx.rollback()
+          logger.warn(
+            `[Orders] Stock insuffisant pour ${product.name}: demandé ${item.quantity}, disponible ${product.stock}`
+          )
+          return response.badRequest({
+            message: `Stock insuffisant pour le produit "${product.name}"`,
+          })
+        }
+
+        const unitPrice =
+          typeof product.price === 'string' ? parseFloat(product.price) : product.price
+        const totalPrice = unitPrice * item.quantity
+
+        orderItemsData.push({
+          productId: product.id,
+          productName: product.name,
+          quantity: item.quantity,
+          unitPrice,
+          totalPrice,
+        })
+
+        totalAmount += totalPrice
+
+        // Décrémenter le stock
+        product.stock -= item.quantity
+        await product.useTransaction(trx).save()
+        logger.info(`[Orders] Stock ${product.name}: ${product.stock + item.quantity} → ${product.stock}`)
+      }
+
+      // Générer un numéro de commande unique
+      const orderNumber = `CMD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+
+      // Créer la commande
+      const order = new Order()
+      order.orderNumber = orderNumber
+      order.userId = null // Guest checkout
+      order.customerName = customerName
+      order.customerEmail = customerEmail
+      order.customerPhone = customerPhone
+      order.shippingAddress = shippingAddress || null
+      order.notes = notes || null
+      order.totalAmount = totalAmount
+      order.status = 'pending'
+      order.type = 'order'
+
+      await order.useTransaction(trx).save()
+      logger.info(`[Orders] Commande créée: ${orderNumber}`)
+
+      // Créer les items de commande
+      for (const itemData of orderItemsData) {
+        const orderItem = new OrderItem()
+        orderItem.orderId = order.id
+        orderItem.productId = itemData.productId
+        orderItem.quantity = itemData.quantity
+        orderItem.unitPrice = itemData.unitPrice
+        orderItem.totalPrice = itemData.totalPrice
+        await orderItem.useTransaction(trx).save()
+      }
+
+      await trx.commit()
+      logger.info(`[Orders] Commande ${orderNumber} finalisée avec succès`)
+
+      // Recharger la commande avec les relations
+      await order.load('orderItems', (query) => {
+        query.preload('product')
+      })
+
+      return response.created({
+        data: order,
+        message: 'Commande créée avec succès',
+      })
+    } catch (error) {
+      await trx.rollback()
+      logger.error(`[Orders] Erreur création commande: ${error.message}`)
+      return response.internalServerError({
+        message: 'Erreur lors de la création de la commande',
+        error: error.message,
+      })
+    }
+  }
+
+  /**
+   * Get an order by order number (for guest confirmation)
+   */
+  async show({ params, response }: HttpContext) {
+    try {
+      const order = await Order.query()
+        .where('orderNumber', params.orderNumber)
+        .preload('orderItems', (query) => {
+          query.preload('product')
+        })
+        .firstOrFail()
+
+      return response.ok({
+        data: order,
+        message: 'Commande récupérée avec succès',
+      })
+    } catch (error) {
+      return response.notFound({
+        message: 'Commande introuvable',
+      })
+    }
+  }
+}

@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Palette dorée/beige moderne et élégante */
+@theme {
+  /* Or clair - pour les accents subtils */
+  --color-gold-50: #fdfbf7;
+  --color-gold-100: #f8f3ea;
+  --color-gold-200: #f0e6d2;
+
+  /* Beige élégant - couleurs principales */
+  --color-gold-300: #e8d4b0;
+  --color-gold-400: #d4b896;
+  --color-gold-500: #c19a6b;
+
+  /* Or profond - pour les CTA et accents importants */
+  --color-gold-600: #a67c52;
+  --color-gold-700: #8b6341;
+  --color-gold-800: #6d4c33;
+  --color-gold-900: #523826;
+
+  /* Remplacer les couleurs d'accent par défaut (orange) */
+  --color-accent: var(--color-gold-500);
+  --color-primary: var(--color-gold-600);
+}
+
+/* Custom styles pour Marché de Noël la Sainte Famille - Thème doré/beige */
+@layer components {
+  .btn-primary {
+    @apply bg-gold-600 hover:bg-gold-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-all shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-gold-100 hover:bg-gold-200 text-gold-800 font-medium py-2.5 px-6 rounded-lg transition-all border border-gold-300;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gold-200 hover:shadow-lg transition-shadow;
+  }
+
+  .text-accent {
+    @apply text-gold-600;
+  }
+
+  .bg-accent {
+    @apply bg-gold-500;
+  }
+}
+
+/* Surcharge des couleurs par défaut de Tailwind et navigateurs pour éviter l'orange */
+@layer base {
+  /* Variables CSS globales pour forcer la couleur gold partout */
+  :root {
+    accent-color: #c19a6b; /* gold-500 - couleur d'accent pour tout le site */
+    --tw-ring-color: #c19a6b; /* Override Tailwind ring color */
+  }
+
+  /* HTML et Body */
+  html, body {
+    accent-color: #c19a6b; /* gold-500 */
+  }
+
+  /* Tous les liens - surcharge complète */
+  a {
+    text-decoration: none;
+    outline-color: #c19a6b !important; /* gold-500 */
+  }
+
+  a:hover,
+  a:focus,
+  a:active,
+  a:visited {
+    outline-color: #c19a6b !important; /* gold-500 */
+    text-decoration-color: #c19a6b !important; /* gold-500 */
+  }
+
+  a:focus-visible {
+    @apply outline-gold-500 ring-gold-500;
+    outline-color: #c19a6b !important; /* gold-500 - force */
+  }
+
+  /* Focus rings - utiliser gold partout */
+  *:focus-visible {
+    @apply outline-gold-500 ring-gold-500;
+    outline-color: #c19a6b !important; /* gold-500 */
+  }
+
+  /* Boutons focus */
+  button:focus-visible {
+    @apply outline-gold-500 ring-gold-500;
+    outline-color: #c19a6b !important; /* gold-500 */
+  }
+
+  /* Input focus */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply ring-gold-500 border-gold-500;
+    outline-color: #c19a6b !important; /* gold-500 */
+  }
+}
