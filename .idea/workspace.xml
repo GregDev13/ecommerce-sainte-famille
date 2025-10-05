@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="064cb1c7-d603-46b0-b0fe-24c240fe41ad" name="Changes" comment="" />
+    <list default="true" id="064cb1c7-d603-46b0-b0fe-24c240fe41ad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/adonisrc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/adonisrc.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/start/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/start/env.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layouts/AdminLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layouts/AdminLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/admin/ProductFormView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/admin/ProductFormView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GregDev13"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GregDev13/ecommerce-sainte-famille.git",
+    "accountId": "6873cc4a-4fe1-4237-90c8-312b1ddca507"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -26,6 +48,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/greg/Dev/ecommerce-sainte-famille",
     "node.js.detected.package.eslint": "true",
@@ -59,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759346479866</updated>
       <workItem from="1759346481078" duration="19296000" />
-      <workItem from="1759570010181" duration="191000" />
+      <workItem from="1759570010181" duration="12792000" />
     </task>
     <servers />
   </component>

@@ -6,7 +6,7 @@
         <div class="flex justify-between h-16">
           <div class="flex items-center">
             <router-link to="/admin/dashboard" class="text-xl font-bold text-gold-600">
-              🎄 Admin - Marché de Noël la Sainte Famille
+              Admin
             </router-link>
           </div>
 

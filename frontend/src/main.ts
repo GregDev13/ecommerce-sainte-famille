@@ -12,7 +12,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(Toast, {
-  position: 'top-right',
+  position: 'bottom-right',
   timeout: 3000,
   closeOnClick: true,
   pauseOnFocusLoss: true,

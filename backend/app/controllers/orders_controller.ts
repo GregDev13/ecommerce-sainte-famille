@@ -4,6 +4,9 @@ import OrderItem from '#models/order_item'
 import Product from '#models/product'
 import logger from '@adonisjs/core/services/logger'
 import db from '@adonisjs/lucid/services/db'
+import mail from '@adonisjs/mail/services/main'
+import OrderConfirmationNotification from '#mails/order_confirmation_notification'
+import NewOrderNotification from '#mails/new_order_notification'
 
 export default class OrdersController {
   /**
@@ -120,6 +123,11 @@ export default class OrdersController {
         query.preload('product')
       })
 
+      // Envoyer les emails de manière asynchrone (ne pas bloquer la réponse)
+      this.sendOrderEmails(order).catch((error) => {
+        logger.error(`[Orders] Erreur envoi emails pour ${orderNumber}: ${error.message}`)
+      })
+
       return response.created({
         data: order,
         message: 'Commande créée avec succès',
@@ -154,6 +162,27 @@ export default class OrdersController {
       return response.notFound({
         message: 'Commande introuvable',
       })
+    }
+  }
+
+  /**
+   * Send order confirmation emails (client + admin)
+   */
+  private async sendOrderEmails(order: Order): Promise<void> {
+    try {
+      // Email de confirmation au client
+      logger.info(`[Orders] Envoi email confirmation client: ${order.customerEmail}`)
+      await mail.send(new OrderConfirmationNotification(order))
+      logger.info(`[Orders] Email confirmation client envoyé avec succès`)
+
+      // Email de notification à l'admin
+      logger.info(`[Orders] Envoi email notification admin`)
+      await mail.send(new NewOrderNotification(order))
+      logger.info(`[Orders] Email notification admin envoyé avec succès`)
+    } catch (error) {
+      logger.error(`[Orders] Erreur lors de l'envoi des emails: ${error.message}`)
+      logger.error(`[Orders] Détails erreur:`, error)
+      throw error
     }
   }
 }
