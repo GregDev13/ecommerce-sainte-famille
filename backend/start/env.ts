@@ -43,5 +43,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   |----------------------------------------------------------
   */
   MAILGUN_API_KEY: Env.schema.string(),
-  MAILGUN_DOMAIN: Env.schema.string()
+  MAILGUN_DOMAIN: Env.schema.string(),
+  MAILGUN_API_URL: Env.schema.string.optional(),
+  MAILGUN_FROM_EMAIL: Env.schema.string(),
+  MAILGUN_FROM_NAME: Env.schema.string.optional(),
+
+  /*
+  |----------------------------------------------------------
+  | Admin email for notifications
+  |----------------------------------------------------------
+  */
+  ADMIN_EMAIL: Env.schema.string()
 })

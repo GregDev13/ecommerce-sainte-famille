@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3334/api/v1/admin'
+// Utilise la variable d'environnement VITE_API_URL définie au build
+// Fallback sur localhost:3333 pour le développement local
+const BASE_API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3333/api/v1'
+const API_URL = `${BASE_API_URL}/admin`
 
 const adminApi = axios.create({
   baseURL: API_URL,

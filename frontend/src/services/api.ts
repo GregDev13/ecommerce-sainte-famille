@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 // Configuration de base pour l'API
-const API_URL = 'http://localhost:3334/api/v1'
+// Utilise la variable d'environnement VITE_API_URL définie au build
+// Fallback sur localhost:3333 pour le développement local
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3333/api/v1'
 
 const api = axios.create({
   baseURL: API_URL,

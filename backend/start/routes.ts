@@ -10,11 +10,19 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
-// API Health Check
+// API Health Check - Route racine
 router.get('/', async () => {
   return {
     message: 'Marché de Noël la Sainte Famille API is running',
     version: '1.0.0',
+    timestamp: new Date().toISOString()
+  }
+})
+
+// Health check pour Docker healthcheck
+router.get('/health', async () => {
+  return {
+    status: 'healthy',
     timestamp: new Date().toISOString()
   }
 })
