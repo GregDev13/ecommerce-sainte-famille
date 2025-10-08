@@ -38,21 +38,21 @@ services:
       NODE_ENV: production
       PORT: 3333
       HOST: 0.0.0.0
-      LOG_LEVEL: ${LOG_LEVEL:-info}
+      LOG_LEVEL: ${LOG_LEVEL}
       APP_KEY: ${APP_KEY}
-      DB_HOST: ${DB_HOST:-postgres}
-      DB_PORT: ${DB_PORT:-5432}
-      DB_USER: ${DB_USER:-sainte_famille_user}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE:-sainte_famille_prod}
+      DB_DATABASE: ${DB_DATABASE}
       DRIVE_DISK: ${DRIVE_DISK:-fs}
       MAILGUN_API_KEY: ${MAILGUN_API_KEY}
       MAILGUN_DOMAIN: ${MAILGUN_DOMAIN}
-      MAILGUN_API_URL: ${MAILGUN_API_URL:-https://api.eu.mailgun.net}
-      MAILGUN_FROM_EMAIL: ${MAILGUN_FROM_EMAIL:-noreply@boutiquesaintefamille.fr}
-      MAILGUN_FROM_NAME: ${MAILGUN_FROM_NAME:-Marché de Noël la Sainte Famille}
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
-      APP_URL: ${APP_URL:-https://boutiquesaintefamille.fr}
+      MAILGUN_API_URL: ${MAILGUN_API_URL}
+      MAILGUN_FROM_EMAIL: ${MAILGUN_FROM_EMAIL}
+      MAILGUN_FROM_NAME: ${MAILGUN_FROM_NAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      APP_URL: ${APP_URL}
     volumes:
       - uploads_data:/app/storage/uploads
     ports:
@@ -77,7 +77,7 @@ services:
       context: ./frontend
       target: production
       args:
-        VITE_API_URL: ${VITE_API_URL:-https://votre-domaine.fr/api}
+        VITE_API_URL: ${VITE_API_URL}
     container_name: sainte-famille-frontend
     restart: unless-stopped
     ports:

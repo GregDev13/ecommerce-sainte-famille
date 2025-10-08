@@ -72,8 +72,8 @@
               <div class="absolute top-0 right-0 w-72 bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-300 floating border border-gold-100">
                 <div class="w-full h-48 bg-gradient-to-br from-gold-200 to-gold-300 rounded-xl mb-4 overflow-hidden flex items-center justify-center">
                   <img
-                    v-if="recentProducts[0]?.image?.url"
-                    :src="`${API_URL}${recentProducts[0].image.url}`"
+                    v-if="recentProducts[0]?.imageUrl"
+                    :src="`${API_URL}${recentProducts[0].imageUrl}`"
                     :alt="recentProducts[0].name"
                     class="w-full h-full object-cover"
                   />
@@ -194,8 +194,8 @@
           <div v-for="product in recentProducts" :key="product.id" class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
             <div class="relative h-64 bg-gradient-to-br from-gold-200 to-gold-300 flex items-center justify-center overflow-hidden">
               <img
-                v-if="product.image?.url"
-                :src="`${API_URL}${product.image.url}`"
+                v-if="product.imageUrl"
+                :src="`${API_URL}${product.imageUrl}`"
                 :alt="product.name"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />

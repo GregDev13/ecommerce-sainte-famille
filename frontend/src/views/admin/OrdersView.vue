@@ -234,8 +234,8 @@
                 <!-- Image du produit -->
                 <div class="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
                   <img
-                    v-if="item.product?.image?.url"
-                    :src="`${API_URL}${item.product.image.url}`"
+                    v-if="item.product?.imageUrl"
+                    :src="`${API_URL}${item.product.imageUrl}`"
                     :alt="item.product.name"
                     class="w-full h-full object-cover"
                   />
