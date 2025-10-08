@@ -55,7 +55,7 @@
         <!-- Preview de l'image existante -->
         <div v-if="imagePreview || existingImage" class="mb-4">
           <img
-            :src="imagePreview || existingImage"
+            :src="imagePreview || existingImage || undefined"
             alt="Preview"
             class="w-32 h-32 object-cover rounded-lg border-2 border-gray-200"
           />

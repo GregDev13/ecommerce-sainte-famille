@@ -51,6 +51,9 @@ export interface Order {
   id: number
   orderNumber: string
   userId: number | null
+  customerName: string
+  customerEmail: string
+  customerPhone: string
   totalAmount: number
   status: 'pending' | 'reserved' | 'paid' | 'shipped' | 'delivered' | 'cancelled'
   type: 'order' | 'reservation'
@@ -73,6 +76,7 @@ export interface OrderItem {
   productId: number
   quantity: number
   unitPrice: number
+  totalPrice: number
   product?: {
     id: number
     name: string

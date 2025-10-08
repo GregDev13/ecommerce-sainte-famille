@@ -47,7 +47,7 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="relative inline-block" @click.stop>
                 <button
-                  :ref="el => buttonRefs[order.id] = el"
+                  :ref="el => buttonRefs[order.id] = el as HTMLElement"
                   @click="toggleStatusDropdown(order.id)"
                   class="px-4 py-2 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-2"
                   :class="getStatusClass(order.status)"

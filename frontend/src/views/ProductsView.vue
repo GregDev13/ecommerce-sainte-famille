@@ -27,7 +27,7 @@
     <div v-else-if="error" class="text-center py-12">
       <div class="text-red-500 mb-4">❌</div>
       <p class="text-red-600">{{ error }}</p>
-      <button @click="loadProducts" class="btn-primary mt-4">Réessayer</button>
+      <button @click="() => loadProducts()" class="btn-primary mt-4">Réessayer</button>
     </div>
 
     <!-- Products grid -->
