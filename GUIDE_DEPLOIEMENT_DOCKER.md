@@ -1,6 +1,6 @@
 # 🐳 Guide de Déploiement Docker - Sainte-Famille E-commerce
 
-Guide complet pour déployer votre application avec Docker sur VPS Ubuntu.
+Guide complet pour déployer votre application avec Docker + Caddy sur VPS Ubuntu.
 
 ---
 
@@ -8,7 +8,7 @@ Guide complet pour déployer votre application avec Docker sur VPS Ubuntu.
 
 - [ ] VPS Ubuntu (OVH ou autre)
 - [ ] Accès SSH au VPS
-- [ ] Nom de domaine (optionnel mais recommandé)
+- [ ] Nom de domaine configuré (boutiquesaintefamille.fr)
 - [ ] Credentials Mailgun
 - [ ] Repository Git configuré
 
@@ -82,53 +82,77 @@ mkdir -p ~/app
 cd ~/app
 
 # Cloner le repository (remplacer par votre URL)
-git clone https://github.com/VOTRE_USERNAME/ecommerce-sainte-famille.git .
+git clone https://github.com/VOTRE_USERNAME/ecommerce-sainte-famille.git ecommerce-sainte-famille
+cd ecommerce-sainte-famille
 
 # Ou avec SSH si configuré :
-# git clone git@github.com:VOTRE_USERNAME/ecommerce-sainte-famille.git .
+# git clone git@github.com:VOTRE_USERNAME/ecommerce-sainte-famille.git
 ```
 
 ### Étape 2.3 : Configurer les variables d'environnement
 
 ```bash
-# Copier le template vers .env
-cp .env.docker .env
-
-# Éditer le fichier .env
-nano .env
+# Créer le fichier .env
+vim .env
 ```
 
-**Remplissez les valeurs suivantes :**
+**Remplissez avec ces valeurs :**
 
 ```env
-# Backend
-APP_KEY=                    # ⚠️ Sera généré à l'étape suivante
+# Application
+TZ=UTC
+LOG_LEVEL=info
 
-# Base de données
+# Backend AdonisJS - Security
+APP_KEY=    # ⚠️ Sera généré à l'étape suivante
+
+# Base de données PostgreSQL
+DB_HOST=postgres
+DB_PORT=5432
 DB_USER=sainte_famille_user
 DB_PASSWORD=CHANGEZ_CE_MOT_DE_PASSE_TRÈS_SÉCURISÉ
 DB_DATABASE=sainte_famille_prod
 
-# Mailgun
-MAILGUN_API_KEY=VOTRE_CLE_API_MAILGUN
-MAILGUN_DOMAIN=VOTRE_DOMAINE_MAILGUN
+# Storage / Drive
+DRIVE_DISK=fs
 
-# URLs (adapter selon votre domaine)
-APP_URL=https://votre-domaine.fr
-VITE_API_URL=https://votre-domaine.fr/api
+# Mail - Mailgun
+MAILGUN_API_KEY=VOTRE_CLE_API_MAILGUN
+MAILGUN_DOMAIN=boutiquesaintefamille.fr
+MAILGUN_API_URL=https://api.eu.mailgun.net
+MAILGUN_FROM_EMAIL=noreply@boutiquesaintefamille.fr
+MAILGUN_FROM_NAME=Marché de Noël la Sainte Famille
+
+# Email Admin
+ADMIN_EMAIL=matcsnv@gmail.com
+
+# URLs de production
+APP_URL=https://boutiquesaintefamille.fr
+VITE_API_URL=https://boutiquesaintefamille.fr/api/v1
 ```
 
-**Sauvegarder :** `Ctrl+O`, `Entrée`, puis `Ctrl+X`
+**Sauvegarder dans vim :** `Echap`, puis `:wq`, puis `Entrée`
 
 ### Étape 2.4 : Générer l'APP_KEY
 
-```bash
-# Générer l'APP_KEY pour AdonisJS
-docker compose run --rm backend node ace generate:key
+⚠️ **IMPORTANT :** Avec Docker en production, on ne peut pas utiliser `node ace generate:key` avant le build.
 
-# Copier la clé générée et l'ajouter dans .env
-nano .env
-# Coller la clé après APP_KEY=
+**Solution : Générer avec Node.js directement**
+
+```bash
+# Générer une clé aléatoire sécurisée
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+
+# Copier la clé affichée
+```
+
+**Éditer .env et coller la clé :**
+
+```bash
+vim .env
+# Appuyez sur 'i' pour passer en mode insertion
+# Allez à la ligne APP_KEY= et collez la clé
+# Appuyez sur Echap puis :wq
 ```
 
 ---
@@ -141,6 +165,8 @@ nano .env
 # Builder toutes les images (peut prendre 5-10 minutes)
 docker compose build
 ```
+
+**Note :** Si vous voyez l'avertissement `version is obsolete`, c'est normal, ignorez-le.
 
 ### Étape 3.2 : Démarrer les services
 
@@ -155,152 +181,146 @@ docker compose up -d
 # Voir le statut des conteneurs
 docker compose ps
 
-# Tous les conteneurs doivent être "Up"
+# Tous les conteneurs doivent être "Up" (healthy)
 ```
 
 ### Étape 3.4 : Exécuter les migrations de base de données
+
+⚠️ **IMPORTANT :** Avec Docker en production, la commande Ace est dans le dossier `build/`
 
 ```bash
 # Attendre 10 secondes que PostgreSQL soit prêt
 sleep 10
 
-# Exécuter les migrations
-docker compose exec backend node ace migration:run --force
+# Exécuter les migrations (ATTENTION à la commande !)
+docker compose exec backend node build/ace.js migration:run --force
 ```
 
-### Étape 3.5 : Tester l'application
+### Étape 3.5 : Tester l'application localement
 
 ```bash
-# Tester que l'API répond
-curl http://localhost:3333
+# Tester le health check de l'API
+curl http://localhost:3333/health
+# Doit retourner: {"status":"healthy",...}
 
-# Depuis votre navigateur local :
-# http://VOTRE_IP_VPS (frontend)
-# http://VOTRE_IP_VPS:3333 (backend API)
+# Tester le frontend
+curl http://localhost:8080
+# Doit retourner du HTML
+
+# Tester l'API
+curl http://localhost:3333/api/v1/products
+```
+
+**Depuis votre navigateur local :**
+- Frontend : `http://VOTRE_IP_VPS:8080`
+- Backend API : `http://VOTRE_IP_VPS:3333`
+
+---
+
+## 🌐 PHASE 4 : Configuration DNS (OVH)
+
+### Étape 4.1 : Obtenir l'IP de votre VPS
+
+```bash
+curl ifconfig.me
+# Notez cette IP (ex: 123.45.67.89)
+```
+
+### Étape 4.2 : Configurer le DNS chez OVH
+
+1. **Se connecter sur OVH** : https://www.ovh.com/manager/
+2. **Aller dans "Noms de domaine"** → `boutiquesaintefamille.fr`
+3. **Cliquer sur l'onglet "Zone DNS"**
+4. **Ajouter/Modifier ces 2 enregistrements :**
+
+```
+Type A : @ (ou vide) → VOTRE_IP_VPS
+Type A : www → VOTRE_IP_VPS
+```
+
+5. **Sauvegarder**
+6. **Attendre 10-60 minutes** pour la propagation DNS
+
+### Étape 4.3 : Vérifier la propagation DNS
+
+```bash
+# Depuis votre machine locale
+nslookup boutiquesaintefamille.fr
+
+# Ou
+dig boutiquesaintefamille.fr
+
+# L'IP doit correspondre à celle de votre VPS
 ```
 
 ---
 
-## 🌐 PHASE 4 : Configuration du Domaine et SSL
+## 🔒 PHASE 5 : Installation de Caddy (SSL automatique)
 
-### Étape 4.1 : Configurer le DNS
-
-**Dans votre interface de domaine (OVH, Cloudflare, etc.) :**
-
-1. Créer un enregistrement A : `@` → `VOTRE_IP_VPS`
-2. Créer un enregistrement A : `www` → `VOTRE_IP_VPS`
-3. Attendre la propagation DNS (5-30 minutes)
-
-Vérifier avec :
-```bash
-ping votre-domaine.fr
-# Doit pointer vers votre IP VPS
-```
-
-### Étape 4.2 : Installer Nginx pour le reverse proxy
+### Étape 5.1 : Installer Caddy
 
 ```bash
-sudo apt install nginx -y
+# Installer les dépendances
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+
+# Ajouter le repository Caddy
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+
+# Mettre à jour et installer Caddy
+sudo apt update
+sudo apt install caddy
+
+# Vérifier l'installation
+caddy version
 ```
 
-### Étape 4.3 : Configurer Nginx
+### Étape 5.2 : Copier le Caddyfile
 
 ```bash
-# Créer la configuration
-sudo nano /etc/nginx/sites-available/sainte-famille
+# Copier le Caddyfile dans /etc/caddy
+sudo cp Caddyfile /etc/caddy/Caddyfile
+
+# Vérifier la configuration
+sudo caddy validate --config /etc/caddy/Caddyfile
 ```
 
-**Coller cette configuration :**
-
-```nginx
-# Redirect HTTP to HTTPS
-server {
-    listen 80;
-    server_name votre-domaine.fr www.votre-domaine.fr;
-
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-# HTTPS Server
-server {
-    listen 443 ssl http2;
-    server_name votre-domaine.fr www.votre-domaine.fr;
-
-    # SSL Configuration (Certbot les ajoutera)
-    ssl_certificate /etc/letsencrypt/live/votre-domaine.fr/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/votre-domaine.fr/privkey.pem;
-
-    # Frontend
-    location / {
-        proxy_pass http://localhost:80;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    # API Backend
-    location /api {
-        proxy_pass http://localhost:3333;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
-**Remplacer `votre-domaine.fr` par votre vrai domaine !**
-
-### Étape 4.4 : Activer le site
+### Étape 5.3 : Démarrer Caddy
 
 ```bash
-# Créer le lien symbolique
-sudo ln -s /etc/nginx/sites-available/sainte-famille /etc/nginx/sites-enabled/
+# Activer Caddy au démarrage
+sudo systemctl enable caddy
 
-# Désactiver le site par défaut
-sudo rm /etc/nginx/sites-enabled/default
+# Démarrer Caddy
+sudo systemctl start caddy
 
-# Tester la configuration
-sudo nginx -t
-
-# Recharger Nginx
-sudo systemctl reload nginx
+# Vérifier le statut
+sudo systemctl status caddy
 ```
 
-### Étape 4.5 : Installer le certificat SSL avec Certbot
+**Caddy va automatiquement :**
+- ✅ Obtenir un certificat SSL de Let's Encrypt
+- ✅ Configurer HTTPS
+- ✅ Rediriger HTTP → HTTPS
+- ✅ Renouveler le certificat tous les 90 jours
+
+### Étape 5.4 : Vérifier que tout fonctionne
 
 ```bash
-# Installer Certbot
-sudo apt install certbot python3-certbot-nginx -y
+# Tester depuis le VPS
+curl https://boutiquesaintefamille.fr
 
-# Obtenir le certificat SSL
-sudo certbot --nginx -d votre-domaine.fr -d www.votre-domaine.fr
-
-# Suivre les instructions :
-# - Entrer votre email
-# - Accepter les conditions
-# - Choisir de rediriger HTTP vers HTTPS
+# Voir les logs Caddy
+sudo journalctl -u caddy -f
 ```
 
-### Étape 4.6 : Configurer le renouvellement automatique
-
-```bash
-# Tester le renouvellement
-sudo certbot renew --dry-run
-
-# Le renouvellement automatique est déjà configuré via cron
-```
+**Depuis votre navigateur :**
+- 🌐 https://boutiquesaintefamille.fr (doit afficher votre site en HTTPS !)
 
 ---
 
-## 🔄 PHASE 5 : Script de Déploiement Rapide
+## 🔄 PHASE 6 : Script de Déploiement Rapide
 
 Pour les prochaines mises à jour, utilisez le script automatisé :
 
@@ -311,6 +331,12 @@ chmod +x deploy-docker.sh
 # Lancer le déploiement
 ./deploy-docker.sh
 ```
+
+Le script fera automatiquement :
+1. Arrêter les conteneurs
+2. Rebuilder les images
+3. Démarrer les conteneurs
+4. Exécuter les migrations
 
 ---
 
@@ -351,9 +377,10 @@ docker compose exec backend sh
 # Accéder à PostgreSQL
 docker compose exec postgres psql -U sainte_famille_user -d sainte_famille_prod
 
-# Exécuter une commande Ace
-docker compose exec backend node ace list
-docker compose exec backend node ace migration:run
+# Exécuter une commande Ace (IMPORTANT : utiliser build/ace.js)
+docker compose exec backend node build/ace.js list
+docker compose exec backend node build/ace.js migration:run --force
+docker compose exec backend node build/ace.js migration:rollback
 ```
 
 ### Monitoring
@@ -381,7 +408,7 @@ docker system prune -a --volumes
 
 ---
 
-## 💾 Backups avec Docker
+## 💾 Backups
 
 ### Backup de la base de données
 
@@ -407,16 +434,14 @@ docker run --rm -v sainte-famille-uploads:/data -v ~/backups:/backup alpine tar 
 gunzip < ~/backups/db_backup_YYYYMMDD_HHMMSS.sql.gz | docker compose exec -T postgres psql -U sainte_famille_user -d sainte_famille_prod
 ```
 
-### Script de backup automatique
-
-Créer un cron job :
+### Script de backup automatique (Cron)
 
 ```bash
 # Éditer le crontab
 crontab -e
 
 # Ajouter (backup tous les jours à 2h du matin) :
-0 2 * * * cd ~/app && docker compose exec postgres pg_dump -U sainte_famille_user sainte_famille_prod | gzip > ~/backups/db_backup_$(date +\%Y\%m\%d_\%H\%M\%S).sql.gz
+0 2 * * * cd ~/app/ecommerce-sainte-famille && docker compose exec postgres pg_dump -U sainte_famille_user sainte_famille_prod | gzip > ~/backups/db_backup_$(date +\%Y\%m\%d_\%H\%M\%S).sql.gz
 ```
 
 ---
@@ -432,7 +457,7 @@ sudo apt install ufw -y
 # Autoriser SSH (IMPORTANT !)
 sudo ufw allow 22/tcp
 
-# Autoriser HTTP et HTTPS
+# Autoriser HTTP et HTTPS (pour Caddy)
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 
@@ -466,6 +491,18 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
+### Erreur "Cannot find module '/app/ace'"
+
+⚠️ **C'est normal !** En production, utilisez :
+
+```bash
+# ❌ MAUVAIS
+docker compose exec backend node ace migration:run
+
+# ✅ CORRECT
+docker compose exec backend node build/ace.js migration:run --force
+```
+
 ### Erreur de connexion à la base de données
 
 ```bash
@@ -483,83 +520,135 @@ docker compose restart postgres
 
 ```bash
 # Vérifier que le backend tourne
-curl http://localhost:3333
+curl http://localhost:3333/health
 
 # Vérifier les logs du backend
 docker compose logs backend
 
 # Vérifier la variable VITE_API_URL dans .env
+cat .env | grep VITE_API_URL
 ```
 
-### Nginx 502 Bad Gateway
+### Caddy ne démarre pas (port 80 déjà utilisé)
+
+```bash
+# Vérifier ce qui utilise le port 80
+sudo lsof -i :80
+
+# Si c'est Docker frontend, vérifier docker-compose.yml
+# Le frontend doit être sur 8080:80, pas 80:80
+```
+
+### Caddy n'obtient pas le certificat SSL
+
+```bash
+# Vérifier les logs Caddy
+sudo journalctl -u caddy -n 50
+
+# Vérifier que le DNS est bien configuré
+nslookup boutiquesaintefamille.fr
+
+# Vérifier que les ports 80 et 443 sont ouverts
+sudo ufw status
+
+# Redémarrer Caddy
+sudo systemctl restart caddy
+```
+
+### 502 Bad Gateway
 
 ```bash
 # Vérifier que les conteneurs tournent
 docker compose ps
 
 # Tester depuis le VPS
-curl http://localhost:80
-curl http://localhost:3333
-```
+curl http://localhost:8080  # Frontend
+curl http://localhost:3333  # Backend
 
-### Problème de permissions
-
-```bash
-# Corriger les permissions des volumes
-docker compose down
-sudo chown -R $USER:$USER ~/app
-docker compose up -d
+# Voir les logs Caddy
+sudo journalctl -u caddy -f
 ```
 
 ---
 
 ## ✅ Checklist de Déploiement
 
+### Préparation
 - [ ] Docker installé et fonctionnel
-- [ ] Repository cloné
-- [ ] Fichier `.env` configuré avec toutes les valeurs
-- [ ] APP_KEY générée
-- [ ] Images Docker buildées
-- [ ] Conteneurs démarrés (postgres, backend, frontend)
-- [ ] Migrations exécutées
-- [ ] DNS configuré et propagé
-- [ ] Nginx configuré
-- [ ] Certificat SSL installé
-- [ ] Application accessible via HTTPS
-- [ ] Emails Mailgun testés
-- [ ] Backups configurés
-- [ ] Firewall activé
+- [ ] Repository cloné dans ~/app/ecommerce-sainte-famille
+- [ ] Fichier `.env` créé et configuré
+- [ ] APP_KEY générée avec Node.js
+- [ ] DNS configuré chez OVH (enregistrements A)
+- [ ] DNS propagé (10-60 minutes)
+
+### Déploiement Docker
+- [ ] `docker compose build` réussi
+- [ ] `docker compose up -d` réussi
+- [ ] 3 conteneurs "Up" (postgres, backend, frontend)
+- [ ] Migrations exécutées avec `build/ace.js`
+- [ ] API répond : `curl http://localhost:3333/health`
+- [ ] Frontend répond : `curl http://localhost:8080`
+
+### Configuration Caddy
+- [ ] Caddy installé
+- [ ] Caddyfile copié dans /etc/caddy
+- [ ] Caddy démarré : `sudo systemctl status caddy`
+- [ ] Certificat SSL obtenu automatiquement
+- [ ] Site accessible en HTTPS : https://boutiquesaintefamille.fr
+
+### Sécurité
+- [ ] Firewall UFW activé (ports 22, 80, 443)
+- [ ] Fail2ban installé
+- [ ] Backups configurés (cron)
 
 ---
 
-## 📞 Support & Ressources
+## 📞 Commandes de Gestion Caddy
 
-### Documentation Docker
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Docker Hub](https://hub.docker.com/)
-
-### Logs importants
 ```bash
-# Logs de l'application
-docker compose logs -f
+# Voir le statut
+sudo systemctl status caddy
 
-# Logs Nginx
-sudo tail -f /var/log/nginx/error.log
+# Redémarrer Caddy
+sudo systemctl restart caddy
 
-# Logs système
-sudo journalctl -u docker -f
+# Recharger la config (sans downtime)
+sudo systemctl reload caddy
+
+# Voir les logs
+sudo journalctl -u caddy -f
+
+# Voir les certificats SSL
+sudo caddy list-certificates
+
+# Forcer le renouvellement SSL (test)
+sudo caddy renew --force
 ```
 
 ---
 
 ## 🎉 Félicitations !
 
-Votre application est maintenant déployée avec Docker ! 🚀
+Votre application est maintenant déployée avec Docker + Caddy ! 🚀
+
+**Architecture finale :**
+```
+Internet (port 80/443)
+    ↓
+Caddy (reverse proxy + SSL auto)
+    ├→ Frontend Docker (port 8080)
+    └→ Backend Docker (port 3333)
+         ↓
+    PostgreSQL Docker (port 5432)
+```
 
 **Prochaines étapes recommandées :**
-- Configurer un monitoring (Grafana + Prometheus)
-- Mettre en place des alertes
-- Configurer des backups automatiques vers un stockage externe
-- Ajouter un système de CI/CD (GitHub Actions)
+- ✅ Tester toutes les fonctionnalités de l'application
+- ✅ Créer un utilisateur admin
+- ✅ Ajouter des produits
+- ✅ Tester les emails Mailgun
+- 📊 Configurer un monitoring (Grafana + Prometheus)
+- 🔔 Mettre en place des alertes
+- 🔄 Configurer un système de CI/CD (GitHub Actions)
 
 Bon déploiement ! 🐳

@@ -1,0 +1,70 @@
+# ============================================================================
+# Caddyfile - Sainte-Famille E-commerce
+# ============================================================================
+# Configuration Caddy pour reverse proxy avec SSL automatique
+# À copier dans /etc/caddy/Caddyfile sur le serveur
+# ============================================================================
+
+boutiquesaintefamille.fr, www.boutiquesaintefamille.fr {
+    # Logs
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 10mb
+            roll_keep 10
+        }
+    }
+
+    # Headers de sécurité
+    header {
+        # Empêcher l'inclusion dans une iframe
+        X-Frame-Options "SAMEORIGIN"
+        # Empêcher le MIME-sniffing
+        X-Content-Type-Options "nosniff"
+        # Protection XSS
+        X-XSS-Protection "1; mode=block"
+        # Politique de référence
+        Referrer-Policy "no-referrer-when-downgrade"
+        # HSTS (optionnel mais recommandé)
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    # Limite de taille de fichier pour uploads
+    request_body {
+        max_size 50MB
+    }
+
+    # API Backend - Proxy vers AdonisJS (port 3333)
+    handle /api/* {
+        reverse_proxy localhost:3333 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    # Fichiers uploadés - Proxy vers backend
+    handle /uploads/* {
+        reverse_proxy localhost:3333 {
+            header_up Host {host}
+        }
+        # Cache pour les uploads
+        header Cache-Control "public, max-age=31536000"
+    }
+
+    # Frontend - Proxy vers conteneur Vue.js/Nginx (port 8080)
+    handle {
+        reverse_proxy localhost:8080 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    # Compression gzip automatique
+    encode gzip zstd
+
+    # SSL automatique via Let's Encrypt
+    # Pas de configuration nécessaire, Caddy s'en occupe !
+}
