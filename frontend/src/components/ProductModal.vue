@@ -25,7 +25,7 @@
           </button>
 
           <!-- Product Image -->
-          <div class="relative h-80 bg-gradient-to-br from-gold-200 to-gold-300 rounded-t-2xl flex items-center justify-center overflow-hidden">
+          <div class="relative h-56 sm:h-72 lg:h-80 bg-gradient-to-br from-gold-200 to-gold-300 rounded-t-2xl flex items-center justify-center overflow-hidden">
             <img
               v-if="product.image?.url"
               :src="product.image.url"
@@ -50,12 +50,12 @@
           </div>
 
           <!-- Product Details -->
-          <div class="p-6 sm:p-8">
+          <div class="p-4 sm:p-6 lg:p-8">
             <!-- Title & Price -->
             <div class="mb-6">
-              <h2 class="text-3xl font-bold text-gray-900 mb-3">{{ product.name }}</h2>
+              <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{{ product.name }}</h2>
               <div class="flex items-baseline gap-3">
-                <span class="text-4xl font-bold bg-gradient-to-r from-gold-600 to-gold-700 bg-clip-text text-transparent">
+                <span class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gold-600 to-gold-700 bg-clip-text text-transparent">
                   {{ product.formattedPrice }}
                 </span>
                 <span v-if="product.isInStock" class="text-sm text-green-600 font-medium">
@@ -65,7 +65,7 @@
             </div>
 
             <!-- Description -->
-            <div class="mb-8">
+            <div class="mb-6 sm:mb-8">
               <h3 class="text-lg font-semibold text-gray-900 mb-2">Description</h3>
               <p class="text-gray-600 leading-relaxed">
                 {{ product.description || 'Aucune description disponible pour ce produit.' }}
@@ -105,7 +105,7 @@
                   </svg>
                 </button>
 
-                <span class="text-sm text-gray-500 ml-2">
+                <span class="text-sm text-gray-500 ml-2 hidden sm:inline">
                   (max: {{ product.stock }})
                 </span>
               </div>
@@ -116,7 +116,7 @@
               <button
                 v-if="product.isInStock"
                 @click="handleAddToCart"
-                class="flex-1 px-6 py-4 bg-gradient-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
+                class="w-full px-6 py-3 sm:py-4 bg-gradient-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -125,20 +125,9 @@
               </button>
 
               <button
-                v-if="product.isInStock"
-                @click="handleReserve"
-                class="flex-1 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                </svg>
-                Réserver
-              </button>
-
-              <button
                 v-else
                 disabled
-                class="w-full px-6 py-4 bg-gray-300 text-gray-500 font-semibold rounded-xl cursor-not-allowed"
+                class="w-full px-6 py-3 sm:py-4 bg-gray-300 text-gray-500 font-semibold rounded-xl cursor-not-allowed"
               >
                 Produit indisponible
               </button>
@@ -226,22 +215,6 @@ const handleAddToCart = () => {
     closeModal()
   } catch (error: any) {
     toast.error(error.message || 'Erreur lors de l\'ajout au panier')
-  }
-}
-
-const handleReserve = () => {
-  if (!props.product) return
-
-  try {
-    for (let i = 0; i < quantity.value; i++) {
-      cartStore.addItem(props.product)
-    }
-    toast.info(`${quantity.value} × ${props.product.name} ajouté${quantity.value > 1 ? 's' : ''} pour réservation !`, {
-      timeout: 2000
-    })
-    closeModal()
-  } catch (error: any) {
-    toast.error(error.message || 'Erreur lors de la réservation')
   }
 }
 
