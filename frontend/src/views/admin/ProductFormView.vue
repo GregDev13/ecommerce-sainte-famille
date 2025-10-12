@@ -159,7 +159,7 @@ const loadProduct = async () => {
 
     // Load existing image if available
     if (response.data.image?.url) {
-      existingImage.value = `${API_URL}${response.data.image.url}`
+      existingImage.value = response.data.image.url
     }
   } catch (error) {
     console.error('Error loading product:', error)

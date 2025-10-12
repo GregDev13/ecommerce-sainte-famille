@@ -129,7 +129,7 @@
               <div class="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
                 <img
                   v-if="item.image?.url"
-                  :src="`${API_URL}${item.image.url}`"
+                  :src="item.image.url"
                   :alt="item.name"
                   class="w-full h-full object-cover"
                 />

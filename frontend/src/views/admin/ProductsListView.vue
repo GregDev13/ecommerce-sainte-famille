@@ -40,7 +40,7 @@
                 <div class="w-10 h-10 bg-gray-200 rounded flex items-center justify-center overflow-hidden">
                   <img
                     v-if="product.image?.url"
-                    :src="`${API_URL}${product.image.url}`"
+                    :src="product.image.url"
                     :alt="product.name"
                     class="w-full h-full object-cover"
                   />
