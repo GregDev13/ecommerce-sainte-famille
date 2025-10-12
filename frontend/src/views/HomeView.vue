@@ -9,23 +9,14 @@
         <div class="absolute top-40 left-40 w-80 h-80 bg-gold-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
       </div>
 
-      <!-- Christmas decorations - Snowflakes & Stars -->
-      <div class="christmas-decorations absolute inset-0 pointer-events-none overflow-hidden">
-        <!-- Subtle snowflakes -->
-        <div class="snowflake" style="left: 10%; animation-delay: 0s;">❄</div>
-        <div class="snowflake" style="left: 25%; animation-delay: 2s;">❅</div>
-        <div class="snowflake" style="left: 50%; animation-delay: 4s;">❄</div>
-        <div class="snowflake" style="left: 70%; animation-delay: 1s;">❆</div>
-        <div class="snowflake" style="left: 85%; animation-delay: 3s;">❅</div>
+      <!-- Snow particles -->
+      <Particles
+        id="tsparticles"
+        :particlesInit="particlesInit"
+        :options="particlesOptions"
+      />
 
-        <!-- Golden twinkling stars -->
-        <div class="star" style="top: 15%; left: 20%; animation-delay: 0s;">✨</div>
-        <div class="star" style="top: 30%; left: 80%; animation-delay: 1.5s;">⭐</div>
-        <div class="star" style="top: 60%; left: 15%; animation-delay: 3s;">✨</div>
-        <div class="star" style="top: 75%; left: 90%; animation-delay: 2s;">⭐</div>
-      </div>
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- Left content -->
           <div class="space-y-8 text-center lg:text-left">
@@ -218,6 +209,9 @@ import { productsApi, type Product } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
+import Particles from '@tsparticles/vue3'
+import { loadSlim } from '@tsparticles/slim'
+import type { Engine } from '@tsparticles/engine'
 
 const API_URL = import.meta.env.VITE_API_URL
 const router = useRouter()
@@ -226,6 +220,71 @@ const toast = useToast()
 
 const recentProducts = ref<Product[]>([])
 const loading = ref(true)
+
+// tsParticles configuration
+const particlesInit = async (engine: Engine) => {
+  await loadSlim(engine)
+}
+
+const particlesOptions = {
+  background: {
+    color: {
+      value: 'transparent'
+    }
+  },
+  fpsLimit: 60,
+  particles: {
+    color: {
+      value: '#ffffff'
+    },
+    move: {
+      direction: 'bottom' as const,
+      enable: true,
+      outModes: {
+        default: 'out' as const
+      },
+      random: false,
+      speed: 1,
+      straight: false
+    },
+    number: {
+      density: {
+        enable: true,
+        area: 800
+      },
+      value: 30
+    },
+    opacity: {
+      value: { min: 0.3, max: 0.8 }
+    },
+    shape: {
+      type: 'circle'
+    },
+    size: {
+      value: { min: 2, max: 5 }
+    },
+    wobble: {
+      enable: true,
+      distance: 10,
+      speed: 10
+    }
+  },
+  detectRetina: true,
+  interactivity: {
+    events: {
+      onHover: {
+        enable: true,
+        mode: 'repulse' as const
+      }
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+        duration: 0.4
+      }
+    }
+  }
+}
 
 const loadRecentProducts = async () => {
   try {
@@ -341,94 +400,13 @@ onMounted(() => {
   -webkit-box-orient: vertical;
 }
 
-/* Christmas decorations - Subtle snowflakes */
-@keyframes snowfall {
-  0% {
-    transform: translateY(-100px) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(100vh) translateX(20px);
-    opacity: 0;
-  }
-}
-
-@keyframes sway {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(15px);
-  }
-}
-
-.snowflake {
+/* tsParticles container styling */
+#tsparticles {
   position: absolute;
-  top: -50px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.2rem;
-  animation: snowfall 15s linear infinite, sway 3s ease-in-out infinite;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-.snowflake:nth-child(2) {
-  font-size: 1rem;
-  animation-duration: 18s, 4s;
-}
-
-.snowflake:nth-child(3) {
-  font-size: 1.4rem;
-  animation-duration: 20s, 3.5s;
-}
-
-.snowflake:nth-child(4) {
-  font-size: 0.9rem;
-  animation-duration: 16s, 4.5s;
-}
-
-.snowflake:nth-child(5) {
-  font-size: 1.1rem;
-  animation-duration: 19s, 3.8s;
-}
-
-/* Golden twinkling stars */
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
-
-.star {
-  position: absolute;
-  color: #c19a6b;
-  font-size: 1rem;
-  animation: twinkle 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 3px rgba(193, 154, 107, 0.5));
-}
-
-.star:nth-child(7) {
-  animation-duration: 2.5s;
-  font-size: 0.8rem;
-}
-
-.star:nth-child(8) {
-  animation-duration: 3.5s;
-  font-size: 1.1rem;
-}
-
-.star:nth-child(9) {
-  animation-duration: 2.8s;
-  font-size: 0.9rem;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 </style>
