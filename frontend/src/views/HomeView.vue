@@ -10,7 +10,7 @@
       </div>
 
       <!-- Snow particles -->
-      <Particles
+      <vue-particles
         id="tsparticles"
         :options="particlesOptions"
       />
