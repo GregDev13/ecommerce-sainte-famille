@@ -65,52 +65,15 @@
             </div>
           </div>
 
-          <!-- Right content - Floating cards -->
-          <div class="relative hidden lg:block">
-            <div class="relative w-full h-[600px]">
-              <!-- Card 1 -->
-              <div class="absolute top-0 right-0 w-72 bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-300 floating border border-gold-100">
-                <div class="w-full h-48 bg-gradient-to-br from-gold-200 to-gold-300 rounded-xl mb-4 overflow-hidden flex items-center justify-center">
-                  <img
-                    v-if="recentProducts[0]?.image?.url"
-                    :src="recentProducts[0].image.url"
-                    :alt="recentProducts[0].name"
-                    class="w-full h-full object-cover"
-                  />
-                  <span v-else class="text-6xl">🌞</span>
-                </div>
-                <h3 class="font-bold text-lg text-gray-900 mb-2">Produits de qualité</h3>
-                <p class="text-gray-600 text-sm">Sélection rigoureuse pour votre satisfaction</p>
-                <div class="mt-4 flex items-center justify-between">
-                  <span class="text-gold-700 font-bold text-xl">À partir de 5€</span>
-                  <button class="w-10 h-10 bg-gold-100 hover:bg-gold-200 rounded-full flex items-center justify-center transition-colors">
-                    <svg class="w-5 h-5 text-gold-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Card 2 -->
-              <div class="absolute bottom-0 left-0 w-64 bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-300 floating animation-delay-2000 border border-gold-100">
-                <div class="flex items-center gap-4 mb-4">
-                  <div class="w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-600 rounded-xl flex items-center justify-center">
-                    <span class="text-3xl">🛒</span>
-                  </div>
-                  <div>
-                    <div class="text-2xl font-bold text-gray-900">98%</div>
-                    <div class="text-sm text-gray-600">Satisfaction</div>
-                  </div>
-                </div>
-                <p class="text-gray-600 text-sm">Des clients satisfaits et fidèles</p>
-              </div>
-
-              <!-- Card 3 - Small badge -->
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-xl p-4 floating animation-delay-4000">
-                <div class="flex items-center gap-3">
-                  <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span class="font-semibold text-gray-700">Livraison rapide</span>
-                </div>
+          <!-- Right content - École logo -->
+          <div class="relative hidden lg:flex items-center justify-center">
+            <div class="logo-entrance">
+              <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-gold-200 hover:border-gold-300 transition-all duration-500 hover:shadow-3xl">
+                <img
+                  src="/photo-default-article.jpg"
+                  alt="École de la Sainte Famille - La Valette du Var"
+                  class="w-full max-w-md h-auto"
+                />
               </div>
             </div>
           </div>
@@ -324,12 +287,27 @@ onMounted(() => {
   }
 }
 
+@keyframes logo-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .animate-blob {
   animation: blob 7s infinite;
 }
 
 .floating {
   animation: floating 6s ease-in-out infinite;
+}
+
+.logo-entrance {
+  animation: logo-entrance 1s ease-out forwards;
 }
 
 .animation-delay-2000 {

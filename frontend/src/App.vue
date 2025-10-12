@@ -154,18 +154,54 @@ const closeMobileMenu = () => {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8 mt-12">
+    <footer class="bg-gray-900 text-white py-12 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-4 md:mb-0">
-            <h5 class="text-lg font-semibold mb-2">
-              🎄 Marché de Noël la Sainte Famille
-            </h5>
-            <p class="text-gray-400">Votre boutique familiale en ligne</p>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <!-- Logo et description -->
+          <div class="flex flex-col items-center md:items-start">
+            <div class="bg-white rounded-xl p-4 mb-4 w-48">
+              <img
+                src="/photo-default-article.jpg"
+                alt="École de la Sainte Famille"
+                class="w-full h-auto"
+              />
+            </div>
+            <p class="text-gray-400 text-sm text-center md:text-left">
+              Marché de Noël organisé par l'École de la Sainte Famille
+            </p>
           </div>
-          <div class="text-center md:text-right">
-            <p class="text-gray-400">&copy; 2024 Marché de Noël la Sainte Famille. Tous droits réservés.</p>
+
+          <!-- Informations -->
+          <div class="text-center md:text-left">
+            <h5 class="text-lg font-semibold mb-4">🎄 Le Marché de Noël</h5>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>Boutique familiale en ligne</li>
+              <li>Produits de qualité</li>
+              <li>Livraison gratuite</li>
+              <li>Paiement sécurisé</li>
+            </ul>
           </div>
+
+          <!-- Contact -->
+          <div class="text-center md:text-left">
+            <h5 class="text-lg font-semibold mb-4">📍 L'École</h5>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>École de la Sainte Famille</li>
+              <li>La Valette du Var</li>
+              <li class="pt-2">
+                <a href="mailto:contact@saintefamille-lavalette.fr" class="hover:text-gold-400 transition-colors">
+                  contact@saintefamille-lavalette.fr
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 pt-6 text-center">
+          <p class="text-gray-400 text-sm">
+            &copy; 2024 Marché de Noël - École de la Sainte Famille, La Valette du Var. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>
