@@ -4,6 +4,7 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import OrderItem from './order_item.js'
+import env from '#start/env'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -32,14 +33,21 @@ export default class Product extends BaseModel {
 
   @computed()
   get formattedPrice() {
-    const price = typeof this.price === 'string' ? parseFloat(this.price) : this.price
+    const price = typeof this.price === 'string' ? Number.parseFloat(this.price) : this.price
     return `${price.toFixed(2)} €`
   }
 
   @computed()
   get isInStock() {
-    const stock = typeof this.stock === 'string' ? parseInt(this.stock) : this.stock
+    const stock = typeof this.stock === 'string' ? Number.parseInt(this.stock) : this.stock
     return stock > 0
+  }
+
+  @computed()
+  get imageUrl() {
+    if (!this.image?.url) return null
+    const appUrl = env.get('APP_URL')
+    return `${appUrl}${this.image.url}`
   }
 
   @column.dateTime({ autoCreate: true })
