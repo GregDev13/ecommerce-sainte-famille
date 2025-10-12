@@ -12,7 +12,6 @@
       <!-- Snow particles -->
       <Particles
         id="tsparticles"
-        :particlesInit="particlesInit"
         :options="particlesOptions"
       />
 
@@ -209,9 +208,6 @@ import { productsApi, type Product } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
-import Particles from '@tsparticles/vue3'
-import { loadSlim } from '@tsparticles/slim'
-import type { Engine } from '@tsparticles/engine'
 
 const API_URL = import.meta.env.VITE_API_URL
 const router = useRouter()
@@ -222,10 +218,6 @@ const recentProducts = ref<Product[]>([])
 const loading = ref(true)
 
 // tsParticles configuration
-const particlesInit = async (engine: Engine) => {
-  await loadSlim(engine)
-}
-
 const particlesOptions = {
   background: {
     color: {
