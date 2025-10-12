@@ -41,7 +41,7 @@
         <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
           <img
             v-if="product.imageUrl"
-            :src="`${API_URL}${product.imageUrl}`"
+            :src="product.imageUrl"
             :alt="product.name"
             class="h-full w-full object-cover rounded-lg"
           />

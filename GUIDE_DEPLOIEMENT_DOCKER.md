@@ -652,3 +652,19 @@ Caddy (reverse proxy + SSL auto)
 - 🔄 Configurer un système de CI/CD (GitHub Actions)
 
 Bon déploiement ! 🐳
+
+
+# Récupérer les derniers changements
+git pull
+
+# Arrêter les conteneurs
+docker compose down
+
+# Rebuilder le backend avec les nouveaux changements
+docker compose build backend
+
+# Redémarrer tous les conteneurs
+docker compose up -d
+
+# Vérifier que tout fonctionne
+docker compose ps

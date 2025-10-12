@@ -73,7 +73,7 @@
                 <div class="w-full h-48 bg-gradient-to-br from-gold-200 to-gold-300 rounded-xl mb-4 overflow-hidden flex items-center justify-center">
                   <img
                     v-if="recentProducts[0]?.imageUrl"
-                    :src="`${API_URL}${recentProducts[0].imageUrl}`"
+                    :src="recentProducts[0].imageUrl"
                     :alt="recentProducts[0].name"
                     class="w-full h-full object-cover"
                   />
@@ -195,7 +195,7 @@
             <div class="relative h-64 bg-gradient-to-br from-gold-200 to-gold-300 flex items-center justify-center overflow-hidden">
               <img
                 v-if="product.imageUrl"
-                :src="`${API_URL}${product.imageUrl}`"
+                :src="product.imageUrl"
                 :alt="product.name"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
