@@ -21,9 +21,12 @@ const corsConfig = defineConfig({
     }
 
     // En production, liste blanche des origines autorisées
+    const appUrl = env.get('APP_URL')
     const allowedOrigins = [
-      env.get('APP_URL'), // URL principale du backend
-      env.get('APP_URL').replace('https://', 'http://'), // Fallback HTTP
+      appUrl, // URL principale (ex: https://boutiquesaintefamille.fr)
+      appUrl.replace('https://', 'http://'), // Fallback HTTP
+      appUrl.replace('https://', 'https://www.'), // Avec www (HTTPS)
+      appUrl.replace('https://', 'http://www.'), // Avec www (HTTP)
       'http://localhost',
       'http://localhost:80',
     ]
