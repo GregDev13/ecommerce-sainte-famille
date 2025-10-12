@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen max-w-4xl mx-auto py-8 px-4">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">Finaliser ma commande</h1>
+  <div class="min-h-screen max-w-4xl mx-auto py-6 sm:py-8 px-4">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Finaliser ma commande</h1>
 
     <div v-if="cartStore.itemCount === 0" class="text-center py-16">
       <div class="text-8xl mb-6">🛒</div>
@@ -97,16 +97,16 @@
             </div>
 
             <!-- Boutons d'action -->
-            <div class="flex gap-4 pt-4">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
               <button
                 type="submit"
                 :disabled="loading"
-                class="btn-primary flex-1"
+                class="btn-primary flex-1 min-h-[44px]"
               >
                 <span v-if="loading">Traitement en cours...</span>
                 <span v-else>Valider ma commande</span>
               </button>
-              <router-link to="/cart" class="btn-secondary flex-1 text-center">
+              <router-link to="/cart" class="btn-secondary flex-1 text-center min-h-[44px] flex items-center justify-center">
                 Retour au panier
               </router-link>
             </div>

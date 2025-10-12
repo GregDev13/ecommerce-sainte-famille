@@ -21,8 +21,8 @@
       />
     </div>
 
-    <!-- Products Table -->
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <!-- Products Table (Desktop) -->
+    <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -93,6 +93,80 @@
       <!-- Loading State -->
       <div v-if="loading" class="text-center py-12">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
+      </div>
+    </div>
+
+    <!-- Products Cards (Mobile) -->
+    <div class="md:hidden space-y-4">
+      <!-- Loading State -->
+      <div v-if="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else-if="products.length === 0" class="bg-white rounded-xl shadow-sm p-8 text-center">
+        <p class="text-gray-500">Aucun produit trouvé</p>
+      </div>
+
+      <!-- Product Cards -->
+      <div
+        v-for="product in products"
+        :key="product.id"
+        class="bg-white rounded-xl shadow-sm p-4 space-y-3"
+      >
+        <!-- Product Header -->
+        <div class="flex gap-3">
+          <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+            <img
+              v-if="product.image?.url"
+              :src="product.image.url"
+              :alt="product.name"
+              class="w-full h-full object-cover"
+            />
+            <span v-else class="text-3xl">📦</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-gray-900 truncate">{{ product.name }}</h3>
+            <p class="text-sm text-gray-500 line-clamp-2">{{ product.description }}</p>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="grid grid-cols-2 gap-3 pt-3 border-t">
+          <div>
+            <p class="text-xs text-gray-500">Prix</p>
+            <p class="font-semibold text-gray-900">{{ Number(product.price).toFixed(2) }} €</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500">Stock</p>
+            <p class="font-semibold text-gray-900">{{ product.stock }}</p>
+          </div>
+        </div>
+
+        <!-- Status & Actions -->
+        <div class="flex items-center justify-between pt-3 border-t">
+          <button
+            @click="toggleActive(product)"
+            :class="product.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+            class="px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            {{ product.isActive ? 'Actif' : 'Inactif' }}
+          </button>
+          <div class="flex gap-2">
+            <router-link
+              :to="`/admin/products/${product.id}/edit`"
+              class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors"
+            >
+              Modifier
+            </router-link>
+            <button
+              @click="deleteProduct(product)"
+              class="px-4 py-2 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 

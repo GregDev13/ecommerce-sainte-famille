@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen max-w-2xl">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
       {{ isEdit ? 'Modifier le produit' : 'Nouveau produit' }}
     </h1>
 
-    <form @submit.prevent="handleSubmit" class="bg-white rounded-xl shadow-sm p-6 space-y-6">
+    <form @submit.prevent="handleSubmit" class="bg-white rounded-xl shadow-sm p-4 sm:p-6 space-y-4 sm:space-y-6">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
         <input
@@ -83,17 +83,17 @@
         </label>
       </div>
 
-      <div class="flex gap-4 pt-4">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
         <button
           type="submit"
           :disabled="loading"
-          class="flex-1 bg-gold-600 hover:bg-gold-700 text-white font-semibold py-3 rounded-lg disabled:opacity-50 transition-colors"
+          class="flex-1 bg-gold-600 hover:bg-gold-700 text-white font-semibold py-3 rounded-lg disabled:opacity-50 transition-colors min-h-[44px]"
         >
           {{ loading ? 'Enregistrement...' : isEdit ? 'Mettre à jour' : 'Créer' }}
         </button>
         <router-link
           to="/admin/products"
-          class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-colors"
+          class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-colors text-center min-h-[44px] flex items-center justify-center"
         >
           Annuler
         </router-link>

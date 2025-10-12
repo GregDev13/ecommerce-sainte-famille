@@ -19,8 +19,8 @@
       </select>
     </div>
 
-    <!-- Orders Table -->
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <!-- Orders Table (Desktop) -->
+    <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -123,6 +123,114 @@
       <!-- Loading State -->
       <div v-if="loading" class="text-center py-12">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
+      </div>
+    </div>
+
+    <!-- Orders Cards (Mobile) -->
+    <div class="md:hidden space-y-4">
+      <!-- Loading State -->
+      <div v-if="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else-if="orders.length === 0" class="bg-white rounded-xl shadow-sm p-8 text-center">
+        <p class="text-gray-500">Aucune commande trouvée</p>
+      </div>
+
+      <!-- Order Cards -->
+      <div
+        v-for="order in orders"
+        :key="order.id"
+        class="bg-white rounded-xl shadow-sm p-4 space-y-3"
+      >
+        <!-- Order Header -->
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="font-semibold text-gray-900">{{ order.orderNumber }}</h3>
+            <p class="text-xs text-gray-500">{{ order.type === 'reservation' ? 'Réservation' : 'Commande' }}</p>
+          </div>
+          <div class="relative inline-block" @click.stop>
+            <button
+              :ref="el => buttonRefs[order.id] = el as HTMLElement"
+              @click="toggleStatusDropdown(order.id)"
+              class="px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-1"
+              :class="getStatusClass(order.status)"
+            >
+              <span>{{ getStatusLabel(order.status) }}</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <!-- Dropdown menu using Teleport -->
+            <Teleport to="body">
+              <div
+                v-if="openStatusDropdown === order.id"
+                :style="dropdownStyle"
+                class="fixed z-[9999] w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2"
+                @click.stop
+              >
+                <button
+                  v-for="status in statusOptions"
+                  :key="status.value"
+                  @click="updateStatus(order, status.value)"
+                  class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
+                  :class="order.status === status.value ? 'bg-gold-50' : ''"
+                >
+                  <span
+                    class="w-3 h-3 rounded-full"
+                    :class="status.dotClass"
+                  ></span>
+                  <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
+                    {{ status.label }}
+                  </span>
+                  <svg
+                    v-if="order.status === status.value"
+                    class="w-4 h-4 ml-auto text-gold-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </button>
+              </div>
+            </Teleport>
+          </div>
+        </div>
+
+        <!-- Order Info -->
+        <div class="pt-3 border-t space-y-2">
+          <div class="flex justify-between">
+            <span class="text-xs text-gray-500">Client</span>
+            <span class="text-sm font-medium text-gray-900">{{ order.user?.email || 'Invité' }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-gray-500">Montant</span>
+            <span class="text-sm font-semibold text-gray-900">{{ Number(order.totalAmount).toFixed(2) }} €</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-gray-500">Date</span>
+            <span class="text-sm text-gray-900">{{ new Date(order.createdAt).toLocaleDateString('fr-FR') }}</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-2 pt-3 border-t">
+          <button
+            @click="viewDetails(order)"
+            class="flex-1 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors"
+          >
+            Détails
+          </button>
+          <button
+            @click="deleteOrder(order)"
+            class="flex-1 px-4 py-2 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors"
+          >
+            Supprimer
+          </button>
+        </div>
       </div>
     </div>
 

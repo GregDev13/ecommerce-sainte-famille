@@ -21,12 +21,12 @@
 
             <!-- Main heading with gradient -->
             <div>
-              <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
                 <span class="bg-gradient-to-r from-gold-700 via-gold-600 to-gold-500 bg-clip-text text-transparent">
                   Marché de Noël la Sainte Famille
                 </span>
               </h1>
-              <p class="text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Découvrez notre sélection de produits familiaux de qualité.
                 <span class="font-semibold text-gold-800">Commandez en ligne</span> ou
                 <span class="font-semibold text-gold-800">réservez</span> pour récupérer en magasin.
@@ -49,18 +49,18 @@
             </div>
 
             <!-- Stats -->
-            <div class="grid grid-cols-3 gap-8 pt-8">
+            <div class="grid grid-cols-3 gap-4 sm:gap-8 pt-8">
               <div class="text-center lg:text-left">
-                <div class="text-3xl font-bold text-gray-900">100+</div>
-                <div class="text-sm text-gray-600 mt-1">Produits</div>
+                <div class="text-2xl sm:text-3xl font-bold text-gray-900">100+</div>
+                <div class="text-xs sm:text-sm text-gray-600 mt-1">Produits</div>
               </div>
               <div class="text-center lg:text-left">
-                <div class="text-3xl font-bold text-gray-900">500+</div>
-                <div class="text-sm text-gray-600 mt-1">Clients</div>
+                <div class="text-2xl sm:text-3xl font-bold text-gray-900">500+</div>
+                <div class="text-xs sm:text-sm text-gray-600 mt-1">Clients</div>
               </div>
               <div class="text-center lg:text-left">
-                <div class="text-3xl font-bold text-gray-900">24h</div>
-                <div class="text-sm text-gray-600 mt-1">Livraison</div>
+                <div class="text-2xl sm:text-3xl font-bold text-gray-900">24h</div>
+                <div class="text-xs sm:text-sm text-gray-600 mt-1">Livraison</div>
               </div>
             </div>
           </div>
@@ -119,11 +119,11 @@
     </div>
 
     <!-- Features Section -->
-    <div class="py-24 bg-white">
+    <div class="py-16 sm:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Pourquoi nous choisir ?</h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">Une expérience d'achat simple, rapide et sécurisée</p>
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Pourquoi nous choisir ?</h2>
+          <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">Une expérience d'achat simple, rapide et sécurisée</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
@@ -167,14 +167,14 @@
     </div>
 
     <!-- Recent Products Section -->
-    <div class="py-24 bg-gradient-to-b from-white to-gray-50">
+    <div class="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12 sm:mb-16">
           <span class="inline-block px-4 py-2 bg-gold-100 text-gold-700 rounded-full text-sm font-semibold mb-4">
             Nouveautés
           </span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Nos derniers produits</h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">Découvrez notre sélection de produits récemment ajoutés</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nos derniers produits</h2>
+          <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">Découvrez notre sélection de produits récemment ajoutés</p>
         </div>
 
         <!-- Loading state -->

@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 
 const cartStore = useCartStore()
+const mobileMenuOpen = ref(false)
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false
+}
 </script>
 
 <template>
@@ -17,6 +23,7 @@ const cartStore = useCartStore()
             </router-link>
           </div>
 
+          <!-- Desktop navigation -->
           <div class="hidden md:flex items-center space-x-8">
             <router-link
               to="/products"
@@ -43,9 +50,103 @@ const cartStore = useCartStore()
               🔐 Admin
             </router-link>
           </div>
+
+          <!-- Mobile menu button -->
+          <button
+            @click="mobileMenuOpen = true"
+            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Ouvrir le menu"
+          >
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- Mobile menu overlay -->
+    <Transition
+      enter-active-class="transition-opacity duration-300"
+      leave-active-class="transition-opacity duration-300"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="mobileMenuOpen"
+        @click="closeMobileMenu"
+        class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+      ></div>
+    </Transition>
+
+    <!-- Mobile menu panel -->
+    <Transition
+      enter-active-class="transition-transform duration-300"
+      leave-active-class="transition-transform duration-300"
+      enter-from-class="translate-x-full"
+      leave-to-class="translate-x-full"
+    >
+      <div
+        v-if="mobileMenuOpen"
+        class="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-white shadow-xl z-50 md:hidden"
+      >
+        <!-- Mobile menu header -->
+        <div class="flex items-center justify-between p-4 border-b">
+          <h2 class="text-lg font-bold text-gray-900">Menu</h2>
+          <button
+            @click="closeMobileMenu"
+            class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Fermer le menu"
+          >
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu links -->
+        <nav class="flex flex-col p-4 space-y-2">
+          <router-link
+            to="/products"
+            @click="closeMobileMenu"
+            class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gold-50 hover:text-gold-700 rounded-lg transition-colors font-medium"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+            Produits
+          </router-link>
+
+          <router-link
+            to="/cart"
+            @click="closeMobileMenu"
+            class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gold-50 hover:text-gold-700 rounded-lg transition-colors font-medium relative"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Panier
+            <span
+              v-if="cartStore.itemCount > 0"
+              class="ml-auto bg-gold-600 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold"
+            >
+              {{ cartStore.itemCount }}
+            </span>
+          </router-link>
+
+          <router-link
+            to="/admin/login"
+            @click="closeMobileMenu"
+            class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gold-50 hover:text-gold-700 rounded-lg transition-colors font-medium text-sm"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            Administration
+          </router-link>
+        </nav>
+      </div>
+    </Transition>
 
     <!-- Contenu principal -->
     <main>
