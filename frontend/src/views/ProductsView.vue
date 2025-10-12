@@ -35,7 +35,8 @@
       <div
         v-for="product in products"
         :key="product.id"
-        class="card p-4 hover:shadow-lg transition-shadow"
+        @click="openProductModal(product)"
+        class="card p-4 hover:shadow-lg transition-shadow cursor-pointer"
       >
         <!-- Product image -->
         <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
@@ -67,8 +68,9 @@
         <div class="flex gap-2">
           <button
             v-if="product.isInStock"
-            @click="addToCart(product)"
+            @click="addToCart(product, $event)"
             class="btn-primary flex-1 text-sm py-2"
+            title="Ajout rapide au panier"
           >
             🛒 Ajouter
           </button>
@@ -114,6 +116,13 @@
         </button>
       </nav>
     </div>
+
+    <!-- Product Detail Modal -->
+    <ProductModal
+      :is-open="isModalOpen"
+      :product="selectedProduct"
+      @close="closeProductModal"
+    />
   </div>
 </template>
 
@@ -123,6 +132,7 @@ import { useRouter } from 'vue-router'
 import { productsApi, type Product } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
 import { useToast } from 'vue-toastification'
+import ProductModal from '@/components/ProductModal.vue'
 
 const API_URL = import.meta.env.VITE_API_URL
 const router = useRouter()
@@ -135,6 +145,8 @@ const loading = ref(true)
 const error = ref('')
 const searchQuery = ref('')
 const pagination = ref<any>(null)
+const selectedProduct = ref<Product | null>(null)
+const isModalOpen = ref(false)
 
 // Methods
 const loadProducts = async (page = 1) => {
@@ -167,7 +179,12 @@ const loadPage = (page: number) => {
   loadProducts(page)
 }
 
-const addToCart = (product: Product) => {
+const addToCart = (product: Product, event?: Event) => {
+  // Stop event propagation to prevent opening modal when clicking quick add button
+  if (event) {
+    event.stopPropagation()
+  }
+
   try {
     cartStore.addItem(product)
     toast.success(`${product.name} ajouté au panier !`, {
@@ -176,6 +193,18 @@ const addToCart = (product: Product) => {
   } catch (error: any) {
     toast.error(error.message || 'Erreur lors de l\'ajout au panier')
   }
+}
+
+const openProductModal = (product: Product) => {
+  selectedProduct.value = product
+  isModalOpen.value = true
+}
+
+const closeProductModal = () => {
+  isModalOpen.value = false
+  setTimeout(() => {
+    selectedProduct.value = null
+  }, 300) // Wait for animation to finish
 }
 
 // Lifecycle

@@ -136,7 +136,12 @@
 
         <!-- Products grid -->
         <div v-else-if="recentProducts.length > 0" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div v-for="product in recentProducts" :key="product.id" class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
+          <div
+            v-for="product in recentProducts"
+            :key="product.id"
+            @click="openProductModal(product)"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 cursor-pointer"
+          >
             <div class="relative h-64 bg-gradient-to-br from-gold-200 to-gold-300 flex items-center justify-center overflow-hidden">
               <img
                 v-if="product.image?.url"
@@ -159,8 +164,9 @@
                 <span class="text-2xl font-bold text-gold-600">{{ product.formattedPrice }}</span>
                 <button
                   v-if="product.isInStock"
-                  @click="addToCart(product)"
+                  @click="addToCart(product, $event)"
                   class="w-10 h-10 bg-gold-600 hover:bg-gold-700 text-white rounded-xl flex items-center justify-center transition-colors shadow-md hover:shadow-lg"
+                  title="Ajout rapide au panier"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -199,6 +205,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Product Detail Modal -->
+    <ProductModal
+      :is-open="isModalOpen"
+      :product="selectedProduct"
+      @close="closeProductModal"
+    />
   </div>
 </template>
 
@@ -208,6 +221,7 @@ import { productsApi, type Product } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
+import ProductModal from '@/components/ProductModal.vue'
 
 const API_URL = import.meta.env.VITE_API_URL
 const router = useRouter()
@@ -216,6 +230,8 @@ const toast = useToast()
 
 const recentProducts = ref<Product[]>([])
 const loading = ref(true)
+const selectedProduct = ref<Product | null>(null)
+const isModalOpen = ref(false)
 
 // tsParticles configuration
 const particlesOptions = {
@@ -290,7 +306,12 @@ const loadRecentProducts = async () => {
   }
 }
 
-const addToCart = (product: Product) => {
+const addToCart = (product: Product, event?: Event) => {
+  // Stop event propagation to prevent opening modal when clicking quick add button
+  if (event) {
+    event.stopPropagation()
+  }
+
   try {
     cartStore.addItem(product)
     toast.success(`${product.name} ajouté au panier !`, {
@@ -299,6 +320,18 @@ const addToCart = (product: Product) => {
   } catch (error: any) {
     toast.error(error.message || 'Erreur lors de l\'ajout au panier')
   }
+}
+
+const openProductModal = (product: Product) => {
+  selectedProduct.value = product
+  isModalOpen.value = true
+}
+
+const closeProductModal = () => {
+  isModalOpen.value = false
+  setTimeout(() => {
+    selectedProduct.value = null
+  }, 300) // Wait for animation to finish
 }
 
 onMounted(() => {
