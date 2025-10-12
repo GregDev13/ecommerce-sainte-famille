@@ -30,7 +30,12 @@ export interface Product {
   price: number
   stock: number
   isActive: boolean
-  imageUrl: string | null
+  image: {
+    url: string
+    name: string
+    size: number
+    extname: string
+  } | null
   formattedPrice: string
   isInStock: boolean
   createdAt: string

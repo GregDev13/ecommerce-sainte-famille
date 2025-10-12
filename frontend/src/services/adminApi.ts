@@ -81,7 +81,10 @@ export interface OrderItem {
     id: number
     name: string
     price: number
-    imageUrl: string | null
+    image: {
+      url: string
+      name: string
+    } | null
   }
 }
 
