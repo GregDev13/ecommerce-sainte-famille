@@ -67,14 +67,12 @@
 
           <!-- Right content - École logo -->
           <div class="relative hidden lg:flex items-center justify-center">
-            <div class="logo-entrance">
-              <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-gold-200 hover:border-gold-300 transition-all duration-500 hover:shadow-3xl">
-                <img
-                  src="/photo-default-article.jpg"
-                  alt="École de la Sainte Famille - La Valette du Var"
-                  class="w-full max-w-md h-auto"
-                />
-              </div>
+            <div class="logo-entrance logo-glow">
+              <img
+                src="/photo-default-article.jpg"
+                alt="École de la Sainte Famille - La Valette du Var"
+                class="w-full max-w-lg h-auto rounded-2xl"
+              />
             </div>
           </div>
         </div>
@@ -298,6 +296,17 @@ onMounted(() => {
   }
 }
 
+@keyframes gentle-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 40px rgba(166, 124, 82, 0.4))
+            drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 60px rgba(166, 124, 82, 0.5))
+            drop-shadow(0 0 100px rgba(166, 124, 82, 0.3));
+  }
+}
+
 .animate-blob {
   animation: blob 7s infinite;
 }
@@ -308,6 +317,18 @@ onMounted(() => {
 
 .logo-entrance {
   animation: logo-entrance 1s ease-out forwards;
+}
+
+.logo-glow {
+  filter: drop-shadow(0 0 40px rgba(166, 124, 82, 0.4))
+          drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
+  animation: gentle-pulse 4s ease-in-out infinite;
+  transition: filter 0.3s ease;
+}
+
+.logo-glow:hover {
+  filter: drop-shadow(0 0 60px rgba(166, 124, 82, 0.6))
+          drop-shadow(0 0 100px rgba(166, 124, 82, 0.4));
 }
 
 .animation-delay-2000 {

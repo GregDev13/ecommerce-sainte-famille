@@ -10,7 +10,7 @@ export default class extends BaseSeeder {
         email: 'admin@soleil-du-sud.fr',
         password: 'admin123', // Change ce mot de passe !
         fullName: 'Administrateur',
-        role: 'admin'
+        role: 'admin',
       }
     )
 
@@ -21,7 +21,7 @@ export default class extends BaseSeeder {
         email: 'client@test.fr',
         password: 'client123',
         fullName: 'Client Test',
-        role: 'client'
+        role: 'client',
       }
     )
   }

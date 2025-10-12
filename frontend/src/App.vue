@@ -159,11 +159,11 @@ const closeMobileMenu = () => {
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <!-- Logo et description -->
           <div class="flex flex-col items-center md:items-start">
-            <div class="bg-white rounded-xl p-4 mb-4 w-48">
+            <div class="mb-4 footer-logo-glow">
               <img
                 src="/photo-default-article.jpg"
                 alt="École de la Sainte Famille"
-                class="w-full h-auto"
+                class="w-40 h-auto rounded-lg"
               />
             </div>
             <p class="text-gray-400 text-sm text-center md:text-left">
@@ -230,5 +230,17 @@ a:hover:active {
 a:-webkit-any-link:active {
   color: #a67c52 !important;
   text-decoration-color: #c19a6b !important;
+}
+
+/* Glow subtil pour le logo dans le footer */
+.footer-logo-glow {
+  filter: drop-shadow(0 0 20px rgba(166, 124, 82, 0.3))
+          drop-shadow(0 0 40px rgba(166, 124, 82, 0.15));
+  transition: filter 0.3s ease;
+}
+
+.footer-logo-glow:hover {
+  filter: drop-shadow(0 0 30px rgba(166, 124, 82, 0.4))
+          drop-shadow(0 0 50px rgba(166, 124, 82, 0.2));
 }
 </style>
