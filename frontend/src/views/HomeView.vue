@@ -9,16 +9,26 @@
         <div class="absolute top-40 left-40 w-80 h-80 bg-gold-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
       </div>
 
+      <!-- Christmas decorations - Snowflakes & Stars -->
+      <div class="christmas-decorations absolute inset-0 pointer-events-none overflow-hidden">
+        <!-- Subtle snowflakes -->
+        <div class="snowflake" style="left: 10%; animation-delay: 0s;">❄</div>
+        <div class="snowflake" style="left: 25%; animation-delay: 2s;">❅</div>
+        <div class="snowflake" style="left: 50%; animation-delay: 4s;">❄</div>
+        <div class="snowflake" style="left: 70%; animation-delay: 1s;">❆</div>
+        <div class="snowflake" style="left: 85%; animation-delay: 3s;">❅</div>
+
+        <!-- Golden twinkling stars -->
+        <div class="star" style="top: 15%; left: 20%; animation-delay: 0s;">✨</div>
+        <div class="star" style="top: 30%; left: 80%; animation-delay: 1.5s;">⭐</div>
+        <div class="star" style="top: 60%; left: 15%; animation-delay: 3s;">✨</div>
+        <div class="star" style="top: 75%; left: 90%; animation-delay: 2s;">⭐</div>
+      </div>
+
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- Left content -->
           <div class="space-y-8 text-center lg:text-left">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm border border-gold-200">
-              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              <span class="text-sm font-medium text-gold-800">Boutique familiale depuis 2024</span>
-            </div>
-
             <!-- Main heading with gradient -->
             <div>
               <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -46,22 +56,6 @@
                   </svg>
                 </span>
               </router-link>
-            </div>
-
-            <!-- Stats -->
-            <div class="grid grid-cols-3 gap-4 sm:gap-8 pt-8">
-              <div class="text-center lg:text-left">
-                <div class="text-2xl sm:text-3xl font-bold text-gray-900">100+</div>
-                <div class="text-xs sm:text-sm text-gray-600 mt-1">Produits</div>
-              </div>
-              <div class="text-center lg:text-left">
-                <div class="text-2xl sm:text-3xl font-bold text-gray-900">500+</div>
-                <div class="text-xs sm:text-sm text-gray-600 mt-1">Clients</div>
-              </div>
-              <div class="text-center lg:text-left">
-                <div class="text-2xl sm:text-3xl font-bold text-gray-900">24h</div>
-                <div class="text-xs sm:text-sm text-gray-600 mt-1">Livraison</div>
-              </div>
             </div>
           </div>
 
@@ -345,5 +339,96 @@ onMounted(() => {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+/* Christmas decorations - Subtle snowflakes */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: -50px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  animation: snowfall 15s linear infinite, sway 3s ease-in-out infinite;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.snowflake:nth-child(2) {
+  font-size: 1rem;
+  animation-duration: 18s, 4s;
+}
+
+.snowflake:nth-child(3) {
+  font-size: 1.4rem;
+  animation-duration: 20s, 3.5s;
+}
+
+.snowflake:nth-child(4) {
+  font-size: 0.9rem;
+  animation-duration: 16s, 4.5s;
+}
+
+.snowflake:nth-child(5) {
+  font-size: 1.1rem;
+  animation-duration: 19s, 3.8s;
+}
+
+/* Golden twinkling stars */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.star {
+  position: absolute;
+  color: #c19a6b;
+  font-size: 1rem;
+  animation: twinkle 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 3px rgba(193, 154, 107, 0.5));
+}
+
+.star:nth-child(7) {
+  animation-duration: 2.5s;
+  font-size: 0.8rem;
+}
+
+.star:nth-child(8) {
+  animation-duration: 3.5s;
+  font-size: 1.1rem;
+}
+
+.star:nth-child(9) {
+  animation-duration: 2.8s;
+  font-size: 0.9rem;
 }
 </style>
