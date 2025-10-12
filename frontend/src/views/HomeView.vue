@@ -227,7 +227,7 @@ const particlesOptions = {
   fpsLimit: 60,
   particles: {
     color: {
-      value: '#ffffff'
+      value: '#DAA520'
     },
     move: {
       direction: 'bottom' as const,
