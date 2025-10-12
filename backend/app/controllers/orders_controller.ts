@@ -7,6 +7,7 @@ import db from '@adonisjs/lucid/services/db'
 import mail from '@adonisjs/mail/services/main'
 import OrderConfirmationNotification from '#mails/order_confirmation_notification'
 import NewOrderNotification from '#mails/new_order_notification'
+import stripeService from '#services/stripe_service'
 
 export default class OrdersController {
   /**
@@ -98,7 +99,7 @@ export default class OrdersController {
       order.shippingAddress = shippingAddress || null
       order.notes = notes || null
       order.totalAmount = totalAmount
-      order.status = 'pending'
+      order.status = 'pending_payment'
       order.type = 'order'
 
       await order.useTransaction(trx).save()
@@ -123,14 +124,22 @@ export default class OrdersController {
         query.preload('product')
       })
 
-      // Envoyer les emails de manière asynchrone (ne pas bloquer la réponse)
-      this.sendOrderEmails(order).catch((error) => {
-        logger.error(`[Orders] Erreur envoi emails pour ${orderNumber}: ${error.message}`)
-      })
+      // Créer une session Stripe Checkout
+      const { sessionId, checkoutUrl } = await stripeService.createCheckoutSession(order)
+
+      // Sauvegarder le session ID dans la commande
+      order.stripePaymentIntentId = sessionId
+      await order.save()
+
+      logger.info(`[Orders] Session Stripe créée pour ${orderNumber}: ${sessionId}`)
 
       return response.created({
-        data: order,
-        message: 'Commande créée avec succès',
+        data: {
+          order,
+          stripeSessionId: sessionId,
+          checkoutUrl,
+        },
+        message: 'Commande créée avec succès. Redirection vers le paiement...',
       })
     } catch (error) {
       await trx.rollback()

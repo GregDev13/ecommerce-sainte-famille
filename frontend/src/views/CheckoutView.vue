@@ -218,22 +218,23 @@ const handleSubmit = async () => {
       })),
     }
 
-    // Créer la commande
+    // Créer la commande et obtenir l'URL Stripe
     const response = await ordersApi.create(orderData)
 
-    // Succès - vider le panier et rediriger
-    cartStore.clearCart()
-    toast.success('Commande validée avec succès !', {
-      timeout: 3000,
-    })
+    // Rediriger vers Stripe Checkout
+    if (response.data.checkoutUrl) {
+      // Vider le panier localement avant la redirection
+      cartStore.clearCart()
 
-    // Rediriger vers la page de confirmation
-    router.push(`/order-confirmation/${response.data.orderNumber}`)
+      // Rediriger vers Stripe pour le paiement
+      window.location.href = response.data.checkoutUrl
+    } else {
+      throw new Error('URL de paiement non reçue')
+    }
   } catch (error: any) {
     console.error('Erreur lors de la création de la commande:', error)
     errorMessage.value = error.response?.data?.message || 'Une erreur est survenue lors de la validation de votre commande'
     toast.error(errorMessage.value)
-  } finally {
     loading.value = false
   }
 }

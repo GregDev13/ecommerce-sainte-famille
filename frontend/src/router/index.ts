@@ -28,6 +28,16 @@ const router = createRouter({
       component: () => import('@/views/CheckoutView.vue'),
     },
     {
+      path: '/checkout/success',
+      name: 'checkout-success',
+      component: () => import('@/views/CheckoutSuccessView.vue'),
+    },
+    {
+      path: '/checkout/cancel',
+      name: 'checkout-cancel',
+      component: () => import('@/views/CheckoutCancelView.vue'),
+    },
+    {
       path: '/order-confirmation/:orderNumber',
       name: 'order-confirmation',
       component: () => import('@/views/OrderConfirmationView.vue'),

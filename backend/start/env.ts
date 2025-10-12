@@ -53,5 +53,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Admin email for notifications
   |----------------------------------------------------------
   */
-  ADMIN_EMAIL: Env.schema.string()
+  ADMIN_EMAIL: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring Stripe payments
+  |----------------------------------------------------------
+  */
+  STRIPE_SECRET_KEY: Env.schema.string(),
+  STRIPE_PUBLISHABLE_KEY: Env.schema.string(),
+  STRIPE_WEBHOOK_SECRET: Env.schema.string(),
+  FRONTEND_URL: Env.schema.string()
 })

@@ -38,6 +38,9 @@ router.group(() => {
   router.post('/orders', '#controllers/orders_controller.store')
   router.get('/orders/:orderNumber', '#controllers/orders_controller.show')
 
+  // Stripe Webhook (public - called by Stripe)
+  router.post('/webhooks/stripe', '#controllers/stripe_webhook_controller.handle')
+
   // Admin Routes
   router.group(() => {
     // Auth

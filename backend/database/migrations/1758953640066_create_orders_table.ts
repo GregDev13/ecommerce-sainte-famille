@@ -22,7 +22,7 @@ export default class extends BaseSchema {
 
       table.decimal('total_amount', 10, 2).notNullable()
       table
-        .enum('status', ['pending', 'reserved', 'paid', 'shipped', 'delivered', 'cancelled'])
+        .enum('status', ['pending', 'pending_payment', 'reserved', 'paid', 'shipped', 'delivered', 'cancelled', 'failed'])
         .defaultTo('pending')
       table.enum('type', ['order', 'reservation']).notNullable()
       table.string('stripe_payment_intent_id').nullable()
