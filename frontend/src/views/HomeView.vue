@@ -50,12 +50,12 @@
           </div>
 
           <!-- Right content - École logo -->
-          <div class="relative hidden lg:flex items-center justify-center">
+          <div class="relative flex items-center justify-center mt-8 lg:mt-0">
             <div class="logo-entrance logo-glow">
               <img
                 src="/photo-default-article.jpg"
                 alt="École de la Sainte Famille - La Valette du Var"
-                class="w-full max-w-lg h-auto rounded-2xl"
+                class="w-full max-w-xs sm:max-w-sm lg:max-w-lg h-auto rounded-2xl"
               />
             </div>
           </div>
