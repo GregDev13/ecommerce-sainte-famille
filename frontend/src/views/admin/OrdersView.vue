@@ -47,7 +47,6 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="relative inline-block" @click.stop>
                 <button
-                  :ref="el => buttonRefs[order.id] = el as HTMLElement"
                   @click="toggleStatusDropdown(order.id)"
                   class="px-4 py-2 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-2"
                   :class="getStatusClass(order.status)"
@@ -58,40 +57,37 @@
                   </svg>
                 </button>
 
-                <!-- Dropdown menu using Teleport -->
-                <Teleport to="body">
-                  <div
-                    v-if="openStatusDropdown === order.id"
-                    :style="dropdownStyle"
-                    class="fixed z-[9999] w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2"
-                    @click.stop
+                <!-- Dropdown menu -->
+                <div
+                  v-if="openStatusDropdown === order.id"
+                  class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+                  @click.stop
+                >
+                  <button
+                    v-for="status in statusOptions"
+                    :key="status.value"
+                    @click="updateStatus(order, status.value)"
+                    class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
+                    :class="order.status === status.value ? 'bg-gold-50' : ''"
                   >
-                    <button
-                      v-for="status in statusOptions"
-                      :key="status.value"
-                      @click="updateStatus(order, status.value)"
-                      class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
-                      :class="order.status === status.value ? 'bg-gold-50' : ''"
+                    <span
+                      class="w-3 h-3 rounded-full"
+                      :class="status.dotClass"
+                    ></span>
+                    <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
+                      {{ status.label }}
+                    </span>
+                    <svg
+                      v-if="order.status === status.value"
+                      class="w-4 h-4 ml-auto text-gold-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <span
-                        class="w-3 h-3 rounded-full"
-                        :class="status.dotClass"
-                      ></span>
-                      <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
-                        {{ status.label }}
-                      </span>
-                      <svg
-                        v-if="order.status === status.value"
-                        class="w-4 h-4 ml-auto text-gold-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </Teleport>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -152,7 +148,6 @@
           </div>
           <div class="relative inline-block" @click.stop>
             <button
-              :ref="el => buttonRefs[order.id] = el as HTMLElement"
               @click="toggleStatusDropdown(order.id)"
               class="px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-1"
               :class="getStatusClass(order.status)"
@@ -163,40 +158,37 @@
               </svg>
             </button>
 
-            <!-- Dropdown menu using Teleport -->
-            <Teleport to="body">
-              <div
-                v-if="openStatusDropdown === order.id"
-                :style="dropdownStyle"
-                class="fixed z-[9999] w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2"
-                @click.stop
+            <!-- Dropdown menu -->
+            <div
+              v-if="openStatusDropdown === order.id"
+              class="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+              @click.stop
+            >
+              <button
+                v-for="status in statusOptions"
+                :key="status.value"
+                @click="updateStatus(order, status.value)"
+                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
+                :class="order.status === status.value ? 'bg-gold-50' : ''"
               >
-                <button
-                  v-for="status in statusOptions"
-                  :key="status.value"
-                  @click="updateStatus(order, status.value)"
-                  class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
-                  :class="order.status === status.value ? 'bg-gold-50' : ''"
+                <span
+                  class="w-3 h-3 rounded-full"
+                  :class="status.dotClass"
+                ></span>
+                <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
+                  {{ status.label }}
+                </span>
+                <svg
+                  v-if="order.status === status.value"
+                  class="w-4 h-4 ml-auto text-gold-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <span
-                    class="w-3 h-3 rounded-full"
-                    :class="status.dotClass"
-                  ></span>
-                  <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
-                    {{ status.label }}
-                  </span>
-                  <svg
-                    v-if="order.status === status.value"
-                    class="w-4 h-4 ml-auto text-gold-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </button>
-              </div>
-            </Teleport>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -391,7 +383,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { adminOrdersApi, type Order } from '@/services/adminApi'
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -402,20 +394,6 @@ const statusFilter = ref('')
 const pagination = ref<any>(null)
 const selectedOrder = ref<Order | null>(null)
 const openStatusDropdown = ref<number | null>(null)
-const buttonRefs = ref<Record<number, HTMLElement>>({})
-
-const dropdownStyle = computed(() => {
-  if (!openStatusDropdown.value) return {}
-
-  const button = buttonRefs.value[openStatusDropdown.value]
-  if (!button) return {}
-
-  const rect = button.getBoundingClientRect()
-  return {
-    top: `${rect.bottom + 8}px`,
-    left: `${rect.left}px`,
-  }
-})
 
 const statusOptions = [
   { value: 'pending', label: 'En attente', dotClass: 'bg-yellow-500' },
