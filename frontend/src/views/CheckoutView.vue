@@ -91,6 +91,81 @@
               ></textarea>
             </div>
 
+            <!-- Méthode de paiement -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-3">
+                Méthode de paiement <span class="text-red-500">*</span>
+              </label>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <!-- Wero -->
+                <label
+                  :class="[
+                    'relative flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all',
+                    formData.paymentMethod === 'wero'
+                      ? 'border-gold-600 bg-gold-50'
+                      : 'border-gray-300 hover:border-gold-400 bg-white'
+                  ]"
+                >
+                  <input
+                    type="radio"
+                    v-model="formData.paymentMethod"
+                    value="wero"
+                    class="sr-only"
+                  />
+                  <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-2xl flex-shrink-0">
+                    🏦
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-semibold text-gray-900">Wero</div>
+                    <div class="text-xs text-gray-500">Virement bancaire instantané</div>
+                  </div>
+                  <div
+                    v-if="formData.paymentMethod === 'wero'"
+                    class="absolute top-2 right-2 w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                </label>
+
+                <!-- PayPal -->
+                <label
+                  :class="[
+                    'relative flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all',
+                    formData.paymentMethod === 'paypal'
+                      ? 'border-gold-600 bg-gold-50'
+                      : 'border-gray-300 hover:border-gold-400 bg-white'
+                  ]"
+                >
+                  <input
+                    type="radio"
+                    v-model="formData.paymentMethod"
+                    value="paypal"
+                    class="sr-only"
+                  />
+                  <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center text-white text-2xl flex-shrink-0">
+                    💳
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-semibold text-gray-900">PayPal</div>
+                    <div class="text-xs text-gray-500">Paiement PayPal</div>
+                  </div>
+                  <div
+                    v-if="formData.paymentMethod === 'paypal'"
+                    class="absolute top-2 right-2 w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                </label>
+              </div>
+              <p class="mt-2 text-sm text-gray-500">
+                Vous recevrez les instructions de paiement après validation de votre commande.
+              </p>
+            </div>
+
             <!-- Messages d'erreur -->
             <div v-if="errorMessage" class="p-4 bg-red-50 border border-red-200 rounded-lg">
               <p class="text-red-600 text-sm">{{ errorMessage }}</p>
@@ -202,6 +277,7 @@ const formData = ref({
   customerPhone: '',
   shippingAddress: '',
   notes: '',
+  paymentMethod: 'wero' as 'wero' | 'paypal',
 })
 
 const handleSubmit = async () => {

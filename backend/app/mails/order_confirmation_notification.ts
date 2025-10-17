@@ -1,6 +1,7 @@
 import Order from '#models/order'
 import { BaseMail } from '@adonisjs/mail'
 import env from '#start/env'
+import { paymentInstructions } from '#config/payment_instructions'
 
 export default class OrderConfirmationNotification extends BaseMail {
   from = env.get('MAILGUN_FROM_EMAIL')
@@ -16,13 +17,17 @@ export default class OrderConfirmationNotification extends BaseMail {
    */
   prepare() {
     const appUrl = env.get('APP_URL', 'http://localhost:3334')
-    const frontendUrl = env.get('VITE_API_URL', 'http://localhost:5173')
+    const frontendUrl = env.get('FRONTEND_URL')
+
+    // Récupérer les instructions de paiement selon la méthode choisie
+    const instructions = paymentInstructions[this.order.paymentMethod]
 
     this.message.to(this.order.customerEmail)
     this.message.htmlView('emails/order_confirmation', {
       order: this.order,
       appUrl,
       frontendUrl,
+      paymentInstructions: instructions,
     })
   }
 }

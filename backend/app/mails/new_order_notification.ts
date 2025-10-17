@@ -17,7 +17,7 @@ export default class NewOrderNotification extends BaseMail {
   prepare() {
     const adminEmail = env.get('ADMIN_EMAIL')
     const appUrl = env.get('APP_URL', 'http://localhost:3334')
-    const frontendUrl = env.get('VITE_API_URL', 'http://localhost:5173')
+    const frontendUrl = env.get('FRONTEND_URL')
 
     this.message.to(adminEmail)
     this.message.htmlView('emails/new_order_admin', {

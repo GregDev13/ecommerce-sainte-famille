@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Order from '#models/order'
 import OrderItem from '#models/order_item'
 import Product from '#models/product'
+import OrderSequence from '#models/order_sequence'
 import logger from '@adonisjs/core/services/logger'
 import db from '@adonisjs/lucid/services/db'
 import mail from '@adonisjs/mail/services/main'
@@ -23,6 +24,7 @@ export default class OrdersController {
         shippingAddress,
         notes,
         items,
+        paymentMethod,
       } = request.only([
         'customerName',
         'customerEmail',
@@ -30,6 +32,7 @@ export default class OrdersController {
         'shippingAddress',
         'notes',
         'items',
+        'paymentMethod',
       ])
 
       logger.info(`[Orders] Nouvelle commande de ${customerEmail}`)
@@ -38,6 +41,12 @@ export default class OrdersController {
       if (!customerName || !customerEmail || !customerPhone) {
         return response.badRequest({
           message: 'Les informations client sont obligatoires',
+        })
+      }
+
+      if (!paymentMethod || !['wero', 'paypal'].includes(paymentMethod)) {
+        return response.badRequest({
+          message: 'La méthode de paiement est obligatoire et doit être "wero" ou "paypal"',
         })
       }
 
@@ -85,8 +94,8 @@ export default class OrdersController {
         logger.info(`[Orders] Stock ${product.name}: ${product.stock + item.quantity} → ${product.stock}`)
       }
 
-      // Générer un numéro de commande unique
-      const orderNumber = `CMD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+      // Générer un numéro de commande séquentiel (SF-0001, SF-0002, etc.)
+      const orderNumber = await OrderSequence.getNextNumber()
 
       // Créer la commande
       const order = new Order()
@@ -100,6 +109,7 @@ export default class OrdersController {
       order.totalAmount = totalAmount
       order.status = 'pending'
       order.type = 'order'
+      order.paymentMethod = paymentMethod
 
       await order.useTransaction(trx).save()
       logger.info(`[Orders] Commande créée: ${orderNumber}`)

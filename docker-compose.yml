@@ -51,6 +51,7 @@ services:
       MAILGUN_FROM_NAME: ${MAILGUN_FROM_NAME}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       APP_URL: ${APP_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
     volumes:
       - uploads_data:/app/storage
     ports:

@@ -115,6 +115,13 @@
         </div>
       </div>
 
+      <!-- Instructions de paiement -->
+      <PaymentInstructions
+        v-if="order.paymentMethod"
+        :payment-method="order.paymentMethod"
+        :order-number="order.orderNumber"
+      />
+
       <!-- Statut de la commande -->
       <div class="card p-6">
         <h2 class="text-xl font-bold text-gray-900 mb-4">Statut de la commande</h2>
@@ -168,6 +175,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ordersApi, type Order } from '@/services/api'
+import PaymentInstructions from '@/components/PaymentInstructions.vue'
 
 const API_URL = import.meta.env.VITE_API_URL
 const route = useRoute()

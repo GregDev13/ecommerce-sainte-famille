@@ -13,16 +13,5 @@ export default class extends BaseSeeder {
         role: 'admin',
       }
     )
-
-    // Tu peux aussi créer un utilisateur client de test
-    await User.updateOrCreate(
-      { email: 'client@test.fr' },
-      {
-        email: 'client@test.fr',
-        password: 'client123',
-        fullName: 'Client Test',
-        role: 'client',
-      }
-    )
   }
 }

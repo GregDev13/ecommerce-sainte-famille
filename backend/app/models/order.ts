@@ -36,6 +36,9 @@ export default class Order extends BaseModel {
   declare stripePaymentIntentId: string | null
 
   @column()
+  declare paymentMethod: 'wero' | 'paypal'
+
+  @column()
   declare shippingAddress: string | null
 
   @column()

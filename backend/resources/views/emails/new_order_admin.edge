@@ -224,6 +224,28 @@
         </div>
       </div>
 
+      <!-- Payment Method -->
+      <div class="section">
+        <div class="section-title">
+          <span>💳</span>
+          <span>Méthode de paiement</span>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Méthode :</div>
+            <div class="info-value">
+              {{ order.paymentMethod === 'wero' ? 'Wero' : 'PayPal' }}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Statut :</div>
+            <div class="info-value" style="color: #d97706;">
+              ⏳ En attente de paiement manuel
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Products -->
       <div class="section">
         <div class="section-title">

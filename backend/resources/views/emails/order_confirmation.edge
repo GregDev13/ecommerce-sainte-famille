@@ -228,6 +228,40 @@
         </div>
       </div>
 
+      <!-- Payment Instructions -->
+      <div class="section">
+        <div class="section-title">💳 {{ paymentInstructions.title }}</div>
+        <div style="background-color: #fff9f0; border: 2px solid #c19a6b; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <p style="margin: 0 0 15px; font-weight: 600; color: #a67c52;">Pour finaliser votre commande, veuillez effectuer le paiement :</p>
+
+          @each(instruction in paymentInstructions.instructions)
+          <div class="step-item">
+            <div class="step-icon">•</div>
+            <div>{{ instruction }}</div>
+          </div>
+          @end
+
+          <div style="background-color: #ffffff; padding: 15px; border-radius: 6px; margin-top: 15px;">
+            <div class="info-item">
+              <div class="info-label">{{ order.paymentMethod === 'wero' ? 'Email Wero' : 'Email PayPal' }}</div>
+              <div class="info-value">{{ paymentInstructions.email }}</div>
+            </div>
+
+            @if(order.paymentMethod === 'wero')
+            <div class="info-item">
+              <div class="info-label">Bénéficiaire</div>
+              <div class="info-value">{{ paymentInstructions.accountHolder }}</div>
+            </div>
+            @end
+
+            <div class="info-item" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e8d4b0;">
+              <div class="info-label" style="color: #d97706; font-weight: 600;">⚠️ IMPORTANT : Référence à indiquer</div>
+              <div class="info-value" style="font-family: monospace; font-size: 18px; color: #d97706;">{{ order.orderNumber }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Next Steps -->
       <div class="steps">
         <div class="section-title">🎯 Prochaines étapes</div>

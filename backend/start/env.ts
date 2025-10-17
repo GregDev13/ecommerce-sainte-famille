@@ -53,5 +53,21 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Admin email for notifications
   |----------------------------------------------------------
   */
-  ADMIN_EMAIL: Env.schema.string()
+  ADMIN_EMAIL: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Frontend URL for email links
+  |----------------------------------------------------------
+  */
+  FRONTEND_URL: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for payment instructions (Wero & PayPal)
+  |----------------------------------------------------------
+  */
+  WERO_EMAIL: Env.schema.string(),
+  WERO_ACCOUNT_HOLDER: Env.schema.string(),
+  PAYPAL_EMAIL: Env.schema.string(),
 })

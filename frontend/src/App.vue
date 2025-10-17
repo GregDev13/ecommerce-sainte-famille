@@ -166,31 +166,43 @@ const closeMobileMenu = () => {
                 class="w-40 h-auto rounded-lg"
               />
             </div>
+            <h5 class="text-lg font-semibold mb-2">Marché de Noël</h5>
             <p class="text-gray-400 text-sm text-center md:text-left">
-              Marché de Noël organisé par l'École de la Sainte Famille
+              Organisé par l'École de la Sainte Famille
             </p>
           </div>
 
-          <!-- Informations -->
+          <!-- Adresse -->
           <div class="text-center md:text-left">
-            <h5 class="text-lg font-semibold mb-4">🎄 Le Marché de Noël</h5>
+            <h5 class="text-lg font-semibold mb-4 flex items-center justify-center md:justify-start gap-2">
+              <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              Adresse
+            </h5>
             <ul class="space-y-2 text-gray-400 text-sm">
-              <li>Boutique familiale en ligne</li>
-              <li>Produits de qualité</li>
-              <li>Livraison gratuite</li>
-              <li>Paiement sécurisé</li>
+              <li class="font-medium text-white">École de la Sainte Famille</li>
+              <li>101 Av. du Char Verdun</li>
+              <li>83160 La Valette-du-Var</li>
             </ul>
           </div>
 
           <!-- Contact -->
           <div class="text-center md:text-left">
-            <h5 class="text-lg font-semibold mb-4">📍 L'École</h5>
+            <h5 class="text-lg font-semibold mb-4 flex items-center justify-center md:justify-start gap-2">
+              <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Contact
+            </h5>
             <ul class="space-y-2 text-gray-400 text-sm">
-              <li>École de la Sainte Famille</li>
-              <li>La Valette du Var</li>
-              <li class="pt-2">
-                <a href="mailto:contact@saintefamille-lavalette.fr" class="hover:text-gold-400 transition-colors">
-                  contact@saintefamille-lavalette.fr
+              <li>
+                <a
+                  href="mailto:secretariat@ecolestefamillelavalette.org"
+                  class="hover:text-gold-400 transition-colors break-all"
+                >
+                  secretariat@ecolestefamillelavalette.org
                 </a>
               </li>
             </ul>
@@ -200,7 +212,7 @@ const closeMobileMenu = () => {
         <!-- Copyright -->
         <div class="border-t border-gray-800 pt-6 text-center">
           <p class="text-gray-400 text-sm">
-            &copy; 2024 Marché de Noël - École de la Sainte Famille, La Valette du Var. Tous droits réservés.
+            &copy; {{ new Date().getFullYear() }} Marché de Noël - École de la Sainte Famille, La Valette-du-Var. Tous droits réservés.
           </p>
         </div>
       </div>

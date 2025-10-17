@@ -38,6 +38,9 @@ router.group(() => {
   router.post('/orders', '#controllers/orders_controller.store')
   router.get('/orders/:orderNumber', '#controllers/orders_controller.show')
 
+  // Payment instructions
+  router.get('/payment-instructions/:method', '#controllers/payment_instructions_controller.show')
+
   // Admin Routes
   router.group(() => {
     // Auth

@@ -74,6 +74,7 @@ export interface CreateOrderData {
   customerPhone: string
   shippingAddress: string
   notes?: string
+  paymentMethod: 'wero' | 'paypal'
   items: OrderItem[]
 }
 
@@ -86,6 +87,7 @@ export interface Order {
   totalAmount: number
   status: string
   type: string
+  paymentMethod: 'wero' | 'paypal'
   shippingAddress: string | null
   notes: string | null
   createdAt: string
