@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="064cb1c7-d603-46b0-b0fe-24c240fe41ad" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/drive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/drive.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/1758953640066_create_orders_table.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/1758953640066_create_orders_table.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/start/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/start/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/start/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/start/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/CheckoutView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/CheckoutView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/services/stripe_service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/services/stripe_service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,30 +44,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/stripe",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/greg/Dev/ecommerce-sainte-famille",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "MTFeaturesSettingsConfigurable",
-    "ts.external.directory.path": "/Users/greg/Dev/ecommerce-sainte-famille/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/stripe&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/greg/Dev/ecommerce-sainte-famille&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MTFeaturesSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/greg/Dev/ecommerce-sainte-famille/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,7 +85,10 @@
       <updated>1759346479866</updated>
       <workItem from="1759346481078" duration="19296000" />
       <workItem from="1759570010181" duration="41211000" />
-      <workItem from="1760285194756" duration="10389000" />
+      <workItem from="1760285194756" duration="10443000" />
+      <workItem from="1760464505803" duration="3231000" />
+      <workItem from="1760541954552" duration="4271000" />
+      <workItem from="1760714861656" duration="743000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -321,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760286883380</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1760304975887</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1760304975887</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

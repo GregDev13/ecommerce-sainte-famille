@@ -43,7 +43,7 @@ class StripeService {
             : `${backendUrl}${productImageUrl}`
         }
 
-        return {
+        const lineItem = {
           price_data: {
             currency: 'eur',
             product_data: {
@@ -55,9 +55,17 @@ class StripeService {
           },
           quantity: item.quantity,
         }
+
+        logger.info(
+          `[Stripe] Line item: ${item.product.name} - ${item.quantity}x ${item.unitPrice}€ - Image: ${imageUrl || 'aucune'}`
+        )
+
+        return lineItem
       })
 
-      logger.info(`[Stripe] Création session checkout pour commande ${order.orderNumber}`)
+      logger.info(
+        `[Stripe] Création session checkout pour commande ${order.orderNumber} avec ${lineItems.length} produit(s)`
+      )
 
       // Créer la session Stripe Checkout
       const session = await this.stripe.checkout.sessions.create({
