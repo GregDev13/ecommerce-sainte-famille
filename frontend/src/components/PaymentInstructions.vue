@@ -158,7 +158,8 @@ const fetchInstructions = async () => {
   }
 }
 
-const copyToClipboard = async (text: string) => {
+const copyToClipboard = async (text: string | undefined) => {
+  if (!text) return
   try {
     await navigator.clipboard.writeText(text)
     toast.success('Copié dans le presse-papier !', { timeout: 2000 })
