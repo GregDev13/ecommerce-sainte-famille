@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="064cb1c7-d603-46b0-b0fe-24c240fe41ad" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee/storage_v2/_src_/database/soleil_du_sud.-2Yaog/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee/storage_v2/_src_/database/soleil_du_sud.-2Yaog/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/mails/new_order_notification.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/mails/new_order_notification.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/mails/order_confirmation_notification.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/mails/order_confirmation_notification.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/models/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models/order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/seeders/user_seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/seeders/user_seeder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/resources/views/emails/new_order_admin.edge" beforeDir="false" afterPath="$PROJECT_DIR$/backend/resources/views/emails/new_order_admin.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/resources/views/emails/order_confirmation.edge" beforeDir="false" afterPath="$PROJECT_DIR$/backend/resources/views/emails/order_confirmation.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/start/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/start/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/start/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/start/routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/CheckoutView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/CheckoutView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/OrderConfirmationView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/OrderConfirmationView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +297,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760717103400</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1760728852705</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1760728852705</updated>
+    </task>
+    <task id="LOCAL-00029" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1760729209069</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1760729209069</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
