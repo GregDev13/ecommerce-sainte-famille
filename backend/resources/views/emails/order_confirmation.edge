@@ -1,296 +1,352 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--[if gte mso 15]>
+  <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
   <title>Confirmation de commande</title>
-  <style>
+  <style type="text/css">
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    table {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
     }
-    .header {
-      background: linear-gradient(135deg, #c19a6b 0%, #a67c52 100%);
-      color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .header .emoji {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    .content {
-      padding: 40px 30px;
-    }
-    .order-number {
-      background-color: #f8f3ea;
-      border-left: 4px solid #c19a6b;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-radius: 4px;
-    }
-    .order-number strong {
-      color: #a67c52;
-      font-size: 18px;
-    }
-    .section {
-      margin: 30px 0;
-    }
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #a67c52;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #f8f3ea;
-      padding-bottom: 8px;
-    }
-    .info-grid {
-      display: grid;
-      gap: 10px;
-    }
-    .info-item {
-      padding: 8px 0;
-    }
-    .info-label {
-      color: #666;
-      font-size: 14px;
-    }
-    .info-value {
-      color: #333;
-      font-weight: 500;
-      margin-top: 4px;
-    }
-    .product-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border: 1px solid #e8d4b0;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      background-color: #fdfbf7;
-    }
-    .product-info {
-      flex: 1;
-    }
-    .product-name {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 4px;
-    }
-    .product-details {
-      font-size: 14px;
-      color: #666;
-    }
-    .product-price {
-      font-weight: 700;
-      color: #a67c52;
-      font-size: 16px;
-      text-align: right;
-    }
-    .total-section {
-      background-color: #f8f3ea;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .total-label {
-      font-size: 16px;
-      color: #666;
-    }
-    .total-value {
-      font-size: 24px;
-      font-weight: 700;
-      color: #a67c52;
-    }
-    .shipping-free {
-      color: #10b981;
-      font-size: 14px;
-      text-align: right;
-      margin-top: 5px;
-    }
-    .steps {
-      background-color: #f8f3ea;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 30px;
-    }
-    .step-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .step-icon {
-      color: #c19a6b;
-      margin-right: 10px;
-      font-size: 18px;
-    }
-    .footer {
-      background-color: #1f2937;
-      color: #9ca3af;
-      padding: 30px;
-      text-align: center;
-      font-size: 14px;
-    }
-    .footer a {
-      color: #c19a6b;
+    img {
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
       text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 100% !important;
+      }
+      .mobile-padding {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>Commande confirmée !</h1>
-      <p style="margin: 4px 0 0; opacity: 0.9;">Merci pour votre confiance</p>
-    </div>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, Helvetica, sans-serif;">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f5f5f5;">
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <!--[if (gte mso 9)|(IE)]>
+          <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+          <tr>
+          <td align="center" valign="top" width="600">
+          <![endif]-->
 
-    <!-- Content -->
-    <div class="content">
-      <p>Bonjour <strong>{{ order.customerName }}</strong>,</p>
-      <p>Nous avons bien reçu votre commande et nous vous remercions pour votre achat.</p>
+          <!-- Main Container -->
+          <table border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="max-width: 600px; background-color: #ffffff; border-radius: 16px;">
 
-      <!-- Order Number -->
-      <div class="order-number">
-        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Numéro de commande</div>
-        <strong>{{ order.orderNumber }}</strong>
-      </div>
+            <!-- Header -->
+            <tr>
+              <td bgcolor="#c19a6b" style="background-color: #c19a6b; border-radius: 16px 16px 0 0; padding: 40px 20px; text-align: center; color: #ffffff;">
+                <h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff;">Commande confirmée !</h1>
+                <p style="margin: 4px 0 0; opacity: 0.9; color: #ffffff; font-size: 16px;">Merci pour votre confiance</p>
+              </td>
+            </tr>
 
-      <!-- Customer Info -->
-      <div class="section">
-        <div class="section-title">📋 Vos informations</div>
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">Nom</div>
-            <div class="info-value">{{ order.customerName }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Email</div>
-            <div class="info-value">{{ order.customerEmail }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Téléphone</div>
-            <div class="info-value">{{ order.customerPhone }}</div>
-          </div>
-          @if(order.shippingAddress)
-          <div class="info-item">
-            <div class="info-label">Adresse</div>
-            <div class="info-value" style="white-space: pre-line;">{{ order.shippingAddress }}</div>
-          </div>
-          @end
-        </div>
-      </div>
+            <!-- Content -->
+            <tr>
+              <td style="padding: 40px 30px;" class="mobile-padding">
 
-      <!-- Products -->
-      <div class="section">
-        <div class="section-title">🛒 Articles commandés</div>
-        @each(item in order.orderItems)
-        <div class="product-item">
-          <div class="product-info">
-            <div class="product-name">{{ item.product ? item.product.name : 'Produit' }}</div>
-            <div class="product-details">
-              Quantité: {{ item.quantity }} × {{ Number(item.unitPrice).toFixed(2) }} €
-            </div>
-          </div>
-          <div class="product-price">{{ Number(item.totalPrice).toFixed(2) }} €</div>
-        </div>
-        @end
-      </div>
+                <!-- Greeting -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td style="padding-bottom: 20px;">
+                      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #333;">
+                        Bonjour <strong>{{ order.customerName }}</strong>,
+                      </p>
+                      <p style="margin: 10px 0 0; font-size: 16px; line-height: 1.6; color: #333;">
+                        Nous avons bien reçu votre commande et nous vous remercions pour votre achat.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
 
-      <!-- Total -->
-      <div class="total-section">
-        <div class="total-row">
-          <div class="total-label">Total de la commande</div>
-          <div class="total-value">{{ Number(order.totalAmount).toFixed(2) }} €</div>
-        </div>
-      </div>
+                <!-- Order Number -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px 0;">
+                  <tr>
+                    <td bgcolor="#f8f3ea" style="background-color: #f8f3ea; border-left: 4px solid #c19a6b; padding: 15px 20px; border-radius: 10px;">
+                      <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Numéro de commande</div>
+                      <strong style="color: #a67c52; font-size: 18px;">{{ order.orderNumber }}</strong>
+                    </td>
+                  </tr>
+                </table>
 
-      <!-- Payment Instructions -->
-      <div class="section">
-        <div class="section-title">💳 {{ paymentInstructions.title }}</div>
-        <div style="background-color: #fff9f0; border: 2px solid #c19a6b; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-          <p style="margin: 0 0 15px; font-weight: 600; color: #a67c52;">Pour finaliser votre commande, veuillez effectuer le paiement :</p>
+                <!-- Customer Info Section -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 30px 0;">
+                  <tr>
+                    <td>
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #a67c52; border-bottom: 2px solid #f8f3ea; padding-bottom: 8px;">
+                        📋 Vos informations
+                      </h2>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0;">
+                      <div style="color: #666; font-size: 14px;">Nom</div>
+                      <div style="color: #333; font-weight: 500; margin-top: 4px;">{{ order.customerName }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0;">
+                      <div style="color: #666; font-size: 14px;">Email</div>
+                      <div style="color: #333; font-weight: 500; margin-top: 4px;">{{ order.customerEmail }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0;">
+                      <div style="color: #666; font-size: 14px;">Téléphone</div>
+                      <div style="color: #333; font-weight: 500; margin-top: 4px;">{{ order.customerPhone }}</div>
+                    </td>
+                  </tr>
+                  @if(order.shippingAddress)
+                  <tr>
+                    <td style="padding: 8px 0;">
+                      <div style="color: #666; font-size: 14px;">Adresse</div>
+                      <div style="color: #333; font-weight: 500; margin-top: 4px; white-space: pre-line;">{{ order.shippingAddress }}</div>
+                    </td>
+                  </tr>
+                  @end
+                </table>
 
-          @each(instruction in paymentInstructions.instructions)
-          <div class="step-item">
-            <div class="step-icon">•</div>
-            <div>{{ instruction }}</div>
-          </div>
-          @end
+                <!-- Products Section -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 30px 0;">
+                  <tr>
+                    <td>
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #a67c52; border-bottom: 2px solid #f8f3ea; padding-bottom: 8px;">
+                        🛒 Articles commandés
+                      </h2>
+                    </td>
+                  </tr>
+                  @each(item in order.orderItems)
+                  <tr>
+                    <td>
+                      <!-- Product Item - Outer table for border effect -->
+                      <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#e8d4b0" style="background-color: #e8d4b0; border-radius: 14px; margin-bottom: 10px;">
+                        <tr>
+                          <td style="border-radius: 14px;">
+                            <!-- Inner table with content -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fdfbf7" style="background-color: #fdfbf7; border-radius: 12px;">
+                              <tr>
+                                <td style="padding: 15px;">
+                                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                      <td style="width: 70%;">
+                                        <div style="font-weight: 600; color: #333; margin-bottom: 4px;">{{ item.product ? item.product.name : 'Produit' }}</div>
+                                        <div style="font-size: 14px; color: #666;">
+                                          Quantité: {{ item.quantity }} × {{ Number(item.unitPrice).toFixed(2) }} €
+                                        </div>
+                                      </td>
+                                      <td style="width: 30%; text-align: right; vertical-align: top;">
+                                        <div style="font-weight: 700; color: #a67c52; font-size: 16px;">
+                                          {{ Number(item.totalPrice).toFixed(2) }} €
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  @end
+                </table>
 
-          <div style="background-color: #ffffff; padding: 15px; border-radius: 6px; margin-top: 15px;">
-            <div class="info-item">
-              <div class="info-label">{{ order.paymentMethod === 'wero' ? 'Email Wero' : 'Email PayPal' }}</div>
-              <div class="info-value">{{ paymentInstructions.email }}</div>
-            </div>
+                <!-- Total Section -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f8f3ea" style="background-color: #f8f3ea; border-radius: 12px; margin-top: 20px;">
+                  <tr>
+                    <td style="padding: 20px;">
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td style="width: 50%; font-size: 16px; color: #666;">Total de la commande</td>
+                          <td style="width: 50%; text-align: right; font-size: 24px; font-weight: 700; color: #a67c52;">
+                            {{ Number(order.totalAmount).toFixed(2) }} €
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
 
-            @if(order.paymentMethod === 'wero')
-            <div class="info-item">
-              <div class="info-label">Bénéficiaire</div>
-              <div class="info-value">{{ paymentInstructions.accountHolder }}</div>
-            </div>
-            @end
+                <!-- Payment Instructions -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 30px 0;">
+                  <tr>
+                    <td>
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #a67c52; border-bottom: 2px solid #f8f3ea; padding-bottom: 8px;">
+                        💳 {{ paymentInstructions.title }}
+                      </h2>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <!-- Payment Box - Outer table for border effect -->
+                      <table border="0" cellpadding="3" cellspacing="0" width="100%" bgcolor="#c19a6b" style="background-color: #c19a6b; border-radius: 20px; margin-bottom: 20px;">
+                        <tr>
+                          <td style="border-radius: 20px;">
+                            <!-- Inner table with content -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff9f0" style="background-color: #fff9f0; border-radius: 17px;">
+                              <tr>
+                                <td style="padding: 20px;">
+                                  <p style="margin: 0 0 15px; font-weight: 600; color: #a67c52; font-size: 16px;">
+                                    Pour finaliser votre commande, veuillez effectuer le paiement :
+                                  </p>
 
-            <div class="info-item" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e8d4b0;">
-              <div class="info-label" style="color: #d97706; font-weight: 600;">⚠️ IMPORTANT : Référence à indiquer</div>
-              <div class="info-value" style="font-family: monospace; font-size: 18px; color: #d97706;">{{ order.orderNumber }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+                            @each(instruction in paymentInstructions.instructions)
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                              <tr>
+                                <td style="width: 20px; vertical-align: top; color: #c19a6b; font-size: 18px;">•</td>
+                                <td style="font-size: 16px; line-height: 1.5; color: #333;">{{ instruction }}</td>
+                              </tr>
+                            </table>
+                            @end
 
-      <!-- Next Steps -->
-      <div class="steps">
-        <div class="section-title">🎯 Prochaines étapes</div>
-        <div class="step-item">
-          <div class="step-icon">✓</div>
-          <div>Vous allez recevoir un email de confirmation</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon">✓</div>
-          <div>Nous préparons votre commande</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon">✓</div>
-          <div>Vous serez notifié lors de l'expédition</div>
-        </div>
-      </div>
+                            <!-- Payment Details Box -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color: #ffffff; border-radius: 10px; margin-top: 15px;">
+                              <tr>
+                                <td style="padding: 15px;">
+                                  <!-- Email -->
+                                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                      <td style="padding-bottom: 15px;">
+                                        <div style="color: #666; font-size: 14px;">{{ order.paymentMethod === 'wero' ? 'Email Wero' : 'Email PayPal' }}</div>
+                                        <div style="color: #333; font-weight: 500; margin-top: 4px;">{{ paymentInstructions.email }}</div>
+                                      </td>
+                                    </tr>
+                                  </table>
 
-      <p style="margin-top: 30px; text-align: center;">
-        <a href="{{ frontendUrl }}" style="display: inline-block; padding: 12px 30px; background-color: #c19a6b; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
-          Retour à la boutique
-        </a>
-      </p>
-    </div>
+                                  @if(order.paymentMethod === 'wero')
+                                  <!-- Account Holder -->
+                                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                      <td style="padding-bottom: 15px;">
+                                        <div style="color: #666; font-size: 14px;">Bénéficiaire</div>
+                                        <div style="color: #333; font-weight: 500; margin-top: 4px;">{{ paymentInstructions.accountHolder }}</div>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  @end
 
-    <!-- Footer -->
-    <div class="footer">
-      <p style="margin: 0 0 10px;"><strong>Marché de Noël la Sainte Famille</strong></p>
-      <p style="margin: 15px 0 0;">&copy; {{ currentYear }} Marché de Noël la Sainte Famille. Tous droits réservés.</p>
-    </div>
-  </div>
+                                  <!-- Order Number Reference -->
+                                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top: 1px solid #e8d4b0; padding-top: 15px;">
+                                    <tr>
+                                      <td>
+                                        <div style="color: #d97706; font-weight: 600; font-size: 14px;">⚠️ IMPORTANT : Référence à indiquer</div>
+                                        <div style="font-family: monospace; font-size: 18px; color: #d97706; margin-top: 4px; font-weight: bold;">
+                                          {{ order.orderNumber }}
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Next Steps -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f8f3ea" style="background-color: #f8f3ea; border-radius: 12px;">
+                  <tr>
+                    <td style="padding: 30px;">
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #a67c52;">🎯 Prochaines étapes</h2>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #c19a6b; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #333;">Vous allez recevoir un email de confirmation</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #c19a6b; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #333;">Nous préparons votre commande</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #c19a6b; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #333;">Vous serez notifié lors de l'expédition</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- CTA Button -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px;">
+                  <tr>
+                    <td align="center">
+                      <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td bgcolor="#c19a6b" style="background-color: #c19a6b; border-radius: 20px; padding: 12px 30px;">
+                            <a href="{{ frontendUrl }}" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 16px; display: inline-block;">
+                              Retour à la boutique
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td bgcolor="#1f2937" style="background-color: #1f2937; padding: 30px; text-align: center; border-radius: 0 0 16px 16px;">
+                <p style="margin: 0 0 10px; color: #9ca3af; font-size: 14px; line-height: 1.5;">
+                  <strong style="color: #ffffff;">Marché de Noël la Sainte Famille</strong>
+                </p>
+                <p style="margin: 15px 0 0; color: #9ca3af; font-size: 14px; line-height: 1.5;">
+                  &copy; {{ currentYear }} Marché de Noël la Sainte Famille. Tous droits réservés.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]>
+          </td>
+          </tr>
+          </table>
+          <![endif]-->
+        </td>
+      </tr>
+    </table>
+  </center>
 </body>
 </html>

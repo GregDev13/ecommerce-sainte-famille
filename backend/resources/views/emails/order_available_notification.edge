@@ -1,324 +1,297 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--[if gte mso 15]>
+  <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
   <title>Commande disponible</title>
-  <style>
+  <style type="text/css">
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    table {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
     }
-    .header {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .header .emoji {
-      font-size: 64px;
-      margin-bottom: 15px;
-    }
-    .content {
-      padding: 40px 30px;
-    }
-    .success-message {
-      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-      border-left: 4px solid #10b981;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-    .success-message h2 {
-      margin: 0 0 10px;
-      color: #065f46;
-      font-size: 20px;
-    }
-    .success-message p {
-      margin: 0;
-      color: #047857;
-      font-size: 16px;
-    }
-    .order-number {
-      background-color: #f8f3ea;
-      border-left: 4px solid #c19a6b;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-radius: 4px;
-    }
-    .order-number strong {
-      color: #a67c52;
-      font-size: 18px;
-    }
-    .section {
-      margin: 30px 0;
-    }
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #a67c52;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #f8f3ea;
-      padding-bottom: 8px;
-    }
-    .product-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border: 1px solid #e8d4b0;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      background-color: #fdfbf7;
-    }
-    .product-info {
-      flex: 1;
-    }
-    .product-name {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 4px;
-    }
-    .product-details {
-      font-size: 14px;
-      color: #666;
-    }
-    .product-price {
-      font-weight: 700;
-      color: #a67c52;
-      font-size: 16px;
-      text-align: right;
-    }
-    .total-section {
-      background-color: #f8f3ea;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .total-label {
-      font-size: 16px;
-      color: #666;
-    }
-    .total-value {
-      font-size: 24px;
-      font-weight: 700;
-      color: #a67c52;
-    }
-    .steps {
-      background-color: #f0fdf4;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 30px;
-      border: 2px solid #86efac;
-    }
-    .steps-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #065f46;
-      margin-bottom: 15px;
-    }
-    .step-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .step-icon {
-      margin-right: 10px;
-      font-size: 18px;
-    }
-    .step-icon.done {
-      color: #10b981;
-    }
-    .step-text {
-      flex: 1;
-    }
-    .step-text.done {
-      color: #065f46;
-      font-weight: 500;
-    }
-    .pickup-info {
-      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-      border: 2px solid #fb923c;
-      border-radius: 12px;
-      padding: 25px;
-      margin: 30px 0;
-    }
-    .pickup-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #9a3412;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .pickup-detail {
-      background-color: #ffffff;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .pickup-label {
-      font-size: 14px;
-      color: #92400e;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    .pickup-value {
-      font-size: 16px;
-      color: #1f2937;
-      font-weight: 500;
-    }
-    .footer {
-      background-color: #1f2937;
-      color: #9ca3af;
-      padding: 30px;
-      text-align: center;
-      font-size: 14px;
-    }
-    .footer a {
-      color: #c19a6b;
+    img {
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
       text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 100% !important;
+      }
+      .mobile-padding {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div class="emoji">🎁</div>
-      <h1>Votre commande est disponible !</h1>
-      <p style="margin: 10px 0 0; opacity: 0.95; font-size: 16px;">Venez la récupérer au marché de Noël</p>
-    </div>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, Helvetica, sans-serif;">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f5f5f5;">
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <!--[if (gte mso 9)|(IE)]>
+          <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+          <tr>
+          <td align="center" valign="top" width="600">
+          <![endif]-->
 
-    <!-- Content -->
-    <div class="content">
-      <p>Bonjour <strong>{{ order.customerName }}</strong>,</p>
+          <!-- Main Container -->
+          <table border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="max-width: 600px; background-color: #ffffff; border-radius: 16px;">
 
-      <!-- Success Message -->
-      <div class="success-message">
-        <h2>🎉 C'est le moment !</h2>
-        <p>Votre commande vous attend au marché de Noël de la Sainte Famille. Vous pouvez venir la récupérer dès maintenant !</p>
-      </div>
+            <!-- Header -->
+            <tr>
+              <td bgcolor="#10b981" style="background-color: #10b981; border-radius: 16px 16px 0 0; padding: 40px 20px; text-align: center; color: #ffffff;">
+                <div style="font-size: 64px; margin-bottom: 15px;">🎁</div>
+                <h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff;">Votre commande est disponible !</h1>
+                <p style="margin: 10px 0 0; opacity: 0.95; color: #ffffff; font-size: 16px;">Venez la récupérer au marché de Noël</p>
+              </td>
+            </tr>
 
-      <!-- Order Number -->
-      <div class="order-number">
-        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Numéro de commande à présenter</div>
-        <strong>{{ order.orderNumber }}</strong>
-      </div>
+            <!-- Content -->
+            <tr>
+              <td style="padding: 40px 30px;" class="mobile-padding">
 
-      <!-- Pickup Information -->
-      <div class="pickup-info">
-        <div class="pickup-title">
-          📍 Informations de retrait
-        </div>
+                <!-- Greeting -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td style="padding-bottom: 20px;">
+                      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #333;">
+                        Bonjour <strong>{{ order.customerName }}</strong>,
+                      </p>
+                    </td>
+                  </tr>
+                </table>
 
-        <div class="pickup-detail">
-          <div class="pickup-label">📅 Date et horaires</div>
-          <div class="pickup-value">Samedi 22 novembre 2025<br>10h - 17h</div>
-        </div>
+                <!-- Success Message -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#d1fae5" style="background-color: #d1fae5; border-left: 4px solid #10b981; margin: 20px 0; border-radius: 8px;">
+                  <tr>
+                    <td style="padding: 20px;">
+                      <h2 style="margin: 0 0 10px; color: #065f46; font-size: 20px;">🎉 C'est le moment !</h2>
+                      <p style="margin: 0; color: #047857; font-size: 16px;">Votre commande vous attend au marché de Noël de la Sainte Famille. Vous pouvez venir la récupérer dès maintenant !</p>
+                    </td>
+                  </tr>
+                </table>
 
-        <div class="pickup-detail">
-          <div class="pickup-label">📍 Lieu</div>
-          <div class="pickup-value">
-            Marché de noël École de la Sainte Famille<br>
-            101 Av. du Char Verdun<br>
-            La Valette-du-Var
-          </div>
-        </div>
+                <!-- Order Number -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px 0;">
+                  <tr>
+                    <td bgcolor="#f8f3ea" style="background-color: #f8f3ea; border-left: 4px solid #c19a6b; padding: 15px 20px; border-radius: 10px;">
+                      <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Numéro de commande à présenter</div>
+                      <strong style="color: #a67c52; font-size: 18px;">{{ order.orderNumber }}</strong>
+                    </td>
+                  </tr>
+                </table>
 
-        <div style="background-color: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #fbbf24;">
-          <p style="margin: 0; color: #92400e; font-size: 14px;">
-            <strong>⚠️ Important :</strong> Pensez à apporter votre <strong>numéro de commande {{ order.orderNumber }}</strong> lors du retrait.
-          </p>
-        </div>
-      </div>
+                <!-- Pickup Information -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7ed" style="background-color: #fff7ed; margin: 30px 0; border-radius: 12px;">
+                  <tr>
+                    <td style="padding: 25px;">
+                      <h2 style="margin: 0 0 15px; font-size: 20px; font-weight: 700; color: #9a3412;">
+                        📍 Informations de retrait
+                      </h2>
 
-      <!-- Products -->
-      <div class="section">
-        <div class="section-title">🛒 Votre commande</div>
-        @each(item in order.orderItems)
-        <div class="product-item">
-          <div class="product-info">
-            <div class="product-name">{{ item.product ? item.product.name : 'Produit' }}</div>
-            <div class="product-details">
-              Quantité: {{ item.quantity }} × {{ Number(item.unitPrice).toFixed(2) }} €
-            </div>
-          </div>
-          <div class="product-price">{{ Number(item.totalPrice).toFixed(2) }} €</div>
-        </div>
-        @end
-      </div>
+                      <!-- Date and hours -->
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color: #ffffff; margin-bottom: 12px; border-radius: 8px;">
+                        <tr>
+                          <td style="padding: 15px;">
+                            <div style="font-size: 14px; color: #92400e; font-weight: 600; margin-bottom: 5px;">📅 Date et horaires</div>
+                            <div style="font-size: 16px; color: #1f2937; font-weight: 500;">
+                              Samedi 22 novembre 2025<br>
+                              10h - 17h
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
 
-      <!-- Total -->
-      <div class="total-section">
-        <div class="total-row">
-          <div class="total-label">Total de la commande</div>
-          <div class="total-value">{{ Number(order.totalAmount).toFixed(2) }} €</div>
-        </div>
-        <div style="color: #10b981; font-size: 14px; text-align: right; margin-top: 5px; font-weight: 500;">
-          ✓ Déjà payé
-        </div>
-      </div>
+                      <!-- Location -->
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color: #ffffff; margin-bottom: 12px; border-radius: 8px;">
+                        <tr>
+                          <td style="padding: 15px;">
+                            <div style="font-size: 14px; color: #92400e; font-weight: 600; margin-bottom: 5px;">📍 Lieu</div>
+                            <div style="font-size: 16px; color: #1f2937; font-weight: 500;">
+                              Marché de noël École de la Sainte Famille<br>
+                              101 Av. du Char Verdun<br>
+                              La Valette-du-Var
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
 
-      <!-- Journey Steps -->
-      <div class="steps">
-        <div class="steps-title">✓ Parcours de votre commande</div>
-        <div class="step-item">
-          <div class="step-icon done">✓</div>
-          <div class="step-text done">Commande passée</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon done">✓</div>
-          <div class="step-text done">Paiement confirmé</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon done">✓</div>
-          <div class="step-text done">Commande préparée</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon done">✓</div>
-          <div class="step-text done">Commande prête</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon done">✓</div>
-          <div class="step-text done">Disponible au retrait - C'est maintenant !</div>
-        </div>
-      </div>
+                      <!-- Important notice -->
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fef3c7" style="background-color: #fef3c7; border-left: 4px solid #fbbf24; border-radius: 8px;">
+                        <tr>
+                          <td style="padding: 15px;">
+                            <p style="margin: 0; color: #92400e; font-size: 14px;">
+                              <strong>⚠️ Important :</strong> Pensez à apporter votre <strong>numéro de commande {{ order.orderNumber }}</strong> lors du retrait.
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
 
-      <p style="text-align: center; color: #666; font-size: 14px; margin-top: 30px;">
-        À très bientôt au marché de Noël !<br>
-        L'équipe du Marché de Noël
-      </p>
-    </div>
+                <!-- Products Section -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 30px 0;">
+                  <tr>
+                    <td>
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #a67c52; border-bottom: 2px solid #f8f3ea; padding-bottom: 8px;">
+                        🛒 Votre commande
+                      </h2>
+                    </td>
+                  </tr>
+                  @each(item in order.orderItems)
+                  <tr>
+                    <td>
+                      <!-- Product Item - Outer table for border effect -->
+                      <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#e8d4b0" style="background-color: #e8d4b0; border-radius: 14px; margin-bottom: 10px;">
+                        <tr>
+                          <td style="border-radius: 14px;">
+                            <!-- Inner table with content -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fdfbf7" style="background-color: #fdfbf7; border-radius: 12px;">
+                              <tr>
+                                <td style="padding: 15px;">
+                                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                      <td style="width: 70%;">
+                                        <div style="font-weight: 600; color: #333; margin-bottom: 4px;">{{ item.product ? item.product.name : 'Produit' }}</div>
+                                        <div style="font-size: 14px; color: #666;">
+                                          Quantité: {{ item.quantity }} × {{ Number(item.unitPrice).toFixed(2) }} €
+                                        </div>
+                                      </td>
+                                      <td style="width: 30%; text-align: right; vertical-align: top;">
+                                        <div style="font-weight: 700; color: #a67c52; font-size: 16px;">
+                                          {{ Number(item.totalPrice).toFixed(2) }} €
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  @end
+                </table>
 
-    <!-- Footer -->
-    <div class="footer">
-      <p style="margin: 0 0 10px;"><strong>Marché de Noël la Sainte Famille</strong></p>
-      <p style="margin: 15px 0 0;">&copy; {{ currentYear }} Marché de Noël la Sainte Famille. Tous droits réservés.</p>
-    </div>
-  </div>
+                <!-- Total Section -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f8f3ea" style="background-color: #f8f3ea; border-radius: 12px; margin-top: 20px;">
+                  <tr>
+                    <td style="padding: 20px;">
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td style="width: 50%; font-size: 16px; color: #666;">Total de la commande</td>
+                          <td style="width: 50%; text-align: right; font-size: 24px; font-weight: 700; color: #a67c52;">
+                            {{ Number(order.totalAmount).toFixed(2) }} €
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: right; padding-top: 5px;">
+                            <span style="color: #10b981; font-size: 14px; font-weight: 500;">✓ Déjà payé</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Journey Steps -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f0fdf4" style="background-color: #f0fdf4; margin-top: 30px; border-radius: 12px;">
+                  <tr>
+                    <td style="padding: 25px;">
+                      <h2 style="margin: 0 0 15px; font-size: 18px; font-weight: 600; color: #065f46;">✓ Parcours de votre commande</h2>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #10b981; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #065f46; font-weight: 500;">Commande passée</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #10b981; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #065f46; font-weight: 500;">Paiement confirmé</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #10b981; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #065f46; font-weight: 500;">Commande préparée</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 12px;">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #10b981; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #065f46; font-weight: 500;">Commande prête</td>
+                        </tr>
+                      </table>
+
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td style="width: 20px; vertical-align: top; color: #10b981; font-size: 18px;">✓</td>
+                          <td style="padding-left: 8px; font-size: 16px; line-height: 1.5; color: #065f46; font-weight: 500;">Disponible au retrait - C'est maintenant !</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="text-align: center; color: #666; font-size: 14px; margin-top: 30px;">
+                  À très bientôt au marché de Noël !<br>
+                  L'équipe du Marché de Noël
+                </p>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td bgcolor="#1f2937" style="background-color: #1f2937; padding: 30px; text-align: center; border-radius: 0 0 16px 16px;">
+                <p style="margin: 0 0 10px; color: #9ca3af; font-size: 14px; line-height: 1.5;">
+                  <strong style="color: #ffffff;">Marché de Noël la Sainte Famille</strong>
+                </p>
+                <p style="margin: 15px 0 0; color: #9ca3af; font-size: 14px; line-height: 1.5;">
+                  &copy; {{ currentYear }} Marché de Noël la Sainte Famille. Tous droits réservés.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]>
+          </td>
+          </tr>
+          </table>
+          <![endif]-->
+        </td>
+      </tr>
+    </table>
+  </center>
 </body>
 </html>
