@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="064cb1c7-d603-46b0-b0fe-24c240fe41ad" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee/storage_v2/_src_/database/soleil_du_sud.-2Yaog/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/59f47c52-1e2a-499b-8c31-dc3634e854ee/storage_v2/_src_/database/soleil_du_sud.-2Yaog/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/controllers/admin/orders_controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/controllers/admin/orders_controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/controllers/orders_controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/models/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models/order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/drive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/drive.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/1758953640066_create_orders_table.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/1758953640066_create_orders_table.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/1760719619819_create_add_payment_method_to_orders_table.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/seeders/user_seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/seeders/user_seeder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/OrderConfirmationView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/OrderConfirmationView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/admin/DashboardView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/admin/DashboardView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/admin/OrdersView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/admin/OrdersView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/ProductsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/ProductsView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +80,7 @@
       <workItem from="1759346481078" duration="19296000" />
       <workItem from="1759570010181" duration="41211000" />
       <workItem from="1760285194756" duration="944000" />
-      <workItem from="1760749086615" duration="9736000" />
+      <workItem from="1760749086615" duration="11941000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -351,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760734164143</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1760774733734</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1760774733734</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

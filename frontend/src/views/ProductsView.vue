@@ -1,5 +1,12 @@
 <template>
-  <div class="min-h-screen max-w-6xl mx-auto py-8 px-4">
+  <div class="relative overflow-hidden min-h-screen">
+    <!-- Snow particles -->
+    <vue-particles
+      id="tsparticles"
+      :options="particlesOptions"
+    />
+
+    <div class="max-w-6xl mx-auto py-8 px-4 relative z-10">
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-gray-900 mb-4">Nos Produits</h1>
 
@@ -123,6 +130,7 @@
       :product="selectedProduct"
       @close="closeProductModal"
     />
+    </div>
   </div>
 </template>
 
@@ -147,6 +155,67 @@ const searchQuery = ref('')
 const pagination = ref<any>(null)
 const selectedProduct = ref<Product | null>(null)
 const isModalOpen = ref(false)
+
+// tsParticles configuration
+const particlesOptions = {
+  background: {
+    color: {
+      value: 'transparent'
+    }
+  },
+  fpsLimit: 60,
+  particles: {
+    color: {
+      value: '#DAA520'
+    },
+    move: {
+      direction: 'bottom' as const,
+      enable: true,
+      outModes: {
+        default: 'out' as const
+      },
+      random: false,
+      speed: 1,
+      straight: false
+    },
+    number: {
+      density: {
+        enable: true,
+        area: 800
+      },
+      value: 30
+    },
+    opacity: {
+      value: { min: 0.3, max: 0.8 }
+    },
+    shape: {
+      type: 'circle'
+    },
+    size: {
+      value: { min: 2, max: 5 }
+    },
+    wobble: {
+      enable: true,
+      distance: 10,
+      speed: 10
+    }
+  },
+  detectRetina: true,
+  interactivity: {
+    events: {
+      onHover: {
+        enable: true,
+        mode: 'repulse' as const
+      }
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+        duration: 0.4
+      }
+    }
+  }
+}
 
 // Methods
 const loadProducts = async (page = 1) => {
@@ -219,5 +288,15 @@ onMounted(() => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* tsParticles container styling */
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 </style>
