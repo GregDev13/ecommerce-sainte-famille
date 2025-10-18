@@ -18,12 +18,12 @@ export default class DashboardController {
 
       // Total commandes
       const totalOrders = await Order.query().count('* as total')
-      const pendingOrders = await Order.query().where('status', 'pending').count('* as total')
+      const pendingOrders = await Order.query().where('status', 'pending_payment').count('* as total')
 
       // Chiffre d'affaires du mois
       const startOfMonth = DateTime.now().startOf('month')
       const monthlyRevenue = await Order.query()
-        .whereIn('status', ['paid', 'shipped', 'delivered'])
+        .whereIn('status', ['paid', 'preparing', 'ready', 'available'])
         .where('created_at', '>=', startOfMonth.toSQL())
         .sum('total_amount as total')
 

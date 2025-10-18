@@ -173,6 +173,7 @@ export const adminOrdersApi = {
     page?: number
     limit?: number
     status?: string
+    orderNumber?: string
   }): Promise<ApiResponse<PaginatedResponse<Order>>> {
     return adminApi.get('/orders', { params })
   },

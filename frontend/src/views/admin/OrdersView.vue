@@ -17,6 +17,32 @@
         <option value="available">Disponible</option>
         <option value="cancelled">Annulée</option>
       </select>
+
+      <div class="relative flex-1 max-w-md">
+        <input
+          v-model="orderNumberFilter"
+          type="text"
+          placeholder="Rechercher par n° de commande..."
+          class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+        />
+        <svg
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <button
+          v-if="orderNumberFilter"
+          @click="orderNumberFilter = ''; loadOrders(1)"
+          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Orders Table (Desktop) -->
@@ -353,7 +379,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { adminOrdersApi, type Order } from '@/services/adminApi'
 import { useToast } from 'vue-toastification'
 
@@ -363,6 +389,7 @@ const toast = useToast()
 const orders = ref<Order[]>([])
 const loading = ref(true)
 const statusFilter = ref('')
+const orderNumberFilter = ref('')
 const pagination = ref<any>(null)
 const selectedOrder = ref<Order | null>(null)
 const openStatusDropdown = ref<number | null>(null)
@@ -383,7 +410,8 @@ const loadOrders = async (page = 1) => {
     const response = await adminOrdersApi.getAll({
       page,
       limit: 20,
-      ...(statusFilter.value && { status: statusFilter.value })
+      ...(statusFilter.value && { status: statusFilter.value }),
+      ...(orderNumberFilter.value && { orderNumber: orderNumberFilter.value })
     })
     orders.value = response.data.data
     pagination.value = response.data.meta
@@ -491,6 +519,17 @@ const handleScroll = () => {
   openStatusDropdown.value = null
   dropdownPosition.value = null
 }
+
+// Recherche avec debounce
+let debounceTimeout: ReturnType<typeof setTimeout> | null = null
+watch(orderNumberFilter, () => {
+  if (debounceTimeout) {
+    clearTimeout(debounceTimeout)
+  }
+  debounceTimeout = setTimeout(() => {
+    loadOrders(1)
+  }, 500)
+})
 
 onMounted(() => {
   loadOrders()

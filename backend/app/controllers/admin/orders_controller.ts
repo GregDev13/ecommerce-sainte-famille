@@ -16,6 +16,7 @@ export default class OrdersController {
       const page = request.input('page', 1)
       const limit = request.input('limit', 20)
       const status = request.input('status', '')
+      const orderNumber = request.input('orderNumber', '')
 
       const ordersQuery = Order.query()
         .preload('user')
@@ -25,6 +26,10 @@ export default class OrdersController {
 
       if (status) {
         ordersQuery.where('status', status)
+      }
+
+      if (orderNumber) {
+        ordersQuery.where('order_number', 'ILIKE', `%${orderNumber}%`)
       }
 
       const orders = await ordersQuery
