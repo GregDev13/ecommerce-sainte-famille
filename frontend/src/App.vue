@@ -198,11 +198,21 @@ const closeMobileMenu = () => {
             </h5>
             <ul class="space-y-2 text-gray-400 text-sm">
               <li>
+                <div class="text-xs text-gray-500 mb-1">École :</div>
                 <a
                   href="mailto:secretariat@ecolestefamillelavalette.org"
                   class="hover:text-gold-400 transition-colors break-all"
                 >
                   secretariat@ecolestefamillelavalette.org
+                </a>
+              </li>
+              <li class="pt-2">
+                <div class="text-xs text-gray-500 mb-1">Support boutique :</div>
+                <a
+                  href="mailto:support@boutiquesaintefamille.fr"
+                  class="hover:text-gold-400 transition-colors break-all"
+                >
+                  support@boutiquesaintefamille.fr
                 </a>
               </li>
             </ul>
