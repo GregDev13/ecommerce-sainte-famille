@@ -355,8 +355,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { adminOrdersApi, type Order } from '@/services/adminApi'
+import { useToast } from 'vue-toastification'
 
 const API_URL = import.meta.env.VITE_API_URL
+const toast = useToast()
 
 const orders = ref<Order[]>([])
 const loading = ref(true)
@@ -412,13 +414,21 @@ const toggleStatusDropdown = (orderId: number, event: MouseEvent) => {
 
 const updateStatus = async (order: Order, newStatus: string) => {
   try {
-    await adminOrdersApi.updateStatus(order.id, newStatus)
+    const response = await adminOrdersApi.updateStatus(order.id, newStatus)
     order.status = newStatus as any
+
+    // Afficher un toast UNIQUEMENT si un email a été envoyé au client
+    if ((response as any).emailSent) {
+      toast.success('✅ Email de confirmation envoyé au client avec succès', {
+        timeout: 5000
+      })
+    }
+
     openStatusDropdown.value = null
     dropdownPosition.value = null
   } catch (error) {
     console.error('Error updating status:', error)
-    alert('Erreur lors de la mise à jour')
+    toast.error('❌ Erreur lors de la mise à jour du statut')
   }
 }
 
@@ -428,9 +438,10 @@ const deleteOrder = async (order: Order) => {
   try {
     await adminOrdersApi.delete(order.id)
     orders.value = orders.value.filter(o => o.id !== order.id)
+    toast.success(`Commande ${order.orderNumber} supprimée avec succès`)
   } catch (error) {
     console.error('Error deleting order:', error)
-    alert('Erreur lors de la suppression')
+    toast.error('❌ Erreur lors de la suppression de la commande')
   }
 }
 
@@ -441,7 +452,7 @@ const viewDetails = async (order: Order) => {
     selectedOrder.value = response.data
   } catch (error) {
     console.error('Error loading order details:', error)
-    alert('Erreur lors du chargement des détails')
+    toast.error('❌ Erreur lors du chargement des détails de la commande')
   }
 }
 

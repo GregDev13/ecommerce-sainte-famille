@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande disponible</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .header .emoji {
+      font-size: 64px;
+      margin-bottom: 15px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .success-message {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left: 4px solid #10b981;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .success-message h2 {
+      margin: 0 0 10px;
+      color: #065f46;
+      font-size: 20px;
+    }
+    .success-message p {
+      margin: 0;
+      color: #047857;
+      font-size: 16px;
+    }
+    .order-number {
+      background-color: #f8f3ea;
+      border-left: 4px solid #c19a6b;
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .order-number strong {
+      color: #a67c52;
+      font-size: 18px;
+    }
+    .section {
+      margin: 30px 0;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #a67c52;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f8f3ea;
+      padding-bottom: 8px;
+    }
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #e8d4b0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background-color: #fdfbf7;
+    }
+    .product-info {
+      flex: 1;
+    }
+    .product-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .product-details {
+      font-size: 14px;
+      color: #666;
+    }
+    .product-price {
+      font-weight: 700;
+      color: #a67c52;
+      font-size: 16px;
+      text-align: right;
+    }
+    .total-section {
+      background-color: #f8f3ea;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .total-label {
+      font-size: 16px;
+      color: #666;
+    }
+    .total-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #a67c52;
+    }
+    .steps {
+      background-color: #f0fdf4;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      border: 2px solid #86efac;
+    }
+    .steps-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #065f46;
+      margin-bottom: 15px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .step-icon {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    .step-icon.done {
+      color: #10b981;
+    }
+    .step-text {
+      flex: 1;
+    }
+    .step-text.done {
+      color: #065f46;
+      font-weight: 500;
+    }
+    .pickup-info {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 2px solid #fb923c;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    .pickup-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #9a3412;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pickup-detail {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .pickup-label {
+      font-size: 14px;
+      color: #92400e;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .pickup-value {
+      font-size: 16px;
+      color: #1f2937;
+      font-weight: 500;
+    }
+    .footer {
+      background-color: #1f2937;
+      color: #9ca3af;
+      padding: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #c19a6b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="emoji">🎁</div>
+      <h1>Votre commande est disponible !</h1>
+      <p style="margin: 10px 0 0; opacity: 0.95; font-size: 16px;">Venez la récupérer au marché de Noël</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <p>Bonjour <strong>{{ order.customerName }}</strong>,</p>
+
+      <!-- Success Message -->
+      <div class="success-message">
+        <h2>🎉 C'est le moment !</h2>
+        <p>Votre commande vous attend au marché de Noël de la Sainte Famille. Vous pouvez venir la récupérer dès maintenant !</p>
+      </div>
+
+      <!-- Order Number -->
+      <div class="order-number">
+        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Numéro de commande à présenter</div>
+        <strong>{{ order.orderNumber }}</strong>
+      </div>
+
+      <!-- Pickup Information -->
+      <div class="pickup-info">
+        <div class="pickup-title">
+          📍 Informations de retrait
+        </div>
+
+        <div class="pickup-detail">
+          <div class="pickup-label">Lieu</div>
+          <div class="pickup-value">Marché de Noël de la Sainte Famille</div>
+        </div>
+
+        <div style="background-color: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #fbbf24;">
+          <p style="margin: 0; color: #92400e; font-size: 14px;">
+            <strong>⚠️ Important :</strong> Pensez à apporter votre <strong>numéro de commande {{ order.orderNumber }}</strong> lors du retrait.
+          </p>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="section">
+        <div class="section-title">🛒 Votre commande</div>
+        @each(item in order.orderItems)
+        <div class="product-item">
+          <div class="product-info">
+            <div class="product-name">{{ item.product ? item.product.name : 'Produit' }}</div>
+            <div class="product-details">
+              Quantité: {{ item.quantity }} × {{ Number(item.unitPrice).toFixed(2) }} €
+            </div>
+          </div>
+          <div class="product-price">{{ Number(item.totalPrice).toFixed(2) }} €</div>
+        </div>
+        @end
+      </div>
+
+      <!-- Total -->
+      <div class="total-section">
+        <div class="total-row">
+          <div class="total-label">Total de la commande</div>
+          <div class="total-value">{{ Number(order.totalAmount).toFixed(2) }} €</div>
+        </div>
+        <div style="color: #10b981; font-size: 14px; text-align: right; margin-top: 5px; font-weight: 500;">
+          ✓ Déjà payé
+        </div>
+      </div>
+
+      <!-- Journey Steps -->
+      <div class="steps">
+        <div class="steps-title">✓ Parcours de votre commande</div>
+        <div class="step-item">
+          <div class="step-icon done">✓</div>
+          <div class="step-text done">Commande passée</div>
+        </div>
+        <div class="step-item">
+          <div class="step-icon done">✓</div>
+          <div class="step-text done">Paiement confirmé</div>
+        </div>
+        <div class="step-item">
+          <div class="step-icon done">✓</div>
+          <div class="step-text done">Commande préparée</div>
+        </div>
+        <div class="step-item">
+          <div class="step-icon done">✓</div>
+          <div class="step-text done">Commande prête</div>
+        </div>
+        <div class="step-item">
+          <div class="step-icon done">✓</div>
+          <div class="step-text done">Disponible au retrait - C'est maintenant !</div>
+        </div>
+      </div>
+
+      <p style="text-align: center; color: #666; font-size: 14px; margin-top: 30px;">
+        À très bientôt au marché de Noël !<br>
+        L'équipe du Marché de Noël
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p style="margin: 0 0 10px;"><strong>Marché de Noël la Sainte Famille</strong></p>
+      <p style="margin: 0;">Votre boutique familiale en ligne</p>
+      <p style="margin: 15px 0 0;">&copy; 2024 Marché de Noël la Sainte Famille. Tous droits réservés.</p>
+    </div>
+  </div>
+</body>
+</html>
