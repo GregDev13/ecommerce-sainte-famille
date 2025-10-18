@@ -28,6 +28,7 @@ export default class OrderConfirmationNotification extends BaseMail {
       appUrl,
       frontendUrl,
       paymentInstructions: instructions,
+      currentYear: new Date().getFullYear(),
     })
   }
 }

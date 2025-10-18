@@ -23,6 +23,7 @@ export default class OrderPaymentConfirmed extends BaseMail {
       order: this.order,
       appUrl,
       frontendUrl,
+      currentYear: new Date().getFullYear(),
     })
   }
 }

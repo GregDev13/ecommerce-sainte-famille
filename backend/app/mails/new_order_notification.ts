@@ -24,6 +24,7 @@ export default class NewOrderNotification extends BaseMail {
       order: this.order,
       appUrl,
       frontendUrl,
+      currentYear: new Date().getFullYear(),
     })
   }
 }

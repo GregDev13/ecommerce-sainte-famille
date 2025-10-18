@@ -23,6 +23,7 @@ export default class OrderAvailableNotification extends BaseMail {
       order: this.order,
       appUrl,
       frontendUrl,
+      currentYear: new Date().getFullYear(),
     })
   }
 }
