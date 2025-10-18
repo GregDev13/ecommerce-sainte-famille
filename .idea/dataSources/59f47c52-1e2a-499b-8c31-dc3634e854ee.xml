@@ -3,17 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>7432</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7549</IntrospectionStateNumber>
       <ServerVersion>17.6</ServerVersion>
-      <StartupTime>1760714833</StartupTime>
+      <StartupTime>1760748732</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -811,7 +803,7 @@ false Zulu
 13527||10|C|G
 13527||-9223372036854775808|U|G
 13527||10|U|G</Grants>
-      <IntrospectionStateNumber>7432</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7549</IntrospectionStateNumber>
       <ObjectId>27971</ObjectId>
       <OwnerName>greg</OwnerName>
     </database>
@@ -4244,11 +4236,11 @@ false Zulu
     <schema id="267" parent="3" name="public">
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>7432</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>7432</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>7432</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>7549</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>7549</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>7549</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2025-10-17.17:55:13</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-10-18.07:58:39</LastIntrospectionLocalTimestamp>
       <ObjectId>28182</ObjectId>
       <StateNumber>7038</StateNumber>
       <OwnerName>greg</OwnerName>
@@ -4264,55 +4256,55 @@ false Zulu
     </sequence>
     <sequence id="269" parent="267" name="auth_access_tokens_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28621</ObjectId>
+      <ObjectId>28734</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
     <sequence id="270" parent="267" name="order_items_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28604</ObjectId>
+      <ObjectId>28717</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
     <sequence id="271" parent="267" name="order_sequences_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28638</ObjectId>
+      <ObjectId>28748</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
     <sequence id="272" parent="267" name="orders_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28585</ObjectId>
+      <ObjectId>28697</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
     <sequence id="273" parent="267" name="products_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28574</ObjectId>
+      <ObjectId>28686</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
     <sequence id="274" parent="267" name="users_id_seq">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28561</ObjectId>
+      <ObjectId>28673</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>greg</OwnerName>
     </sequence>
@@ -4332,43 +4324,43 @@ false Zulu
     </table>
     <table id="277" parent="267" name="auth_access_tokens">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28622</ObjectId>
-      <StateNumber>7384</StateNumber>
+      <ObjectId>28735</ObjectId>
+      <StateNumber>7509</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
     <table id="278" parent="267" name="order_items">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28605</ObjectId>
-      <StateNumber>7383</StateNumber>
+      <ObjectId>28718</ObjectId>
+      <StateNumber>7508</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
     <table id="279" parent="267" name="order_sequences">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28639</ObjectId>
-      <StateNumber>7431</StateNumber>
+      <ObjectId>28749</ObjectId>
+      <StateNumber>7511</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
     <table id="280" parent="267" name="orders">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28586</ObjectId>
-      <StateNumber>7426</StateNumber>
+      <ObjectId>28698</ObjectId>
+      <StateNumber>7507</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
     <table id="281" parent="267" name="products">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28575</ObjectId>
-      <StateNumber>7383</StateNumber>
+      <ObjectId>28687</ObjectId>
+      <StateNumber>7508</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
     <table id="282" parent="267" name="users">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>28562</ObjectId>
-      <StateNumber>7382</StateNumber>
+      <ObjectId>28674</ObjectId>
+      <StateNumber>7507</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>greg</OwnerName>
     </table>
@@ -4445,365 +4437,364 @@ false Zulu
       <DefaultExpression>nextval(&apos;auth_access_tokens_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28621</SequenceId>
+      <SequenceId>28734</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="293" parent="277" name="tokenable_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="294" parent="277" name="type">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="295" parent="277" name="name">
       <Position>4</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="296" parent="277" name="hash">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="297" parent="277" name="abilities">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="298" parent="277" name="created_at">
       <Position>7</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="299" parent="277" name="updated_at">
       <Position>8</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="300" parent="277" name="last_used_at">
       <Position>9</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="301" parent="277" name="expires_at">
       <Position>10</Position>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <foreign-key id="302" parent="277" name="auth_access_tokens_tokenable_id_foreign">
       <ColNames>tokenable_id</ColNames>
-      <ObjectId>28630</ObjectId>
+      <ObjectId>28743</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>28562</RefTableId>
+      <RefTableId>28674</RefTableId>
     </foreign-key>
     <index id="303" parent="277" name="auth_access_tokens_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28628</ObjectId>
+      <ObjectId>28741</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7384</StateNumber>
+      <StateNumber>7509</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="304" parent="277" name="auth_access_tokens_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28629</ObjectId>
+      <ObjectId>28742</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7384</StateNumber>
-      <UnderlyingIndexId>28628</UnderlyingIndexId>
+      <StateNumber>7509</StateNumber>
+      <UnderlyingIndexId>28741</UnderlyingIndexId>
     </key>
     <column id="305" parent="278" name="id">
       <DefaultExpression>nextval(&apos;order_items_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28604</SequenceId>
+      <SequenceId>28717</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="306" parent="278" name="order_id">
       <Position>2</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="307" parent="278" name="product_id">
       <Position>3</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="308" parent="278" name="quantity">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="309" parent="278" name="unit_price">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>numeric(10,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
     <column id="310" parent="278" name="total_price">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>numeric(10,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
     <column id="311" parent="278" name="created_at">
       <Position>7</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="312" parent="278" name="updated_at">
       <Position>8</Position>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <foreign-key id="313" parent="278" name="order_items_order_id_foreign">
       <ColNames>order_id</ColNames>
-      <ObjectId>28611</ObjectId>
+      <ObjectId>28724</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>28586</RefTableId>
+      <RefTableId>28698</RefTableId>
     </foreign-key>
     <foreign-key id="314" parent="278" name="order_items_product_id_foreign">
       <ColNames>product_id</ColNames>
-      <ObjectId>28616</ObjectId>
+      <ObjectId>28729</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>28575</RefTableId>
+      <RefTableId>28687</RefTableId>
     </foreign-key>
     <index id="315" parent="278" name="order_items_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28609</ObjectId>
+      <ObjectId>28722</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7383</StateNumber>
+      <StateNumber>7508</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="316" parent="278" name="order_items_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28610</ObjectId>
+      <ObjectId>28723</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7383</StateNumber>
-      <UnderlyingIndexId>28609</UnderlyingIndexId>
+      <StateNumber>7508</StateNumber>
+      <UnderlyingIndexId>28722</UnderlyingIndexId>
     </key>
     <column id="317" parent="279" name="id">
       <DefaultExpression>nextval(&apos;order_sequences_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28638</SequenceId>
+      <SequenceId>28748</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="318" parent="279" name="current_value">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="319" parent="279" name="created_at">
       <Position>3</Position>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="320" parent="279" name="updated_at">
       <Position>4</Position>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <index id="321" parent="279" name="order_sequences_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28644</ObjectId>
+      <ObjectId>28754</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7431</StateNumber>
+      <StateNumber>7511</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="322" parent="279" name="order_sequences_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28645</ObjectId>
+      <ObjectId>28755</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7431</StateNumber>
-      <UnderlyingIndexId>28644</UnderlyingIndexId>
+      <StateNumber>7511</StateNumber>
+      <UnderlyingIndexId>28754</UnderlyingIndexId>
     </key>
     <check id="323" parent="280" name="orders_payment_method_check">
       <ColNames>payment_method</ColNames>
-      <ObjectId>28637</ObjectId>
+      <ObjectId>28705</ObjectId>
       <Predicate>payment_method = ANY (ARRAY[&apos;wero&apos;::text, &apos;paypal&apos;::text])</Predicate>
-      <StateNumber>7426</StateNumber>
+      <StateNumber>7507</StateNumber>
     </check>
     <check id="324" parent="280" name="orders_status_check">
       <ColNames>status</ColNames>
-      <ObjectId>28591</ObjectId>
-      <Predicate>status = ANY (ARRAY[&apos;pending&apos;::text, &apos;pending_payment&apos;::text, &apos;reserved&apos;::text, &apos;paid&apos;::text, &apos;shipped&apos;::text, &apos;delivered&apos;::text, &apos;cancelled&apos;::text, &apos;failed&apos;::text])</Predicate>
-      <StateNumber>7382</StateNumber>
+      <ObjectId>28703</ObjectId>
+      <Predicate>status = ANY (ARRAY[&apos;pending_payment&apos;::text, &apos;paid&apos;::text, &apos;completed&apos;::text, &apos;cancelled&apos;::text])</Predicate>
+      <StateNumber>7507</StateNumber>
     </check>
     <check id="325" parent="280" name="orders_type_check">
       <ColNames>type</ColNames>
-      <ObjectId>28592</ObjectId>
+      <ObjectId>28704</ObjectId>
       <Predicate>type = ANY (ARRAY[&apos;order&apos;::text, &apos;reservation&apos;::text])</Predicate>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
     </check>
     <column id="326" parent="280" name="id">
       <DefaultExpression>nextval(&apos;orders_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28585</SequenceId>
+      <SequenceId>28697</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="327" parent="280" name="order_number">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="328" parent="280" name="user_id">
       <Position>3</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="329" parent="280" name="customer_name">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="330" parent="280" name="customer_email">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="331" parent="280" name="customer_phone">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="332" parent="280" name="total_amount">
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>numeric(10,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
     <column id="333" parent="280" name="status">
-      <DefaultExpression>&apos;pending&apos;::text</DefaultExpression>
+      <DefaultExpression>&apos;pending_payment&apos;::text</DefaultExpression>
       <Position>8</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="334" parent="280" name="type">
       <NotNull>1</NotNull>
       <Position>9</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="335" parent="280" name="stripe_payment_intent_id">
+    <column id="335" parent="280" name="payment_method">
+      <NotNull>1</NotNull>
       <Position>10</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="336" parent="280" name="stripe_payment_intent_id">
+      <Position>11</Position>
+      <StateNumber>7507</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="336" parent="280" name="shipping_address">
-      <Position>11</Position>
-      <StateNumber>7382</StateNumber>
-      <StoredType>text|0s</StoredType>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="337" parent="280" name="notes">
+    <column id="337" parent="280" name="shipping_address">
       <Position>12</Position>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="338" parent="280" name="created_at">
+    <column id="338" parent="280" name="notes">
       <Position>13</Position>
-      <StateNumber>7382</StateNumber>
-      <StoredType>timestamp with time zone|0s</StoredType>
-      <TypeId>1184</TypeId>
-    </column>
-    <column id="339" parent="280" name="updated_at">
-      <Position>14</Position>
-      <StateNumber>7382</StateNumber>
-      <StoredType>timestamp with time zone|0s</StoredType>
-      <TypeId>1184</TypeId>
-    </column>
-    <column id="340" parent="280" name="payment_method">
-      <DefaultExpression>&apos;wero&apos;::text</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>15</Position>
-      <StateNumber>7426</StateNumber>
+      <StateNumber>7507</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
+    </column>
+    <column id="339" parent="280" name="created_at">
+      <Position>14</Position>
+      <StateNumber>7507</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="340" parent="280" name="updated_at">
+      <Position>15</Position>
+      <StateNumber>7507</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
     </column>
     <foreign-key id="341" parent="280" name="orders_user_id_foreign">
       <ColNames>user_id</ColNames>
-      <ObjectId>28599</ObjectId>
+      <ObjectId>28712</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>28562</RefTableId>
+      <RefTableId>28674</RefTableId>
     </foreign-key>
     <index id="342" parent="280" name="orders_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28595</ObjectId>
+      <ObjectId>28708</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7382</StateNumber>
+      <StateNumber>7507</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <index id="343" parent="280" name="orders_order_number_unique">
       <ColNames>order_number</ColNames>
-      <ObjectId>28597</ObjectId>
-      <StateNumber>7382</StateNumber>
+      <ObjectId>28710</ObjectId>
+      <StateNumber>7507</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4812,161 +4803,161 @@ false Zulu
     </index>
     <key id="344" parent="280" name="orders_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28596</ObjectId>
+      <ObjectId>28709</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7382</StateNumber>
-      <UnderlyingIndexId>28595</UnderlyingIndexId>
+      <StateNumber>7507</StateNumber>
+      <UnderlyingIndexId>28708</UnderlyingIndexId>
     </key>
     <key id="345" parent="280" name="orders_order_number_unique">
-      <ObjectId>28598</ObjectId>
-      <StateNumber>7382</StateNumber>
-      <UnderlyingIndexId>28597</UnderlyingIndexId>
+      <ObjectId>28711</ObjectId>
+      <StateNumber>7507</StateNumber>
+      <UnderlyingIndexId>28710</UnderlyingIndexId>
     </key>
     <column id="346" parent="281" name="id">
       <DefaultExpression>nextval(&apos;products_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28574</SequenceId>
+      <SequenceId>28686</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="347" parent="281" name="name">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="348" parent="281" name="description">
       <Position>3</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="349" parent="281" name="price">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>numeric(10,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
     <column id="350" parent="281" name="stock">
       <DefaultExpression>0</DefaultExpression>
       <Position>5</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="351" parent="281" name="is_active">
       <DefaultExpression>true</DefaultExpression>
       <Position>6</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
     <column id="352" parent="281" name="image">
       <Position>7</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>json|0s</StoredType>
       <TypeId>114</TypeId>
     </column>
     <column id="353" parent="281" name="created_at">
       <Position>8</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="354" parent="281" name="updated_at">
       <Position>9</Position>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <index id="355" parent="281" name="products_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28583</ObjectId>
+      <ObjectId>28695</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7381</StateNumber>
+      <StateNumber>7506</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="356" parent="281" name="products_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28584</ObjectId>
+      <ObjectId>28696</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7381</StateNumber>
-      <UnderlyingIndexId>28583</UnderlyingIndexId>
+      <StateNumber>7506</StateNumber>
+      <UnderlyingIndexId>28695</UnderlyingIndexId>
     </key>
     <check id="357" parent="282" name="users_role_check">
       <ColNames>role</ColNames>
-      <ObjectId>28567</ObjectId>
+      <ObjectId>28679</ObjectId>
       <Predicate>role = ANY (ARRAY[&apos;admin&apos;::text, &apos;client&apos;::text])</Predicate>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
     </check>
     <column id="358" parent="282" name="id">
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>28561</SequenceId>
+      <SequenceId>28673</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="359" parent="282" name="full_name">
       <Position>2</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="360" parent="282" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>varchar(254)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="361" parent="282" name="password">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="362" parent="282" name="role">
       <DefaultExpression>&apos;client&apos;::text</DefaultExpression>
       <Position>5</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="363" parent="282" name="created_at">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <column id="364" parent="282" name="updated_at">
       <Position>7</Position>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
     <index id="365" parent="282" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28570</ObjectId>
+      <ObjectId>28682</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7380</StateNumber>
+      <StateNumber>7505</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <index id="366" parent="282" name="users_email_unique">
       <ColNames>email</ColNames>
-      <ObjectId>28572</ObjectId>
-      <StateNumber>7380</StateNumber>
+      <ObjectId>28684</ObjectId>
+      <StateNumber>7505</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4975,15 +4966,15 @@ false Zulu
     </index>
     <key id="367" parent="282" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28571</ObjectId>
+      <ObjectId>28683</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>7380</StateNumber>
-      <UnderlyingIndexId>28570</UnderlyingIndexId>
+      <StateNumber>7505</StateNumber>
+      <UnderlyingIndexId>28682</UnderlyingIndexId>
     </key>
     <key id="368" parent="282" name="users_email_unique">
-      <ObjectId>28573</ObjectId>
-      <StateNumber>7380</StateNumber>
-      <UnderlyingIndexId>28572</UnderlyingIndexId>
+      <ObjectId>28685</ObjectId>
+      <StateNumber>7505</StateNumber>
+      <UnderlyingIndexId>28684</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

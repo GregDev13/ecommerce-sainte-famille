@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Order from '#models/order'
 import logger from '@adonisjs/core/services/logger'
+import { ORDER_STATUS_ARRAY } from '#core/enums/order_status'
 
 export default class OrdersController {
   /**
@@ -72,8 +73,7 @@ export default class OrdersController {
       logger.info(`[Admin Orders] Changement statut commande ${order.orderNumber}: ${order.status} → ${status}`)
 
       // Valider le statut
-      const validStatuses = ['pending', 'reserved', 'paid', 'shipped', 'delivered', 'cancelled']
-      if (!validStatuses.includes(status)) {
+      if (!ORDER_STATUS_ARRAY.includes(status)) {
         logger.warn(`[Admin Orders] Statut invalide: ${status}`)
         return response.badRequest({
           message: 'Invalid status value'

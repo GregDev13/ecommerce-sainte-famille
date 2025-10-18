@@ -1,4 +1,7 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
+import { ORDER_STATUS_ARRAY, ORDER_STATUS } from '#core/enums/order_status'
+import { ORDER_TYPE_ARRAY } from '#core/enums/order_type'
+import { PAYMENT_METHOD_ARRAY } from '#core/enums/payment_method'
 
 export default class extends BaseSchema {
   protected tableName = 'orders'
@@ -21,10 +24,12 @@ export default class extends BaseSchema {
       table.string('customer_phone').notNullable()
 
       table.decimal('total_amount', 10, 2).notNullable()
-      table
-        .enum('status', ['pending', 'reserved', 'paid', 'shipped', 'delivered', 'cancelled'])
-        .defaultTo('pending')
-      table.enum('type', ['order', 'reservation']).notNullable()
+
+      // Use centralized enums
+      table.enum('status', ORDER_STATUS_ARRAY).defaultTo(ORDER_STATUS.PENDING_PAYMENT)
+      table.enum('type', ORDER_TYPE_ARRAY).notNullable()
+      table.enum('payment_method', PAYMENT_METHOD_ARRAY).notNullable()
+
       table.string('stripe_payment_intent_id').nullable()
       table.text('shipping_address').nullable()
       table.text('notes').nullable()

@@ -200,11 +200,11 @@ const loadOrder = async () => {
 
 const getStatusLabel = (status: string): string => {
   const labels: Record<string, string> = {
-    pending: 'En attente',
-    reserved: 'Réservée',
+    pending_payment: 'En attente de paiement',
     paid: 'Payée',
-    shipped: 'Expédiée',
-    delivered: 'Livrée',
+    preparing: 'En cours de préparation',
+    ready: 'Prête',
+    available: 'Disponible',
     cancelled: 'Annulée',
   }
   return labels[status] || status
@@ -212,11 +212,11 @@ const getStatusLabel = (status: string): string => {
 
 const getStatusDescription = (status: string): string => {
   const descriptions: Record<string, string> = {
-    pending: 'Votre commande est en cours de traitement',
-    reserved: 'Les articles sont réservés pour vous',
-    paid: 'Paiement confirmé, préparation en cours',
-    shipped: 'Votre commande a été expédiée',
-    delivered: 'Votre commande a été livrée',
+    pending_payment: 'En attente de la réception du paiement',
+    paid: 'Paiement confirmé, votre commande est en cours de traitement',
+    preparing: 'Votre commande est en cours de préparation',
+    ready: 'Votre commande est prête à être retirée',
+    available: 'Votre commande est disponible au retrait',
     cancelled: 'Cette commande a été annulée',
   }
   return descriptions[status] || 'Statut de la commande'

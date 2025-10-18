@@ -10,17 +10,17 @@
         class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500"
       >
         <option value="">Tous les statuts</option>
-        <option value="pending">En attente</option>
-        <option value="reserved">Réservé</option>
-        <option value="paid">Payé</option>
-        <option value="shipped">Expédié</option>
-        <option value="delivered">Livré</option>
-        <option value="cancelled">Annulé</option>
+        <option value="pending_payment">En attente de paiement</option>
+        <option value="paid">Payée</option>
+        <option value="preparing">En cours de préparation</option>
+        <option value="ready">Prête</option>
+        <option value="available">Disponible</option>
+        <option value="cancelled">Annulée</option>
       </select>
     </div>
 
     <!-- Orders Table (Desktop) -->
-    <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
+    <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -45,50 +45,16 @@
               <div class="text-sm font-semibold text-gray-900">{{ Number(order.totalAmount).toFixed(2) }} €</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="relative inline-block" @click.stop>
-                <button
-                  @click="toggleStatusDropdown(order.id)"
-                  class="px-4 py-2 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-2"
-                  :class="getStatusClass(order.status)"
-                >
-                  <span>{{ getStatusLabel(order.status) }}</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-
-                <!-- Dropdown menu -->
-                <div
-                  v-if="openStatusDropdown === order.id"
-                  class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
-                  @click.stop
-                >
-                  <button
-                    v-for="status in statusOptions"
-                    :key="status.value"
-                    @click="updateStatus(order, status.value)"
-                    class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
-                    :class="order.status === status.value ? 'bg-gold-50' : ''"
-                  >
-                    <span
-                      class="w-3 h-3 rounded-full"
-                      :class="status.dotClass"
-                    ></span>
-                    <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
-                      {{ status.label }}
-                    </span>
-                    <svg
-                      v-if="order.status === status.value"
-                      class="w-4 h-4 ml-auto text-gold-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              <button
+                @click.stop="toggleStatusDropdown(order.id, $event)"
+                class="px-4 py-2 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-2"
+                :class="getStatusClass(order.status)"
+              >
+                <span>{{ getStatusLabel(order.status) }}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               {{ new Date(order.createdAt).toLocaleDateString('fr-FR') }}
@@ -146,50 +112,16 @@
             <h3 class="font-semibold text-gray-900">{{ order.orderNumber }}</h3>
             <p class="text-xs text-gray-500">{{ order.type === 'reservation' ? 'Réservation' : 'Commande' }}</p>
           </div>
-          <div class="relative inline-block" @click.stop>
-            <button
-              @click="toggleStatusDropdown(order.id)"
-              class="px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-1"
-              :class="getStatusClass(order.status)"
-            >
-              <span>{{ getStatusLabel(order.status) }}</span>
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <!-- Dropdown menu -->
-            <div
-              v-if="openStatusDropdown === order.id"
-              class="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
-              @click.stop
-            >
-              <button
-                v-for="status in statusOptions"
-                :key="status.value"
-                @click="updateStatus(order, status.value)"
-                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
-                :class="order.status === status.value ? 'bg-gold-50' : ''"
-              >
-                <span
-                  class="w-3 h-3 rounded-full"
-                  :class="status.dotClass"
-                ></span>
-                <span :class="order.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
-                  {{ status.label }}
-                </span>
-                <svg
-                  v-if="order.status === status.value"
-                  class="w-4 h-4 ml-auto text-gold-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
+          <button
+            @click.stop="toggleStatusDropdown(order.id, $event)"
+            class="px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gold-500 flex items-center gap-1"
+            :class="getStatusClass(order.status)"
+          >
+            <span>{{ getStatusLabel(order.status) }}</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
         </div>
 
         <!-- Order Info -->
@@ -379,6 +311,44 @@
         </div>
       </div>
     </div>
+
+    <!-- Dropdown de statut global (position fixed) -->
+    <Teleport to="body">
+      <div
+        v-if="openStatusDropdown !== null && dropdownPosition"
+        class="fixed w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[9999]"
+        :style="{
+          top: `${dropdownPosition.top}px`,
+          left: `${dropdownPosition.left}px`
+        }"
+        @click.stop
+      >
+        <button
+          v-for="status in statusOptions"
+          :key="status.value"
+          @click="updateStatus(orders.find(o => o.id === openStatusDropdown)!, status.value)"
+          class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center gap-3"
+          :class="orders.find(o => o.id === openStatusDropdown)?.status === status.value ? 'bg-gold-50' : ''"
+        >
+          <span
+            class="w-3 h-3 rounded-full"
+            :class="status.dotClass"
+          ></span>
+          <span :class="orders.find(o => o.id === openStatusDropdown)?.status === status.value ? 'font-semibold text-gold-700' : 'text-gray-700'">
+            {{ status.label }}
+          </span>
+          <svg
+            v-if="orders.find(o => o.id === openStatusDropdown)?.status === status.value"
+            class="w-4 h-4 ml-auto text-gold-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </button>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -394,14 +364,15 @@ const statusFilter = ref('')
 const pagination = ref<any>(null)
 const selectedOrder = ref<Order | null>(null)
 const openStatusDropdown = ref<number | null>(null)
+const dropdownPosition = ref<{ top: number; left: number } | null>(null)
 
 const statusOptions = [
-  { value: 'pending', label: 'En attente', dotClass: 'bg-yellow-500' },
-  { value: 'reserved', label: 'Réservé', dotClass: 'bg-blue-500' },
-  { value: 'paid', label: 'Payé', dotClass: 'bg-green-500' },
-  { value: 'shipped', label: 'Expédié', dotClass: 'bg-purple-500' },
-  { value: 'delivered', label: 'Livré', dotClass: 'bg-emerald-500' },
-  { value: 'cancelled', label: 'Annulé', dotClass: 'bg-red-500' },
+  { value: 'pending_payment', label: 'En attente de paiement', dotClass: 'bg-orange-500' },
+  { value: 'paid', label: 'Payée', dotClass: 'bg-green-500' },
+  { value: 'preparing', label: 'En cours de préparation', dotClass: 'bg-blue-500' },
+  { value: 'ready', label: 'Prête', dotClass: 'bg-purple-500' },
+  { value: 'available', label: 'Disponible', dotClass: 'bg-emerald-500' },
+  { value: 'cancelled', label: 'Annulée', dotClass: 'bg-red-500' },
 ]
 
 const loadOrders = async (page = 1) => {
@@ -421,11 +392,21 @@ const loadOrders = async (page = 1) => {
   }
 }
 
-const toggleStatusDropdown = (orderId: number) => {
+const toggleStatusDropdown = (orderId: number, event: MouseEvent) => {
   if (openStatusDropdown.value === orderId) {
     openStatusDropdown.value = null
+    dropdownPosition.value = null
   } else {
     openStatusDropdown.value = orderId
+
+    // Calculer la position du bouton
+    const button = event.currentTarget as HTMLElement
+    const rect = button.getBoundingClientRect()
+
+    dropdownPosition.value = {
+      top: rect.bottom + 8,
+      left: rect.left
+    }
   }
 }
 
@@ -433,7 +414,8 @@ const updateStatus = async (order: Order, newStatus: string) => {
   try {
     await adminOrdersApi.updateStatus(order.id, newStatus)
     order.status = newStatus as any
-    openStatusDropdown.value = null // Fermer le dropdown
+    openStatusDropdown.value = null
+    dropdownPosition.value = null
   } catch (error) {
     console.error('Error updating status:', error)
     alert('Erreur lors de la mise à jour')
@@ -465,11 +447,11 @@ const viewDetails = async (order: Order) => {
 
 const getStatusClass = (status: string) => {
   const classes: Record<string, string> = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    reserved: 'bg-blue-100 text-blue-800',
+    pending_payment: 'bg-orange-100 text-orange-800',
     paid: 'bg-green-100 text-green-800',
-    shipped: 'bg-purple-100 text-purple-800',
-    delivered: 'bg-green-100 text-green-800',
+    preparing: 'bg-blue-100 text-blue-800',
+    ready: 'bg-purple-100 text-purple-800',
+    available: 'bg-emerald-100 text-emerald-800',
     cancelled: 'bg-red-100 text-red-800'
   }
   return classes[status] || 'bg-gray-100 text-gray-800'
@@ -477,12 +459,12 @@ const getStatusClass = (status: string) => {
 
 const getStatusLabel = (status: string) => {
   const labels: Record<string, string> = {
-    pending: 'En attente',
-    reserved: 'Réservé',
-    paid: 'Payé',
-    shipped: 'Expédié',
-    delivered: 'Livré',
-    cancelled: 'Annulé'
+    pending_payment: 'En attente de paiement',
+    paid: 'Payée',
+    preparing: 'En cours de préparation',
+    ready: 'Prête',
+    available: 'Disponible',
+    cancelled: 'Annulée'
   }
   return labels[status] || status
 }
@@ -490,14 +472,23 @@ const getStatusLabel = (status: string) => {
 // Fermer le dropdown au clic ailleurs
 const handleClickOutside = () => {
   openStatusDropdown.value = null
+  dropdownPosition.value = null
+}
+
+// Fermer le dropdown au scroll
+const handleScroll = () => {
+  openStatusDropdown.value = null
+  dropdownPosition.value = null
 }
 
 onMounted(() => {
   loadOrders()
   document.addEventListener('click', handleClickOutside)
+  window.addEventListener('scroll', handleScroll, true)
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
+  window.removeEventListener('scroll', handleScroll, true)
 })
 </script>

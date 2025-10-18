@@ -5,10 +5,10 @@ export default class extends BaseSeeder {
   async run() {
     // Créer un utilisateur admin par défaut
     await User.updateOrCreate(
-      { email: 'admin@soleil-du-sud.fr' },
+      { email: 'support@boutiquesaintefamille.fr' },
       {
-        email: 'admin@soleil-du-sud.fr',
-        password: 'admin123', // Change ce mot de passe !
+        email: 'support@boutiquesaintefamille.fr',
+        password: 'S@!nteFamill€2025*', // Change ce mot de passe !
         fullName: 'Administrateur',
         role: 'admin',
       }

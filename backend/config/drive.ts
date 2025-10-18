@@ -1,4 +1,5 @@
 import env from '#start/env'
+import app from '@adonisjs/core/services/app'
 import { defineConfig, services } from '@adonisjs/drive'
 
 const driveConfig = defineConfig({
@@ -6,7 +7,9 @@ const driveConfig = defineConfig({
 
   services: {
     fs: services.fs({
-      location: '/app/storage',
+      // En production (Docker) : /app/storage
+      // En développement : ./storage (relatif au projet)
+      location: app.inProduction ? '/app/storage' : app.makePath('storage'),
       serveFiles: true,
       routeBasePath: '/uploads',
       visibility: 'public',

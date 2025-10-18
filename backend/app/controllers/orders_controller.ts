@@ -8,6 +8,9 @@ import db from '@adonisjs/lucid/services/db'
 import mail from '@adonisjs/mail/services/main'
 import OrderConfirmationNotification from '#mails/order_confirmation_notification'
 import NewOrderNotification from '#mails/new_order_notification'
+import { ORDER_STATUS } from '#core/enums/order_status'
+import { ORDER_TYPE } from '#core/enums/order_type'
+import { PAYMENT_METHOD, type PaymentMethod } from '#core/enums/payment_method'
 
 export default class OrdersController {
   /**
@@ -44,7 +47,7 @@ export default class OrdersController {
         })
       }
 
-      if (!paymentMethod || !['wero', 'paypal'].includes(paymentMethod)) {
+      if (!paymentMethod || !Object.values(PAYMENT_METHOD).includes(paymentMethod)) {
         return response.badRequest({
           message: 'La méthode de paiement est obligatoire et doit être "wero" ou "paypal"',
         })
@@ -107,9 +110,9 @@ export default class OrdersController {
       order.shippingAddress = shippingAddress || null
       order.notes = notes || null
       order.totalAmount = totalAmount
-      order.status = 'pending'
-      order.type = 'order'
-      order.paymentMethod = paymentMethod
+      order.status = ORDER_STATUS.PENDING_PAYMENT
+      order.type = ORDER_TYPE.ORDER
+      order.paymentMethod = paymentMethod as PaymentMethod
 
       await order.useTransaction(trx).save()
       logger.info(`[Orders] Commande créée: ${orderNumber}`)

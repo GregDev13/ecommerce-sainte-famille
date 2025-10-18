@@ -3,6 +3,9 @@ import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
 import OrderItem from './order_item.js'
+import type { OrderStatus } from '#core/enums/order_status'
+import type { OrderType } from '#core/enums/order_type'
+import type { PaymentMethod } from '#core/enums/payment_method'
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -27,16 +30,16 @@ export default class Order extends BaseModel {
   declare totalAmount: number
 
   @column()
-  declare status: string
+  declare status: OrderStatus
 
   @column()
-  declare type: string
+  declare type: OrderType
 
   @column()
   declare stripePaymentIntentId: string | null
 
   @column()
-  declare paymentMethod: 'wero' | 'paypal'
+  declare paymentMethod: PaymentMethod
 
   @column()
   declare shippingAddress: string | null
