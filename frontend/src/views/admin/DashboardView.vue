@@ -3,7 +3,7 @@
     <h1 class="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
 
     <!-- Stats Cards -->
-    <div v-if="!loading" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div v-if="!loading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
       <!-- Total Produits -->
       <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
@@ -51,17 +51,41 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Quick Action -->
-      <div class="bg-gradient-to-br from-gold-500 to-gold-600 rounded-xl shadow-sm p-6 text-white">
-        <p class="text-sm opacity-90 mb-2">Action rapide</p>
-        <p class="text-lg font-semibold mb-4">Ajouter un produit</p>
-        <router-link
-          to="/admin/products/new"
-          class="inline-block bg-white text-gold-600 px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-shadow"
-        >
-          + Nouveau
-        </router-link>
+    <!-- Vues des produits -->
+    <div v-if="!loading" class="grid md:grid-cols-2 gap-6 mb-8">
+      <!-- Total Vues -->
+      <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-600 mb-1">Vues Produits (Total)</p>
+            <p class="text-3xl font-bold text-gray-900">{{ stats.totalViews || 0 }}</p>
+            <p class="text-xs text-gray-500 mt-1">Tous les temps</p>
+          </div>
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vues du Mois -->
+      <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-600 mb-1">Vues du Mois</p>
+            <p class="text-3xl font-bold text-gray-900">{{ stats.monthlyViews || 0 }}</p>
+            <p class="text-xs text-gray-500 mt-1">{{ new Date().toLocaleDateString('fr-FR', { month: 'long' }) }}</p>
+          </div>
+          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -69,6 +93,39 @@
     <div v-else class="text-center py-12">
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
       <p class="mt-2 text-gray-600">Chargement...</p>
+    </div>
+
+    <!-- Produits les plus vus -->
+    <div v-if="!loading && topViewedProducts.length > 0" class="bg-white rounded-xl shadow-sm p-6 mb-8">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Top 5 Produits les Plus Vus</h2>
+      <div class="space-y-3">
+        <div
+          v-for="(item, index) in topViewedProducts"
+          :key="item.product?.id"
+          class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          <div class="flex items-center justify-center w-8 h-8 rounded-full bg-gold-100 text-gold-600 font-bold text-sm">
+            {{ index + 1 }}
+          </div>
+          <div v-if="item.product?.image?.url" class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+            <img :src="item.product.image.url" :alt="item.product.name" class="w-full h-full object-cover" />
+          </div>
+          <div v-else class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center text-2xl">
+            📦
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-gray-900 truncate">{{ item.product?.name }}</p>
+            <p class="text-sm text-gray-600">{{ item.viewsCount }} vues</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span class="font-bold text-purple-600">{{ item.viewsCount }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Recent Orders -->
@@ -103,7 +160,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { adminDashboardApi, type DashboardStats, type Order } from '@/services/adminApi'
+import { adminDashboardApi, type DashboardStats, type Order, type TopViewedProduct } from '@/services/adminApi'
 
 const loading = ref(true)
 const stats = ref<DashboardStats>({
@@ -111,15 +168,19 @@ const stats = ref<DashboardStats>({
   activeProducts: 0,
   totalOrders: 0,
   pendingOrders: 0,
-  monthlyRevenue: 0
+  monthlyRevenue: 0,
+  totalViews: 0,
+  monthlyViews: 0
 })
 const recentOrders = ref<Order[]>([])
+const topViewedProducts = ref<TopViewedProduct[]>([])
 
 const loadDashboard = async () => {
   try {
     const response = await adminDashboardApi.getStats()
     stats.value = response.data.stats
     recentOrders.value = response.data.recentOrders
+    topViewedProducts.value = response.data.topViewedProducts || []
   } catch (error) {
     console.error('Error loading dashboard:', error)
   } finally {

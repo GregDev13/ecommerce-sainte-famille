@@ -1,7 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Product from '#models/product'
+import ProductView from '#models/product_view'
 import logger from '@adonisjs/core/services/logger'
 import { attachmentManager } from '@jrmc/adonis-attachment'
+import db from '@adonisjs/lucid/services/db'
 
 export default class ProductsController {
   /**
@@ -201,6 +203,87 @@ export default class ProductsController {
     } catch (error) {
       return response.badRequest({
         message: 'Failed to toggle product status',
+        error: error.message
+      })
+    }
+  }
+
+  /**
+   * Get product views statistics
+   */
+  async getViewsStats({ response }: HttpContext) {
+    try {
+      // Get top 10 most viewed products with aggregated counts
+      const topViewedProducts = await db
+        .from('product_views')
+        .select('product_id')
+        .count('* as views_count')
+        .groupBy('product_id')
+        .orderBy('views_count', 'desc')
+        .limit(10)
+
+      // Fetch product details for top viewed products
+      const productIds = topViewedProducts.map((item: any) => item.product_id)
+      const products = await Product.query().whereIn('id', productIds)
+
+      // Merge product data with view counts
+      const topProducts = topViewedProducts.map((item: any) => {
+        const product = products.find(p => p.id === item.product_id)
+        return {
+          product: product ? {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            formattedPrice: product.formattedPrice,
+            image: product.image,
+            isActive: product.isActive
+          } : null,
+          viewsCount: Number(item.views_count)
+        }
+      }).filter(item => item.product !== null)
+
+      // Get total views count (all time)
+      const totalViewsResult = await db
+        .from('product_views')
+        .count('* as total')
+        .first()
+      const totalViews = totalViewsResult ? Number(totalViewsResult.total) : 0
+
+      // Get views count for last 7 days
+      const sevenDaysAgo = new Date()
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+      const viewsLast7DaysResult = await db
+        .from('product_views')
+        .where('viewed_at', '>=', sevenDaysAgo)
+        .count('* as total')
+        .first()
+      const viewsLast7Days = viewsLast7DaysResult ? Number(viewsLast7DaysResult.total) : 0
+
+      // Get views count for last 30 days
+      const thirtyDaysAgo = new Date()
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+
+      const viewsLast30DaysResult = await db
+        .from('product_views')
+        .where('viewed_at', '>=', thirtyDaysAgo)
+        .count('* as total')
+        .first()
+      const viewsLast30Days = viewsLast30DaysResult ? Number(viewsLast30DaysResult.total) : 0
+
+      return response.ok({
+        data: {
+          topProducts,
+          totalViews,
+          viewsLast7Days,
+          viewsLast30Days
+        },
+        message: 'Product views statistics retrieved successfully'
+      })
+    } catch (error) {
+      logger.error(`[Admin Products] Error fetching views stats: ${error.message}`)
+      return response.internalServerError({
+        message: 'Failed to retrieve views statistics',
         error: error.message
       })
     }

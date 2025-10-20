@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Product from '#models/product'
+import ProductView from '#models/product_view'
 
 export default class ProductsController {
   /**
@@ -78,6 +79,29 @@ export default class ProductsController {
       return response.notFound({
         message: 'Product not found'
       })
+    }
+  }
+
+  /**
+   * Track a product view
+   */
+  async trackView(ctx: HttpContext) {
+    const { params, response } = ctx
+
+    try {
+      // Verify product exists and is active
+      const product = await Product.query()
+        .where('id', params.id)
+        .where('isActive', true)
+        .firstOrFail()
+
+      // Track the view
+      await ProductView.trackView(product.id, ctx)
+
+      return response.noContent()
+    } catch (error) {
+      // Fail silently to not disrupt user experience
+      return response.noContent()
     }
   }
 }

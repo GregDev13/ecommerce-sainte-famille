@@ -45,6 +45,20 @@ export interface DashboardStats {
   totalOrders: number
   pendingOrders: number
   monthlyRevenue: number
+  totalViews: number
+  monthlyViews: number
+}
+
+export interface TopViewedProduct {
+  product: {
+    id: number
+    name: string
+    image: {
+      url: string
+      name: string
+    } | null
+  } | null
+  viewsCount: number
 }
 
 export interface Order {
@@ -127,7 +141,7 @@ export const adminAuthApi = {
 
 // Dashboard
 export const adminDashboardApi = {
-  async getStats(): Promise<ApiResponse<{ stats: DashboardStats; recentOrders: Order[] }>> {
+  async getStats(): Promise<ApiResponse<{ stats: DashboardStats; recentOrders: Order[]; topViewedProducts: TopViewedProduct[] }>> {
     return adminApi.get('/dashboard')
   }
 }
