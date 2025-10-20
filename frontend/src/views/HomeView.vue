@@ -34,7 +34,7 @@
                   🎁 Craquez sans hésiter : offrez, décorez, partagez… et participez à une belle action de Noël au service de nos enfants !
                 </p>
                 <p>
-                  En achetant vos articles en ligne vous économisez les frais de ports et soutenez les projets et activités des élèves.
+                  En achetant vos articles en ligne vous économisez les frais de ports, en venant les récupérer directement à l'école, et soutenez les projets et activités des élèves.
                   <span class="font-semibold text-gold-800">La moitié de la vente sera reversée directement à l'école.</span> 🌟
                 </p>
                 <p>
