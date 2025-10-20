@@ -26,11 +26,24 @@
                   Marché de Noël la Sainte Famille
                 </span>
               </h1>
-              <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Découvrez notre sélection de produits familiaux de qualité.
-                <span class="font-semibold text-gold-800">Commandez en ligne</span> ou
-                <span class="font-semibold text-gold-800">réservez</span> pour récupérer en magasin.
-              </p>
+              <div class="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 space-y-4 text-justify">
+                <p>
+                  🎄 Nous sommes ravis de vous accueillir sur notre site dédié au marché de Noël de notre école.
+                </p>
+                <p>
+                  🎁 Craquez sans hésiter : offrez, décorez, partagez… et participez à une belle action de Noël au service de nos enfants !
+                </p>
+                <p>
+                  En achetant vos articles en ligne vous économisez les frais de ports et soutenez les projets et activités des élèves.
+                  <span class="font-semibold text-gold-800">La moitié de la vente sera reversée directement à l'école.</span> 🌟
+                </p>
+                <p>
+                  ❄️ N'hésitez plus : marques et produits canons pour stock très limités !
+                </p>
+                <p class="font-semibold text-gold-900">
+                  Merci pour votre soutien et bonnes emplettes 🎄
+                </p>
+              </div>
             </div>
 
             <!-- CTA Buttons -->
