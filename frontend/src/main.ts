@@ -17,9 +17,8 @@ app.use(router)
 app.use(VueGtag, {
   property: {
     id: import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-E87GQAJFNW'
-  },
-  router
-})
+  }
+}, router)
 app.use(Particles, {
   init: async engine => {
     await loadSlim(engine)
