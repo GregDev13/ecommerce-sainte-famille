@@ -59,7 +59,7 @@
                   {{ product.formattedPrice }}
                 </span>
                 <span v-if="product.isInStock" class="text-sm text-green-600 font-medium">
-                  ✓ En stock ({{ product.stock }} disponibles)
+                  ✓ En stock ({{ product.stock }} disponible{{ product.stock > 1 ? 's' : '' }})
                 </span>
               </div>
             </div>
