@@ -45,6 +45,45 @@ export interface DashboardStats {
   totalOrders: number
   pendingOrders: number
   monthlyRevenue: number
+  totalViews: number
+  monthlyViews: number
+}
+
+export interface TopViewedProduct {
+  product: {
+    id: number
+    name: string
+    image: {
+      url: string
+      name: string
+    } | null
+  } | null
+  viewsCount: number
+}
+
+export interface ProductViewStats {
+  id: number
+  name: string
+  price: number
+  formattedPrice: string
+  image: {
+    url: string
+    name: string
+    size: number
+    extname: string
+  } | null
+  isActive: boolean
+  viewsCount: number
+}
+
+export interface ProductViewsStatsMeta {
+  total: number
+  perPage: number
+  currentPage: number
+  lastPage: number
+  firstPage: number
+  totalViews: number
+  averageViews: number
 }
 
 export interface Order {
@@ -127,7 +166,7 @@ export const adminAuthApi = {
 
 // Dashboard
 export const adminDashboardApi = {
-  async getStats(): Promise<ApiResponse<{ stats: DashboardStats; recentOrders: Order[] }>> {
+  async getStats(): Promise<ApiResponse<{ stats: DashboardStats; recentOrders: Order[]; topViewedProducts: TopViewedProduct[] }>> {
     return adminApi.get('/dashboard')
   }
 }
@@ -164,6 +203,14 @@ export const adminProductsApi = {
 
   async toggleActive(id: number): Promise<ApiResponse<any>> {
     return adminApi.patch(`/products/${id}/toggle`)
+  },
+
+  async getViewsStats(params?: {
+    page?: number
+    limit?: number
+    search?: string
+  }): Promise<{ data: ProductViewStats[]; meta: ProductViewsStatsMeta; message: string }> {
+    return adminApi.get('/products/views-stats', { params })
   }
 }
 

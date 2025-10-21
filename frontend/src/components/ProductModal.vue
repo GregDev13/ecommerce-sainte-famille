@@ -142,6 +142,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { Product } from '@/services/api'
+import { productsApi } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
 import { useToast } from 'vue-toastification'
 
@@ -167,10 +168,23 @@ watch(() => props.product, () => {
   quantity.value = 1
 })
 
-// Watch for isOpen to handle body scroll
+// Watch for isOpen to handle body scroll and track view
 watch(() => props.isOpen, (newValue) => {
   if (newValue) {
     document.body.style.overflow = 'hidden'
+
+    // Track product view with session deduplication
+    if (props.product) {
+      const viewKey = `viewed_product_${props.product.id}`
+      const hasViewedInSession = sessionStorage.getItem(viewKey)
+
+      if (!hasViewedInSession) {
+        // Track the view
+        productsApi.trackView(props.product.id)
+        // Mark as viewed in this session
+        sessionStorage.setItem(viewKey, 'true')
+      }
+    }
   } else {
     document.body.style.overflow = ''
   }

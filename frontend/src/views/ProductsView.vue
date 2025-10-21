@@ -246,6 +246,8 @@ const searchProducts = () => {
 
 const loadPage = (page: number) => {
   loadProducts(page)
+  // Scroll to top of the page on mobile/desktop
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const addToCart = (product: Product, event?: Event) => {

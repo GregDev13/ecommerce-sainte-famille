@@ -4,6 +4,7 @@ import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 import Particles from '@tsparticles/vue3'
 import { loadSlim } from '@tsparticles/slim'
+import VueGtag from 'vue-gtag-next'
 
 import App from './App.vue'
 import router from './router'
@@ -13,6 +14,12 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(VueGtag, {
+  property: {
+    id: import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-E87GQAJFNW'
+  },
+  router
+})
 app.use(Particles, {
   init: async engine => {
     await loadSlim(engine)

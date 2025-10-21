@@ -33,6 +33,7 @@ router.group(() => {
   router.get('/products', '#controllers/products_controller.index')
   router.get('/products/:id', '#controllers/products_controller.show')
   router.get('/products/:id/related', '#controllers/products_controller.related')
+  router.post('/products/:id/view', '#controllers/products_controller.trackView')
 
   // Orders (public - guest checkout)
   router.post('/orders', '#controllers/orders_controller.store')
@@ -56,6 +57,7 @@ router.group(() => {
 
       // Products management
       router.get('/products', '#controllers/admin/products_controller.index')
+      router.get('/products/views-stats', '#controllers/admin/products_controller.getViewsStats')
       router.get('/products/:id', '#controllers/admin/products_controller.show')
       router.post('/products', '#controllers/admin/products_controller.store')
       router.put('/products/:id', '#controllers/admin/products_controller.update')

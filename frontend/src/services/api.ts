@@ -112,6 +112,15 @@ export const productsApi = {
   async getRelated(id: number): Promise<ApiResponse<Product[]>> {
     return api.get(`/products/${id}/related`)
   },
+
+  async trackView(id: number): Promise<void> {
+    try {
+      await api.post(`/products/${id}/view`)
+    } catch (error) {
+      // Fail silently - tracking shouldn't disrupt UX
+      console.debug('Failed to track product view:', error)
+    }
+  },
 }
 
 export const ordersApi = {

@@ -1,7 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Product from '#models/product'
+import ProductView from '#models/product_view'
 import logger from '@adonisjs/core/services/logger'
 import { attachmentManager } from '@jrmc/adonis-attachment'
+import db from '@adonisjs/lucid/services/db'
 
 export default class ProductsController {
   /**
@@ -201,6 +203,94 @@ export default class ProductsController {
     } catch (error) {
       return response.badRequest({
         message: 'Failed to toggle product status',
+        error: error.message
+      })
+    }
+  }
+
+  /**
+   * Get product views statistics with pagination
+   */
+  async getViewsStats({ request, response }: HttpContext) {
+    try {
+      const page = request.input('page', 1)
+      const limit = request.input('limit', 20)
+      const search = request.input('search', '')
+
+      // Get views count grouped by product
+      let viewsQuery = db
+        .from('product_views')
+        .select('product_id')
+        .count('* as views_count')
+        .groupBy('product_id')
+
+      // Get all product IDs with views
+      const productsWithViews = await viewsQuery
+
+      // Fetch all products
+      let productsQuery = Product.query()
+
+      // Apply search filter if provided
+      if (search) {
+        productsQuery = productsQuery.where((query) => {
+          query.where('name', 'ILIKE', `%${search}%`)
+        })
+      }
+
+      const allProducts = await productsQuery
+
+      // Create a map of product views
+      const viewsMap = new Map(
+        productsWithViews.map((item: any) => [item.product_id, Number(item.views_count)])
+      )
+
+      // Merge products with their view counts (including products with 0 views)
+      const productsWithStats = allProducts.map(product => ({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        formattedPrice: product.formattedPrice,
+        image: product.image,
+        isActive: product.isActive,
+        viewsCount: viewsMap.get(product.id) || 0
+      }))
+
+      // Sort by views count (descending)
+      productsWithStats.sort((a, b) => b.viewsCount - a.viewsCount)
+
+      // Calculate pagination
+      const total = productsWithStats.length
+      const lastPage = Math.ceil(total / limit)
+      const offset = (page - 1) * limit
+      const paginatedProducts = productsWithStats.slice(offset, offset + limit)
+
+      // Get total views count (all time)
+      const totalViewsResult = await db
+        .from('product_views')
+        .count('* as total')
+        .first()
+      const totalViews = totalViewsResult ? Number(totalViewsResult.total) : 0
+
+      // Calculate average views per product
+      const averageViews = total > 0 ? totalViews / total : 0
+
+      return response.ok({
+        data: paginatedProducts,
+        meta: {
+          total,
+          perPage: limit,
+          currentPage: page,
+          lastPage,
+          firstPage: 1,
+          totalViews,
+          averageViews: Math.round(averageViews * 10) / 10
+        },
+        message: 'Product views statistics retrieved successfully'
+      })
+    } catch (error) {
+      logger.error(`[Admin Products] Error fetching views stats: ${error.message}`)
+      return response.internalServerError({
+        message: 'Failed to retrieve views statistics',
         error: error.message
       })
     }

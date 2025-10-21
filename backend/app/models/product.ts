@@ -4,6 +4,7 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import OrderItem from './order_item.js'
+import ProductView from './product_view.js'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -29,6 +30,9 @@ export default class Product extends BaseModel {
 
   @hasMany(() => OrderItem)
   declare orderItems: HasMany<typeof OrderItem>
+
+  @hasMany(() => ProductView)
+  declare views: HasMany<typeof ProductView>
 
   @computed()
   get formattedPrice() {
