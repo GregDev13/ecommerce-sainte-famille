@@ -14,11 +14,11 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(VueGtag, {
+app.use(VueGtag as any, {
   property: {
     id: import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-E87GQAJFNW'
   }
-}, router)
+})
 app.use(Particles, {
   init: async engine => {
     await loadSlim(engine)
