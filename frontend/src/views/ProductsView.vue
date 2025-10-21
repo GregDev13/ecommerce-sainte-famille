@@ -99,29 +99,15 @@
       <p class="text-gray-600">Essayez de modifier vos critères de recherche.</p>
     </div>
 
-    <!-- Pagination -->
-    <div v-if="pagination && pagination.lastPage > 1" class="mt-8 flex justify-center">
-      <nav class="flex items-center space-x-2">
-        <button
-          v-if="pagination.currentPage > 1"
-          @click="loadPage(pagination.currentPage - 1)"
-          class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-        >
-          Précédent
-        </button>
+    <!-- Infinite scroll loader -->
+    <div v-if="loading && products.length > 0" class="mt-8 text-center py-4">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600"></div>
+      <p class="mt-2 text-gray-600 text-sm">Chargement des produits...</p>
+    </div>
 
-        <span class="px-4 py-2 text-gray-700">
-          Page {{ pagination.currentPage }} sur {{ pagination.lastPage }}
-        </span>
-
-        <button
-          v-if="pagination.currentPage < pagination.lastPage"
-          @click="loadPage(pagination.currentPage + 1)"
-          class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-        >
-          Suivant
-        </button>
-      </nav>
+    <!-- All products loaded message -->
+    <div v-if="!loading && allProductsLoaded && products.length > 0" class="mt-8 text-center py-4">
+      <p class="text-gray-500 text-sm">✨ Tous les produits ont été chargés</p>
     </div>
 
     <!-- Product Detail Modal -->
@@ -131,11 +117,54 @@
       @close="closeProductModal"
     />
     </div>
+
+    <!-- Footer (only shown when all products are loaded) -->
+    <footer v-if="allProductsLoaded && products.length > 0" class="bg-gray-900 text-white py-8 mt-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center space-y-4">
+          <!-- Logo -->
+          <div class="flex justify-center mb-4">
+            <img
+              src="/photo-default-article.jpg"
+              alt="École de la Sainte Famille"
+              class="w-32 h-auto rounded-lg opacity-80"
+            />
+          </div>
+
+          <!-- Contact info -->
+          <div class="text-sm text-gray-400 space-y-2">
+            <p class="font-semibold text-white">Marché de Noël - École de la Sainte Famille</p>
+            <p>101 Av. du Char Verdun, 83160 La Valette-du-Var</p>
+            <div class="space-y-1">
+              <p>
+                <span class="text-gray-500">École :</span>
+                <a href="mailto:secretariat@ecolestefamillelavalette.org" class="hover:text-gold-400 transition-colors">
+                  secretariat@ecolestefamillelavalette.org
+                </a>
+              </p>
+              <p>
+                <span class="text-gray-500">Support boutique :</span>
+                <a href="mailto:support@boutiquesaintefamille.fr" class="hover:text-gold-400 transition-colors">
+                  support@boutiquesaintefamille.fr
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Copyright -->
+          <div class="pt-4 border-t border-gray-800">
+            <p class="text-gray-500 text-xs">
+              &copy; {{ new Date().getFullYear() }} Marché de Noël - École de la Sainte Famille. Tous droits réservés.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { productsApi, type Product } from '@/services/api'
 import { useCartStore } from '@/stores/cart'
@@ -149,12 +178,15 @@ const toast = useToast()
 
 // Reactive data
 const products = ref<Product[]>([])
-const loading = ref(true)
+const loading = ref(false)
 const error = ref('')
 const searchQuery = ref('')
 const pagination = ref<any>(null)
 const selectedProduct = ref<Product | null>(null)
 const isModalOpen = ref(false)
+const currentPage = ref(1)
+const allProductsLoaded = ref(false)
+const isLoadingMore = ref(false)
 
 // tsParticles configuration
 const particlesOptions = {
@@ -218,7 +250,10 @@ const particlesOptions = {
 }
 
 // Methods
-const loadProducts = async (page = 1) => {
+const loadProducts = async (page = 1, append = false) => {
+  // Prevent loading if already loading or all products loaded
+  if (loading.value || (append && allProductsLoaded.value)) return
+
   try {
     loading.value = true
     error.value = ''
@@ -230,24 +265,62 @@ const loadProducts = async (page = 1) => {
     }
 
     const response = await productsApi.getAll(params)
-    products.value = response.data.data
+
+    if (append) {
+      // Append new products to existing list (infinite scroll)
+      products.value = [...products.value, ...response.data.data]
+    } else {
+      // Replace products (initial load or search)
+      products.value = response.data.data
+    }
+
     pagination.value = response.data.meta
+    currentPage.value = page
+
+    // Check if we've loaded all products
+    if (page >= response.data.meta.lastPage) {
+      allProductsLoaded.value = true
+    }
   } catch (err: any) {
     error.value = err.response?.data?.message || 'Erreur lors du chargement des produits'
     console.error('Erreur lors du chargement des produits:', err)
   } finally {
     loading.value = false
+    isLoadingMore.value = false
   }
 }
 
 const searchProducts = () => {
-  setTimeout(() => loadProducts(1), 500) // Debounce
+  setTimeout(() => {
+    // Reset for new search
+    currentPage.value = 1
+    allProductsLoaded.value = false
+    isLoadingMore.value = false
+    loadProducts(1, false)
+  }, 500) // Debounce
 }
 
-const loadPage = (page: number) => {
-  loadProducts(page)
-  // Scroll to top of the page on mobile/desktop
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+// Infinite scroll handler
+const handleScroll = () => {
+  // Protection 1: Prevent multiple simultaneous loads
+  if (isLoadingMore.value || allProductsLoaded.value || loading.value) return
+
+  // Protection 2: Check if page is scrollable (prevent infinite loop on short pages)
+  const scrollHeight = document.documentElement.scrollHeight
+  const clientHeight = document.documentElement.clientHeight
+
+  if (scrollHeight <= clientHeight) return
+
+  // Check if user is near bottom of page (100px from bottom)
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+
+  if (scrollTop + clientHeight >= scrollHeight - 100) {
+    // Load next page if available
+    if (pagination.value && currentPage.value < pagination.value.lastPage) {
+      isLoadingMore.value = true
+      loadProducts(currentPage.value + 1, true)
+    }
+  }
 }
 
 const addToCart = (product: Product, event?: Event) => {
@@ -280,7 +353,19 @@ const closeProductModal = () => {
 
 // Lifecycle
 onMounted(() => {
+  // Reset flags to ensure clean state
+  isLoadingMore.value = false
+  allProductsLoaded.value = false
+  currentPage.value = 1
+
   loadProducts()
+  // Attach scroll event listener for infinite scroll
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  // Clean up scroll event listener
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 

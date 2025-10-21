@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 
 const cartStore = useCartStore()
 const mobileMenuOpen = ref(false)
+const route = useRoute()
 
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
@@ -153,8 +154,8 @@ const closeMobileMenu = () => {
       <RouterView />
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-12">
+    <!-- Footer (hidden on products page) -->
+    <footer v-if="route.path !== '/products'" class="bg-gray-900 text-white py-12 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <!-- Logo et description -->
