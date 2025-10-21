@@ -1,6 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Product from '#models/product'
-import ProductView from '#models/product_view'
 import logger from '@adonisjs/core/services/logger'
 import { attachmentManager } from '@jrmc/adonis-attachment'
 import db from '@adonisjs/lucid/services/db'
