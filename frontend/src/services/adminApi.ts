@@ -61,6 +61,31 @@ export interface TopViewedProduct {
   viewsCount: number
 }
 
+export interface ProductViewStats {
+  id: number
+  name: string
+  price: number
+  formattedPrice: string
+  image: {
+    url: string
+    name: string
+    size: number
+    extname: string
+  } | null
+  isActive: boolean
+  viewsCount: number
+}
+
+export interface ProductViewsStatsMeta {
+  total: number
+  perPage: number
+  currentPage: number
+  lastPage: number
+  firstPage: number
+  totalViews: number
+  averageViews: number
+}
+
 export interface Order {
   id: number
   orderNumber: string
@@ -178,6 +203,14 @@ export const adminProductsApi = {
 
   async toggleActive(id: number): Promise<ApiResponse<any>> {
     return adminApi.patch(`/products/${id}/toggle`)
+  },
+
+  async getViewsStats(params?: {
+    page?: number
+    limit?: number
+    search?: string
+  }): Promise<{ data: ProductViewStats[]; meta: ProductViewsStatsMeta; message: string }> {
+    return adminApi.get('/products/views-stats', { params })
   }
 }
 

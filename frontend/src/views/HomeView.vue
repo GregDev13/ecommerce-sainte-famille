@@ -11,8 +11,8 @@
 
       <!-- Snow particles -->
       <vue-particles
-        id="tsparticles"
-        :options="particlesOptions"
+          id="tsparticles"
+          :options="particlesOptions"
       />
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
@@ -34,7 +34,7 @@
                   🎁 Craquez sans hésiter : offrez, décorez, partagez… et participez à une belle action de Noël au service de nos enfants !
                 </p>
                 <p>
-                  En achetant vos articles en ligne vous économisez les frais de ports et soutenez les projets et activités des élèves.
+                  En achetant vos articles en ligne vous économisez les frais de ports, en venant les récupérer directement à l'école, et soutenez les projets et activités des élèves.
                   <span class="font-semibold text-gold-800">La moitié de la vente sera reversée directement à l'école.</span> 🌟
                 </p>
                 <p>
@@ -49,8 +49,8 @@
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <router-link
-                to="/products"
-                class="group relative px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                  to="/products"
+                  class="group relative px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span class="flex items-center justify-center gap-2">
                   Découvrir nos produits
@@ -66,9 +66,9 @@
           <div class="relative flex items-center justify-center mt-8 lg:mt-0">
             <div class="logo-entrance logo-glow">
               <img
-                src="/noel.jpeg"
-                alt="Marché de Noël de la Sainte Famille"
-                class="w-full max-w-xs sm:max-w-sm lg:max-w-lg h-auto rounded-2xl"
+                  src="/noel.jpeg"
+                  alt="Marché de Noël de la Sainte Famille"
+                  class="w-full max-w-xs sm:max-w-sm lg:max-w-lg h-auto rounded-2xl"
               />
             </div>
           </div>
@@ -102,17 +102,17 @@
         <!-- Products grid -->
         <div v-else-if="recentProducts.length > 0" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div
-            v-for="product in recentProducts"
-            :key="product.id"
-            @click="openProductModal(product)"
-            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 cursor-pointer"
+              v-for="product in recentProducts"
+              :key="product.id"
+              @click="openProductModal(product)"
+              class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 cursor-pointer"
           >
             <div class="relative h-64 bg-gradient-to-br from-gold-200 to-gold-300 flex items-center justify-center overflow-hidden">
               <img
-                v-if="product.image?.url"
-                :src="product.image.url"
-                :alt="product.name"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  v-if="product.image?.url"
+                  :src="product.image.url"
+                  :alt="product.name"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
               <span v-else class="text-6xl group-hover:scale-110 transition-transform duration-300">📦</span>
               <div v-if="product.isInStock" class="absolute top-4 right-4 px-3 py-1 bg-white rounded-full text-sm font-semibold text-gold-600 shadow-md">
@@ -128,19 +128,19 @@
               <div class="flex justify-between items-center pt-4 border-t border-gray-100">
                 <span class="text-2xl font-bold text-gold-600">{{ product.formattedPrice }}</span>
                 <button
-                  v-if="product.isInStock"
-                  @click="addToCart(product, $event)"
-                  class="w-10 h-10 bg-gold-600 hover:bg-gold-700 text-white rounded-xl flex items-center justify-center transition-colors shadow-md hover:shadow-lg"
-                  title="Ajout rapide au panier"
+                    v-if="product.isInStock"
+                    @click="addToCart(product, $event)"
+                    class="w-10 h-10 bg-gold-600 hover:bg-gold-700 text-white rounded-xl flex items-center justify-center transition-colors shadow-md hover:shadow-lg"
+                    title="Ajout rapide au panier"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                   </svg>
                 </button>
                 <button
-                  v-else
-                  disabled
-                  class="w-10 h-10 bg-gray-300 text-gray-500 rounded-xl flex items-center justify-center cursor-not-allowed shadow-md"
+                    v-else
+                    disabled
+                    class="w-10 h-10 bg-gray-300 text-gray-500 rounded-xl flex items-center justify-center cursor-not-allowed shadow-md"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -159,8 +159,8 @@
 
         <div class="text-center mt-12">
           <router-link
-            to="/products"
-            class="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+              to="/products"
+              class="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
           >
             Voir tous les produits
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,9 +173,9 @@
 
     <!-- Product Detail Modal -->
     <ProductModal
-      :is-open="isModalOpen"
-      :product="selectedProduct"
-      @close="closeProductModal"
+        :is-open="isModalOpen"
+        :product="selectedProduct"
+        @close="closeProductModal"
     />
   </div>
 </template>
@@ -342,11 +342,11 @@ onMounted(() => {
 @keyframes gentle-pulse {
   0%, 100% {
     filter: drop-shadow(0 0 40px rgba(166, 124, 82, 0.4))
-            drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
+    drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
   }
   50% {
     filter: drop-shadow(0 0 60px rgba(166, 124, 82, 0.5))
-            drop-shadow(0 0 100px rgba(166, 124, 82, 0.3));
+    drop-shadow(0 0 100px rgba(166, 124, 82, 0.3));
   }
 }
 
@@ -364,14 +364,14 @@ onMounted(() => {
 
 .logo-glow {
   filter: drop-shadow(0 0 40px rgba(166, 124, 82, 0.4))
-          drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
+  drop-shadow(0 0 80px rgba(166, 124, 82, 0.2));
   animation: gentle-pulse 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
 
 .logo-glow:hover {
   filter: drop-shadow(0 0 60px rgba(166, 124, 82, 0.6))
-          drop-shadow(0 0 100px rgba(166, 124, 82, 0.4));
+  drop-shadow(0 0 100px rgba(166, 124, 82, 0.4));
 }
 
 .animation-delay-2000 {

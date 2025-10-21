@@ -97,7 +97,18 @@
 
     <!-- Produits les plus vus -->
     <div v-if="!loading && topViewedProducts.length > 0" class="bg-white rounded-xl shadow-sm p-6 mb-8">
-      <h2 class="text-xl font-bold text-gray-900 mb-4">Top 5 Produits les Plus Vus</h2>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold text-gray-900">Top 5 Produits les Plus Vus</h2>
+        <router-link
+          to="/admin/products-stats"
+          class="text-sm text-gold-600 hover:text-gold-700 font-medium flex items-center gap-1"
+        >
+          Voir le classement complet
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </router-link>
+      </div>
       <div class="space-y-3">
         <div
           v-for="(item, index) in topViewedProducts"
