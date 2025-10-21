@@ -30,7 +30,7 @@
               v-if="product.image?.url"
               :src="product.image.url"
               :alt="product.name"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-contain"
             />
             <span v-else class="text-9xl">📦</span>
 
