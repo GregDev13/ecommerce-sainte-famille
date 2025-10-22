@@ -1,8 +1,20 @@
 <template>
   <div class="min-h-screen">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Statistiques des Vues Produits</h1>
-      <p class="text-gray-600">Classement de tous les produits par nombre de vues</p>
+    <div class="mb-8 flex justify-between items-start">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Statistiques des Vues Produits</h1>
+        <p class="text-gray-600">Classement de tous les produits par nombre de vues</p>
+      </div>
+      <button
+        @click="confirmReset"
+        :disabled="loading"
+        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+        </svg>
+        Réinitialiser les statistiques
+      </button>
     </div>
 
     <!-- Stats Summary Cards -->
@@ -213,6 +225,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { adminProductsApi, type ProductViewStats, type ProductViewsStatsMeta } from '@/services/adminApi'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const loading = ref(true)
 const products = ref<ProductViewStats[]>([])
@@ -255,6 +270,33 @@ const clearSearch = () => {
   searchQuery.value = ''
   currentPage.value = 1
   loadStats()
+}
+
+const confirmReset = () => {
+  if (confirm('⚠️ Êtes-vous sûr de vouloir réinitialiser TOUTES les statistiques de vues ?\n\nCette action est irréversible et supprimera définitivement toutes les données de vues produits.')) {
+    resetStats()
+  }
+}
+
+const resetStats = async () => {
+  try {
+    loading.value = true
+    await adminProductsApi.resetViewsStats()
+
+    toast.success('✅ Statistiques réinitialisées avec succès', {
+      timeout: 3000
+    })
+
+    // Reload stats to show 0 views
+    await loadStats()
+  } catch (error) {
+    console.error('Error resetting stats:', error)
+    toast.error('❌ Erreur lors de la réinitialisation des statistiques', {
+      timeout: 3000
+    })
+  } finally {
+    loading.value = false
+  }
 }
 
 const goToPage = (page: number) => {

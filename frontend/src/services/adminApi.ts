@@ -211,6 +211,10 @@ export const adminProductsApi = {
     search?: string
   }): Promise<{ data: ProductViewStats[]; meta: ProductViewsStatsMeta; message: string }> {
     return adminApi.get('/products/views-stats', { params })
+  },
+
+  async resetViewsStats(): Promise<ApiResponse<any>> {
+    return adminApi.delete('/products/views-stats/reset')
   }
 }
 

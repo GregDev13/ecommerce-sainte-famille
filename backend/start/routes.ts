@@ -58,6 +58,7 @@ router.group(() => {
       // Products management
       router.get('/products', '#controllers/admin/products_controller.index')
       router.get('/products/views-stats', '#controllers/admin/products_controller.getViewsStats')
+      router.delete('/products/views-stats/reset', '#controllers/admin/products_controller.resetViewsStats')
       router.get('/products/:id', '#controllers/admin/products_controller.show')
       router.post('/products', '#controllers/admin/products_controller.store')
       router.put('/products/:id', '#controllers/admin/products_controller.update')

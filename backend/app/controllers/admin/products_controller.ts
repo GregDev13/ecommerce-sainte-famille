@@ -294,4 +294,28 @@ export default class ProductsController {
       })
     }
   }
+
+  /**
+   * Reset all product views statistics
+   */
+  async resetViewsStats({ response }: HttpContext) {
+    try {
+      logger.info('[Admin Products] Resetting product views stats')
+
+      // Delete all product views
+      await db.from('product_views').delete()
+
+      logger.info('[Admin Products] Product views stats reset successfully')
+
+      return response.ok({
+        message: 'Statistiques de vues réinitialisées avec succès'
+      })
+    } catch (error) {
+      logger.error(`[Admin Products] Error resetting product views stats: ${error.message}`)
+      return response.internalServerError({
+        message: 'Erreur lors de la réinitialisation des statistiques',
+        error: error.message
+      })
+    }
+  }
 }
